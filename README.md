@@ -1,6 +1,6 @@
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner with a CPTD credential — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 12 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 12 on-demand reference files.
 
 ---
 
