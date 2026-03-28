@@ -46,11 +46,9 @@ Activates expert-level guidance across the full L&D spectrum:
 ### Claude Code
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/master-instructional-design
+git clone https://github.com/narosemena/master-instructional-design
 cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 ```
-
-Replace `YOUR-USERNAME` with your GitHub username.
 
 ---
 
