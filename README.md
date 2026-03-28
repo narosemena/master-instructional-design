@@ -1,6 +1,6 @@
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 12 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 11 on-demand reference files.
 
 ---
 
@@ -18,7 +18,7 @@ Activates expert-level guidance across the full L&D spectrum:
 - **Adobe Creative Suite** — Photoshop, Illustrator, InDesign, After Effects, Premiere, XD workflows for L&D
 - **Generative AI for L&D** — prompt engineering, AI-assisted ID workflows, agentic pipelines, responsible AI
 - **CLO & Learning Leadership** — organizational learning strategy, talent analytics, skills taxonomy, 3-year L&D strategy
-- **Academic ID Theory** — graduate program canon, major textbooks (Dick & Carey, Gagné, Smith & Ragan, Reigeluth, van Merriënboer, Bloom, Merrill), CPTD exam preparation
+- **Academic ID Theory** — graduate program canon, major textbooks (Dick & Carey, Gagné, Smith & Ragan, Reigeluth, van Merriënboer, Bloom, Merrill)
 - **LMS/LXP Strategy** — platform selection, RFP process, learning data architecture, xAPI
 - **Project Management** — project charters, RACI matrices, design documents, QA checklists, stakeholder communications
 - **Evaluation Planning** — Kirkpatrick L1–5, ROI calculation, L3 manager observation, learning analytics
@@ -39,12 +39,11 @@ Activates expert-level guidance across the full L&D spectrum:
 
 ### Claude.ai (Projects)
 
-1. Download `master-instructional-design.skill` from the [Releases](../../releases) page
+1. Download `master-instructional-design.skill` from the [Releases](https://github.com/narosemena/master-instructional-design/releases) page
 2. Open your Claude Project → Skills → Upload skill
 3. The skill activates automatically when relevant topics are mentioned
 
 ### Claude Code
-
 ```bash
 git clone https://github.com/narosemena/master-instructional-design
 cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
@@ -54,9 +53,9 @@ cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 
 ## What's inside
 
-**SKILL.md** — the core skill file with 15 engagement modes, an 8-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
+**SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
 
-**12 reference files** loaded on demand — never all at once, preserving context efficiency:
+**11 reference files** loaded on demand — never all at once, preserving context efficiency:
 
 | Reference file | Covers |
 |---|---|
@@ -78,7 +77,7 @@ cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 
 10 progressive complexity challenges — from writing a single learning objective (L1) to building a 3-year L&D capability strategy for a 5,000-person organization (L10).
 
-**Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, feedback quality, engagement, theory grounding, and consulting posture dimensions.
+**Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and consulting posture dimensions.
 
 ---
 
@@ -119,6 +118,7 @@ Issues and pull requests welcome. If you find a gap, an outdated reference, or a
 ### v1.0.0
 - Initial release
 - 15 engagement modes
-- 12 reference files covering full L&D spectrum
+- 11 reference files covering full L&D spectrum
+- 9-dimension audit framework
 - Inclusive & emotional design as core design lenses
 - Tested across 10-level complexity framework
