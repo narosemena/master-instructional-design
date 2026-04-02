@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Master Instructional Design Skill — Evaluation Suite
+  Format: mcp-builder Phase 4 specification
+  Version: 1.1.0
+
+  Questions are:
+  - Independent (no question depends on another)
+  - Read-only (no destructive operations required)
+  - Complex (require multi-framework reasoning and deep domain knowledge)
+  - Realistic (real practitioner scenarios)
+  - Verifiable (expected answer is a specific term, name, or phrase)
+  - Stable (answers will not change over time)
+
+  Running: see evaluations/run_eval.sh
+  Baseline score: 314/320 (98.1%) on v1.0.0
+-->
+
+<evaluation version="1.1.0" skill="master-instructional-design">
+
+  <qa_pair id="1" mode="Theory &amp; Concepts" difficulty="intermediate">
+    <question>
+      A learner is designing a training program for surgical team communication — a complex,
+      whole-task skill where novices must simultaneously manage equipment, team roles, and
+      real-time decision-making. They ask which instructional design model is best suited
+      for designing this kind of complex cognitive skill. Which model should you recommend
+      and why? Name the model and its creator.
+    </question>
+    <answer>4C/ID (Four-Component Instructional Design), van Merriënboer</answer>
+    <rationale>
+      4C/ID (van Merriënboer) is the canonical model for complex, whole-task skill design.
+      It integrates learning tasks, supportive information, procedural information, and
+      part-task practice — specifically designed for situations where skills cannot be
+      decomposed into independent sub-skills without losing transfer fidelity.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="2" mode="Audit" difficulty="foundational">
+    <question>
+      A learning objective reads: "By the end of this module, learners will understand the
+      importance of data privacy in the workplace." According to Bloom's Revised Taxonomy,
+      what cognitive level is this objective written at, and what is the primary problem
+      with using "understand" as the action verb?
+    </question>
+    <answer>Understand (Level 2 — Comprehension); "understand" is not observable or measurable</answer>
+    <rationale>
+      "Understand" sits at Level 2 of Bloom's Revised Taxonomy. The core problem is that
+      it describes an internal mental state that cannot be directly observed or assessed —
+      making it impossible to design a valid assessment or measure achievement.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="3" mode="Process Coach" difficulty="intermediate">
+    <question>
+      Malcolm Knowles identified a set of assumptions about adult learners that distinguish
+      adult learning from pedagogy. What is the specific term Knowles used for his adult
+      learning theory?
+    </question>
+    <answer>Andragogy</answer>
+    <rationale>
+      Knowles coined "andragogy" (from Greek "aner" = adult, "agogos" = leading) to describe
+      adult learning theory, contrasting it with "pedagogy" (child-led instruction). His six
+      assumptions include self-concept, experience, readiness, orientation, motivation, and
+      need to know.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="4" mode="Theory &amp; Concepts" difficulty="intermediate">
+    <question>
+      In Sweller's Cognitive Load Theory, there are three types of cognitive load. Which
+      type describes the mental effort imposed by the learning task itself — inherent to
+      the complexity of the content — and cannot be reduced without simplifying the subject
+      matter?
+    </question>
+    <answer>Intrinsic load</answer>
+    <rationale>
+      Intrinsic cognitive load is determined by the inherent complexity of the material and
+      the learner's prior knowledge. Unlike extraneous load (caused by poor design) or
+      germane load (productive effort building schemas), intrinsic load cannot be reduced
+      without changing the content itself — only managed through sequencing and scaffolding.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="5" mode="Co-Creation" difficulty="foundational">
+    <question>
+      In Gagné's 9 Events of Instruction, what is Event 5?
+    </question>
+    <answer>Providing learning guidance</answer>
+    <rationale>
+      Gagné's 9 Events in order: (1) Gain attention, (2) Inform learners of objectives,
+      (3) Stimulate recall of prior learning, (4) Present the content, (5) Provide learning
+      guidance, (6) Elicit performance/practice, (7) Provide feedback, (8) Assess performance,
+      (9) Enhance retention and transfer. Event 5 is when the designer provides examples,
+      analogies, mnemonics, or worked examples to help learners encode new information.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="6" mode="Theory &amp; Concepts" difficulty="foundational">
+    <question>
+      John Keller's ARCS model describes four conditions necessary for learner motivation.
+      What does the letter "R" stand for in ARCS?
+    </question>
+    <answer>Relevance</answer>
+    <rationale>
+      ARCS: Attention, Relevance, Confidence, Satisfaction. Relevance addresses why the
+      learning matters to the learner — connecting content to personal goals, job needs,
+      or prior experience. Without perceived relevance, learners disengage even when
+      content is technically well-designed.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="7" mode="Process Coach" difficulty="intermediate">
+    <question>
+      A manager reports that customer service reps keep issuing incorrect refund amounts.
+      Leadership has requested a 2-hour eLearning course. Before recommending training as
+      the solution, what framework or methodology should an instructional designer apply
+      to diagnose whether a knowledge/skill gap is actually the root cause — versus a
+      process, motivation, or environment problem?
+    </question>
+    <answer>Performance consulting (or root cause analysis / Gilbert's Behavior Engineering Model)</answer>
+    <rationale>
+      Before designing any training, the designer should conduct a root cause analysis —
+      often framed through performance consulting (Robinson &amp; Robinson) or Gilbert's
+      Behavior Engineering Model, which distinguishes between information, resources,
+      incentives, knowledge, capacity, and motives as root causes. If the refund system
+      UI is unclear or the policy is ambiguous, training will not fix the performance gap.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="8" mode="Authoring Tool Expert" difficulty="intermediate">
+    <question>
+      A course developer is publishing a Storyline 360 course to a Cornerstone LMS and
+      needs to track both completion and learner quiz scores. They ask whether to publish
+      as SCORM 1.2 or SCORM 2004. Which standard supports passing a numeric score
+      (not just pass/fail) and reporting suspend data longer than 4096 characters?
+    </question>
+    <answer>SCORM 2004</answer>
+    <rationale>
+      SCORM 2004 supports: (1) cmi.score.raw as a numeric value vs SCORM 1.2's
+      cmi.core.score.raw with a 9-character limit, (2) suspend_data up to 64KB vs
+      SCORM 1.2's 4096-character limit, and (3) sequencing and navigation rules.
+      For complex branching, long suspend data, or numeric scoring, SCORM 2004 is required.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="9" mode="Inclusive &amp; Emotional Design" difficulty="advanced">
+    <question>
+      A DEI training opens with a self-assessment asking employees to rate their own level
+      of unconscious bias on a scale from 1 to 5. A learning designer flags this as a
+      psychological safety risk. What specific psychological phenomenon — first documented
+      by Claude Steele — does this opening risk triggering in members of historically
+      marginalized groups?
+    </question>
+    <answer>Stereotype threat</answer>
+    <rationale>
+      Stereotype threat (Steele &amp; Aronson, 1995) is the anxiety triggered when a person
+      is in a situation where they risk confirming a negative stereotype about their group.
+      Asking marginalized employees to self-rate bias at the opening of DEI training —
+      before psychological safety is established — can trigger identity threat, suppress
+      cognitive performance, and cause disengagement. The assessment should come after
+      safety is built, not before.
+    </rationale>
+  </qa_pair>
+
+  <qa_pair id="10" mode="CLO &amp; Learning Leadership" difficulty="advanced">
+    <question>
+      A CLO is building a business case for a $500K learning technology investment and
+      needs to demonstrate ROI. Which evaluation methodology — extending Kirkpatrick's
+      four levels — specifically provides a framework for converting learning outcomes
+      to monetary value and calculating a return on investment percentage? Name the
+      methodology and its primary author.
+    </question>
+    <answer>Phillips ROI Methodology, Jack Phillips</answer>
+    <rationale>
+      Jack Phillips extended Kirkpatrick's model with a Level 5 — ROI — that requires
+      (1) isolating the effects of the training from other variables, (2) converting
+      outcomes to monetary value, (3) calculating fully-loaded program costs, and
+      (4) computing ROI% = ((Benefits - Costs) / Costs) × 100. It is the most widely
+      cited framework for demonstrating financial return on L&amp;D investment at the
+      executive level.
+    </rationale>
+  </qa_pair>
+
+</evaluation>
