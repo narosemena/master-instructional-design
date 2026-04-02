@@ -1,7 +1,7 @@
 ````markdown
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 11 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 14 on-demand reference files.
 
 ---
 
@@ -66,7 +66,7 @@ cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 
 **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
 
-**11 reference files** loaded on demand — never all at once, preserving context efficiency:
+**14 reference files** loaded on demand — never all at once, preserving context efficiency:
 
 | Reference file | Covers |
 | :--- | :--- |
@@ -81,6 +81,9 @@ cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |
 | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
 | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
+| `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
+| `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow and Formative Assessment Architecture |
+| `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick reference |
 
 -----
 

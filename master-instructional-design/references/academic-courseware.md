@@ -509,3 +509,7 @@ A persistent tension in the field: practitioners often don't read research; rese
 - For **facilitation design** grounded in Gagné's 9 Events and andragogy → `references/facilitation-and-ilt.md`
 - For **Agile/Scrum adaptation** of academic ID process models → `references/agile-and-design.md` §1–5
 - For **AI in graduate ID research** (design-based research with AI tools) → `references/generative-ai-for-ld.md` §9–11
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

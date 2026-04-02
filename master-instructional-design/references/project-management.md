@@ -626,3 +626,7 @@ For full Agile/Scrum methodology for L&D → `references/agile-and-design.md` §
 - For **style guide visual design standards** (typography, color, imagery) → `references/agile-and-design.md` §6–10
 - For **LMS configuration and QA in the LMS** → `references/lms-evaluation.md` §9
 - For **AI-assisted project documentation** (using AI to draft charters, status updates, review emails) → `references/generative-ai-for-ld.md` §5
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

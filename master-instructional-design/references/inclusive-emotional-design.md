@@ -508,3 +508,7 @@ Use this checklist when auditing any learning artifact for inclusive and emotion
 - For **assessment design** that is psychologically safe and formatively rich → `references/evaluation-planning.md` §5
 - For **CLO strategy** that embeds DEI into organizational learning culture → `references/academic-courseware.md` §10
 - For **generative AI prompting** that avoids bias in AI-generated content → `references/generative-ai-for-ld.md` §12
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

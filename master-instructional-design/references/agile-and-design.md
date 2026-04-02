@@ -532,3 +532,7 @@ Set up and share export presets across the team:
 - For **AI-assisted design workflows** (generating icons, layouts, scripts) → `references/generative-ai-for-ld.md`
 - For **facilitation guide design** applying visual design principles to print/digital materials → `references/facilitation-and-ilt.md` §3
 - For **inclusive design** application in visual and UX work → `references/facilitation-and-ilt.md` §14
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

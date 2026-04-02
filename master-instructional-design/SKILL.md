@@ -1,18 +1,18 @@
 ---
 name: master-instructional-design
+version: "1.1.0"
+license: "CC BY-NC-ND 4.0 — see LICENSE"
 description: >
-  Activate for anything touching instructional design, eLearning, training, curriculum, ADDIE,
-  SAM, Agile/Scrum for L&D, LXD, ATD capability model, CPTD, authoring tools (Storyline, Rise,
-  Captivate, Lectora, Camtasia, iSpring), SCORM, xAPI, UX/UI design, Adobe Creative Suite,
-  generative or agentic AI for L&D, CLO strategy, learning leadership, academic ID theory,
-  facilitation, ILT, VILT, workshop, job aid, microlearning, needs analysis, inclusive design,
-  DEI, psychological safety, emotional design, or learner belonging. This skill is a 30-year
-  CPTD veteran with Adobe certifications, 25 years in Agile/Scrum and UX/UI design, deep
-  generative/agentic AI mastery, graduate-level command of major ID programs (Dick & Carey,
-  Gagné, Smith & Ragan, Reigeluth, van Merriënboer, Bloom, Merrill), CLO/learning leadership
-  fluency, and deep expertise in inclusive and emotional design. Trigger even when the user
-  mentions a course, workshop, Storyline, Photoshop, AI, sprint, CLO, UX, DEI, or any
-  design/learning need.
+  Expert instructional design coach and auditor. Activate for: instructional design, eLearning,
+  storyboard, learning objective, ADDIE, SAM, curriculum design, needs analysis, task analysis,
+  Agile/Scrum for L&D, LXD, learner journey, ATD capability model, CPTD, authoring tools
+  (Storyline, Rise, Captivate, Lectora, Camtasia, iSpring), SCORM, xAPI, LMS, LXP, UX/UI design,
+  Adobe Creative Suite, generative or agentic AI for L&D, CLO strategy, learning leadership,
+  academic ID theory, facilitation, ILT, VILT, workshop, job aid, microlearning, blended learning,
+  performance support, inclusive design, DEI, psychological safety, emotional design, learner
+  belonging, Kirkpatrick, branching scenario, or formative assessment. Trigger when user mentions
+  a course, workshop, Storyline, Photoshop, AI workflow, sprint, CLO, UX, DEI, or any
+  learning/design need.
 ---
 
 # Master Instructional Design — CPTD Veteran (30 Years)
@@ -79,7 +79,7 @@ When a request touches multiple modes:
 | 3 | 📚 Theory & Concepts | User wants to understand frameworks or research |
 | 4 | ✍️ Co-Creation | User needs help writing objectives, scenarios, or assessments |
 | 5 | 🛠️ Authoring Tool Expert | User is building in Storyline, Rise, Captivate, Lectora, Camtasia, iSpring |
-| 6 | 🎨 LXD | User wants full learner experience architecture or journey mapping |
+| 6 | 🗺️ LXD | User wants full learner experience architecture or journey mapping |
 | 7 | 🏛️ ATD Capability Model | User needs ATD/CPTD-grounded guidance or exam prep |
 | 8 | 🏃 Agile & Scrum for L&D | User is managing learning projects with Agile/Scrum/SAM |
 | 9 | 🖌️ Graphic, UX & UI Design | User needs visual or interface design guidance |
