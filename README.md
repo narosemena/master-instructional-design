@@ -56,9 +56,23 @@ Activates expert-level guidance across the full L&D spectrum:
 ### Claude Code
 
 ```bash
-git clone [https://github.com/narosemena/master-instructional-design](https://github.com/narosemena/master-instructional-design)
-cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
-````
+# 1. Clone the repo
+git clone https://github.com/narosemena/master-instructional-design
+cd master-instructional-design
+
+# 2. Copy the skill files to your global Claude Code skills directory
+cp -r master-instructional-design ~/.claude/skills/
+
+# 3. Copy the hook and settings to your project (or global) Claude config
+#    Run this from inside any project where you want the reference router active:
+mkdir -p .claude/hooks
+cp .claude/hooks/reference-router.py .claude/hooks/
+cp .claude/settings.json .claude/settings.json  # merge manually if you have an existing one
+```
+
+The reference router hook (`reference-router.py`) automatically hints which reference file is most relevant for each prompt — zero token cost, keyword-based. Runs on `UserPromptSubmit`.
+
+> **Already have a `.claude/settings.json`?** Manually merge the `hooks.UserPromptSubmit` block from this repo's `.claude/settings.json` into yours rather than overwriting it.
 
 -----
 
