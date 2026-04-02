@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 5,
+            "command": "python3 .claude/hooks/reference-router.py"
+          }
+        ]
+      }
+    ]
+  }
+}
