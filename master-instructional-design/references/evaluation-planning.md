@@ -494,3 +494,7 @@ Report accurately, even when results are disappointing. L&D teams that only repo
 - For **building the evaluation plan into the design document** → `references/project-management.md` §5
 - For **L1 survey results analysis** and improving the learning experience → `references/facilitation-and-ilt.md` (for ILT) or `references/authoring-tools.md` (for eLearning)
 - For **AI-assisted evaluation report writing** and data synthesis → `references/generative-ai-for-ld.md` §5
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

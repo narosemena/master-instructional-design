@@ -1,7 +1,7 @@
 ````markdown
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 11 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 14 on-demand reference files.
 
 ---
 
@@ -56,9 +56,23 @@ Activates expert-level guidance across the full L&D spectrum:
 ### Claude Code
 
 ```bash
-git clone [https://github.com/narosemena/master-instructional-design](https://github.com/narosemena/master-instructional-design)
-cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
-````
+# 1. Clone the repo
+git clone https://github.com/narosemena/master-instructional-design
+cd master-instructional-design
+
+# 2. Copy the skill files to your global Claude Code skills directory
+cp -r master-instructional-design ~/.claude/skills/
+
+# 3. Copy the hook and settings to your project (or global) Claude config
+#    Run this from inside any project where you want the reference router active:
+mkdir -p .claude/hooks
+cp .claude/hooks/reference-router.py .claude/hooks/
+cp .claude/settings.json .claude/settings.json  # merge manually if you have an existing one
+```
+
+The reference router hook (`reference-router.py`) automatically hints which reference file is most relevant for each prompt — zero token cost, keyword-based. Runs on `UserPromptSubmit`.
+
+> **Already have a `.claude/settings.json`?** Manually merge the `hooks.UserPromptSubmit` block from this repo's `.claude/settings.json` into yours rather than overwriting it.
 
 -----
 
@@ -66,7 +80,7 @@ cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 
 **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
 
-**11 reference files** loaded on demand — never all at once, preserving context efficiency:
+**14 reference files** loaded on demand — never all at once, preserving context efficiency:
 
 | Reference file | Covers |
 | :--- | :--- |
@@ -81,6 +95,9 @@ cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
 | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |
 | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
 | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
+| `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
+| `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow and Formative Assessment Architecture |
+| `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick reference |
 
 -----
 

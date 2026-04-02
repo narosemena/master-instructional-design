@@ -643,3 +643,7 @@ Tools: Axonify, Qstream, Nudge, or a simple LMS quiz drip configured with releas
 - For **DEI content design** specific guidance → `references/inclusive-emotional-design.md` §7
 - For **learner resistance** handled through facilitation → `references/inclusive-emotional-design.md` §8
 - For **trauma-informed facilitation** protocols → `references/inclusive-emotional-design.md` §9
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

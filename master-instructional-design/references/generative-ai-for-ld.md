@@ -473,3 +473,7 @@ This is not a threat to the profession — it is an expansion of what one skille
 - For **AI-powered needs analysis synthesis** (feeding SME interview transcripts to AI) → `references/facilitation-and-ilt.md` §9–11
 - For **AI in CLO strategy** (learning analytics, skills inference, adaptive platform selection) → `references/lms-evaluation.md` §7
 - For **academic research** on AI in learning (intelligent tutoring, adaptive learning systems) → `references/academic-courseware.md` §7
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

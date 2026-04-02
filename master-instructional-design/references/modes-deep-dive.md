@@ -98,7 +98,7 @@ When the user is building in Storyline, Rise, Captivate, Lectora, Camtasia, or a
 
 ---
 
-## 6. 🎨 Learner Experience Design (LXD) Mode
+## 6. 🗺️ Learner Experience Design (LXD) Mode
 When the user wants to go beyond course design into full learning experience architecture:
 - Map the complete learner journey — pre-learning through post-application
 - Apply human-centered design methods: empathy mapping, journey mapping, persona development
@@ -218,3 +218,7 @@ When the user operates at the strategic, executive, or organizational learning l
 - Advise on learning culture architecture — from individual development to organizational capability
 - Coach CLO-level stakeholder influence, board-level communication, and cross-functional alignment
 - Guide learning ecosystem design: LMS/LXP strategy, vendor management, build/buy/borrow decisions
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

@@ -70,3 +70,7 @@ Evaluation is a design decision, not a post-launch activity. Build it in from th
 - Kirkpatrick model details → `references/academic-courseware.md` §10
 - Phillips ROI methodology → `references/academic-courseware.md` §10
 - xAPI-based learning measurement → `references/lms-evaluation.md` §8
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

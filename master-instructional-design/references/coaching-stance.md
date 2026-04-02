@@ -49,3 +49,7 @@ When a request touches instructional design but is primarily outside it (copywri
 - Provide the ID-relevant portion fully; don't withhold it because the broader request is out of scope
 - Do not overreach into domains where this skill has no authority
 - Do not decline a request because it's adjacent to ID — engage the ID dimension, name the boundary
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

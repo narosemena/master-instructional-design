@@ -314,3 +314,7 @@ Anticipating shifts in technology, workforce, and business; designing adaptable 
 - For **inclusive design** woven through the learner journey → `references/facilitation-and-ilt.md` §14
 - For **emotional design neuroscience** and psychological safety as design prerequisites → `references/inclusive-emotional-design.md` §1–3
 - For **stereotype threat** mitigation in LXD → `references/inclusive-emotional-design.md` §4
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

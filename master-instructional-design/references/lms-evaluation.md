@@ -509,3 +509,7 @@ Always calculate 3-year TCO, not just Year 1 license cost.
 
 - For **evaluation planning** that feeds into LMS reporting strategy → `references/evaluation-planning.md`
 - For **project management** of LMS implementation → `references/project-management.md` §9
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

@@ -213,3 +213,7 @@ The art of asking rather than telling — applied to consulting, facilitation, a
 - For **immersive learning platform and authoring tool** implementation → `references/authoring-tools.md`
 - For **emotional design neuroscience** applied to ID practice → `references/inclusive-emotional-design.md` §1, §13
 - For **stereotype threat, psychological safety, and identity-affirming design** → `references/inclusive-emotional-design.md`
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*

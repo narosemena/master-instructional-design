@@ -418,3 +418,7 @@ Design your xAPI statements intentionally — they are your learning data strate
 - For **accessibility compliance** (WCAG, screen reader testing) in authoring tools → `references/agile-and-design.md` §11
 - For **SCORM/xAPI strategy** at the LMS platform level → `references/lms-evaluation.md`
 - For **Agile sprint workflow** for authoring tool development projects → `references/agile-and-design.md` §1–5
+
+
+---
+*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*
