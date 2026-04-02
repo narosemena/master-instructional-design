@@ -1,3 +1,4 @@
+````markdown
 # master-instructional-design
 
 A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 11 on-demand reference files.
@@ -6,7 +7,7 @@ A Claude skill that embodies a 30-year veteran instructional design practitioner
 
 ## ⚖️ Proprietary Framework & Terms of Use
 
-This repository represents the proprietary instructional design methodology developed by **Norman Daniel Arosemena Jaen** also referred to as the author, Norman Arosemena, CPTD, and/or Norman . 
+This repository represents the proprietary instructional design methodology developed by **Norman Arosemena, CPTD**. 
 
 * **For Individuals/Learners:** You are welcome to use this skill for personal research, study, and non-commercial professional development.
 * **For Organizations/Consultancies:** Commercial use, redistribution, or "white-labeling" of this framework or its underlying logic is strictly prohibited without a commercial license. For enterprise licensing or consulting inquiries, please contact me directly.
@@ -27,7 +28,7 @@ Activates expert-level guidance across the full L&D spectrum:
 * **Adobe Creative Suite** — Photoshop, Illustrator, InDesign, After Effects, Premiere, XD workflows for L&D
 * **Generative AI for L&D** — prompt engineering, AI-assisted ID workflows, agentic pipelines, responsible AI
 * **CLO & Learning Leadership** — organizational learning strategy, talent analytics, skills taxonomy, 3-year L&D strategy
-* **Academic ID Theory** — graduate program canon, major textbooks (Dick & Carey, Gagné, Smith & Ragan, Reigeluth, van Merriënboer, Bloom, Merrill)
+* **Academic ID Theory** — graduate program canon, major textbooks (Dick & Carey, Gagne, Smith & Ragan, Reigeluth, van Merrienboer, Bloom, Merrill)
 * **LMS/LXP Strategy** — platform selection, RFP process, learning data architecture, xAPI
 * **Project Management** — project charters, RACI matrices, design documents, QA checklists, stakeholder communications
 * **Evaluation Planning** — Kirkpatrick L1–5, ROI calculation, L3 manager observation, learning analytics
@@ -57,3 +58,97 @@ Activates expert-level guidance across the full L&D spectrum:
 ```bash
 git clone [https://github.com/narosemena/master-instructional-design](https://github.com/narosemena/master-instructional-design)
 cp -r master-instructional-design/master-instructional-design ~/.claude/skills/
+````
+
+-----
+
+## What's inside
+
+**SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
+
+**11 reference files** loaded on demand — never all at once, preserving context efficiency:
+
+| Reference file | Covers |
+| :--- | :--- |
+| `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning, organizational learning |
+| `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job aids, microlearning |
+| `authoring-tools.md` | Storyline, Rise, Captivate, Lectora, Camtasia + JavaScript/CSS/HTML coding patterns |
+| `lxd-and-atd.md` | LXD frameworks, learner journey, ATD Capability Model, CPTD exam prep |
+| `agile-and-design.md` | Agile/Scrum for L\&D, visual design, UX/UI, Adobe Creative Suite |
+| `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |
+| `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy |
+| `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |
+| `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |
+| `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
+| `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
+
+-----
+
+## Tested against
+
+10 progressive complexity challenges — from writing a single learning objective (L1) to building a 3-year L\&D capability strategy for a 5,000-person organization (L10).
+
+**Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and consulting posture dimensions.
+
+-----
+
+## How to use it
+
+Just mention what you're working on. The skill activates automatically based on context. Examples:
+
+  * *"Audit these 5 learning objectives for a new manager course"*
+  * *"Design a blended onboarding program for software engineers"*
+  * *"Our CSAT dropped 11 points — the sponsor thinks agents need product knowledge training. What do I do?"*
+  * *"Help me write JavaScript to track variable states in Storyline"*
+  * *"Build a 3-year L\&D strategy for a 5,000-person financial services firm"*
+
+-----
+
+## 🚀 Beyond the Core: Enterprise Edition & Consulting
+
+The version of the **Master Instructional Design** skill hosted here is the **Core Edition**—a robust framework for practitioners and students.
+
+For organizations requiring industrial-scale learning transformation, I maintain a proprietary **Enterprise Edition**. This version is integrated with advanced logic, specialized data models, and agentic workflows designed for high-stakes corporate environments.
+
+### Enterprise-Only Features:
+
+| Feature | Description |
+| :--- | :--- |
+| **Lean L\&D / TPS Integration** | Applying the **Toyota Production System (TPS)**, JKK, and Kaizen to learning operations to eliminate "educational waste" and accelerate speed-to-proficiency. |
+| **Advanced xAPI & LRS Mapping** | Proprietary logic for mapping instructional interactions to xAPI statements and LRS (Learning Record Store) architectures. |
+| **ROI & Business Impact L5** | Automated Kirkpatrick Level 4 & 5 (ROI) calculators tied to specific business KPIs and financial modeling. |
+| **Agentic ID Workflows** | Specialized sub-agents for automated Storyboarding, Technical Backlog writing (Agile for L\&D), and Accessibility (Section 508/WCAG) auditing. |
+| **Strategic L\&D Roadmap** | A logic-driven engine for generating 3-year capability strategies and organizational skill taxonomies. |
+| **Premium Template Library** | Access to 40+ professional-grade Project Charters, RACI matrices, Design Documents, and high-fidelity Storyline/Rise templates. |
+
+### 🛠️ Work with Me
+
+If you are looking to elevate your organization's learning ecosystem or require a customized deployment of this AI framework, let's connect.
+
+  * **Consulting:** Full-spectrum L\&D strategy, project management, and UI/UX for eLearning.
+  * **Licensing:** Enterprise-wide access to the full **Master Instructional Design** proprietary skill.
+  * **Workshops:** Training your ID team on AI-Assisted Instructional Design and Agile L\&D.
+
+**[Contact me via LinkedIn](https://www.linkedin.com/in/normanarosemena/) or open a private inquiry via GitHub Issues.**
+
+-----
+
+## Attribution & Disclaimer
+
+This skill references established frameworks, models, and published works in the instructional design and learning sciences fields. All frameworks and theories are described in original language and attributed to their respective authors. Tool and product names are trademarks of their respective owners.
+
+**This project is a personal endeavor created by Norman Arosemena. It is not affiliated with, endorsed by, or representative of any current or past employers.**
+
+-----
+
+## License
+
+[CC BY-NC-ND 4.0](https://www.google.com/search?q=LICENSE) — This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International License.
+
+-----
+
+## Feedback & Requests
+
+While this is a proprietary framework, I value community feedback. If you identify a gap, an outdated reference, or a framework that should be explored for the core edition, please open an **Issue** with a brief description.
+
+-----
