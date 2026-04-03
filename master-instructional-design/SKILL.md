@@ -1,6 +1,6 @@
 ---
 name: master-instructional-design
-version: "1.1.0"
+version: "2.1.0"
 license: "CC BY-NC-ND 4.0 — see LICENSE"
 description: >
   Expert instructional design coach and auditor. Activate for: instructional design, eLearning,
