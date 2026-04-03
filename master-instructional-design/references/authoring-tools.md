@@ -389,14 +389,8 @@ Design your xAPI statements intentionally — they are your learning data strate
 
 ## 11. Accessibility & UDL in Authoring Tools
 
-### WCAG 2.1 AA — Core Requirements for eLearning
-- **1.1.1** Alt text for all non-text content
-- **1.2.2** Captions for all audio/video
-- **1.3.1** Info/relationships conveyed through structure, not just visuals
-- **1.4.3** Color contrast ≥ 4.5:1 (text) / 3:1 (large text)
-- **2.1.1** All functionality keyboard accessible
-- **2.4.3** Focus order logical and meaningful
-- **4.1.2** Name, role, value for all UI components
+### WCAG 2.1 AA — Most Failed in eLearning
+Alt text, captions, color contrast ≥ 4.5:1, keyboard access, logical focus order, semantic structure. Full spec at w3.org/WAI/WCAG21/quickref/.
 
 ### Tool-Specific Accessibility Quick Reference
 - **Storyline**: Set tab order + focus order per slide; add alt text in object properties; test with NVDA
@@ -404,10 +398,8 @@ Design your xAPI statements intentionally — they are your learning data strate
 - **Captivate**: Fluid boxes + accessibility panel; best native accessibility support of major tools
 - **Lectora**: Gold standard; use built-in WCAG checker; reading order + tab order panels
 
-### UDL Principles Applied to Authoring
-- **Multiple Means of Representation**: Provide audio + text + visual versions of key content
-- **Multiple Means of Action/Expression**: Offer keyboard nav, click, voice where possible
-- **Multiple Means of Engagement**: Provide context/relevance, offer challenge calibration, support self-regulation
+### UDL Applied to Authoring
+Design for representation (audio + text + visual), expression (keyboard + click), and engagement (context + challenge calibration). For full UDL implementation patterns → `references/inclusive-emotional-design.md` §10.
 
 ---
 

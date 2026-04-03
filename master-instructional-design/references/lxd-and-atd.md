@@ -183,86 +183,36 @@ The ATD TD Capability Model (2020) defines what talent development professionals
 
 ---
 
-## 8. The 23 TD Capabilities — Detailed
+## 8. The 23 TD Capabilities — Quick Reference
 
-### Domain 1: Building Personal Capability
-
-**1. Communication**
-Proficiency in written, verbal, and visual communication. For ID: clear design documentation, stakeholder communication, effective facilitation of design reviews.
-
-**2. Emotional Intelligence & Decision Making**
-Self-awareness, empathy, managing reactions under pressure. Essential for navigating SME relationships, stakeholder pushback, and ambiguous project requirements.
-
-**3. Collaboration & Leadership**
-Working across functions; influencing without authority; leading project teams. ID practitioners frequently lead without formal authority.
-
-**4. Cultural Awareness & Inclusion**
-Designing learning that works across cultures; recognizing bias in content, characters, and examples; building equitable learning experiences.
-
-**5. Project Management**
-Planning, scoping, managing timelines, risks, and resources. Strong ID practitioners own their projects end to end.
-
-**6. Compliance & Ethical Behavior**
-Copyright, accessibility law, data privacy, ethical use of learner data. Especially critical in regulated industries.
-
-**7. Life-Long Learning**
-Modeling and practicing continuous development; staying current with learning science, technology, and organizational trends.
-
----
-
-### Domain 2: Developing Professional Capability
-
-**8. Learning Sciences**
-Deep understanding of how people learn: cognitive load, memory consolidation, retrieval practice, motivation, transfer. The scientific foundation for all design decisions.
-
-**9. Instructional Design**
-Core ID practice: needs analysis, objective writing, content design, assessment design, evaluation. The technical heart of the profession.
-
-**10. Training Delivery & Facilitation**
-Effective delivery of ILT/VILT; facilitation techniques; managing group dynamics; adapting in real time. Not just for facilitators — IDs must understand delivery to design for it.
-
-**11. Technology Application**
-Authoring tools, LMS, LRS, video tools, collaboration platforms, emerging tech (AI, VR/AR). ID practitioners must be technically proficient.
-
-**12. Knowledge Management**
-Capturing, organizing, and making organizational knowledge accessible. Connects to performance support and LXD strategy.
-
-**13. Career & Leadership Development**
-Designing and supporting career pathways, leadership programs, coaching and mentoring frameworks.
-
-**14. Coaching**
-1:1 coaching skills for managers and leaders; also the coaching posture ID practitioners bring to SME and stakeholder relationships.
-
-**15. Evaluating Impact**
-Designing and executing evaluation at all Kirkpatrick levels; translating data into actionable insights; reporting to stakeholders.
-
-**16. Change Management**
-Supporting organizational change through learning strategy; understanding resistance; designing for adoption.
-
----
-
-### Domain 3: Impacting Organizational Capability
-
-**17. Business Insight**
-Understanding how the business makes money, what drives performance, how L&D connects to strategy. Critical for moving from order-taker to strategic partner.
-
-**18. Consulting & Business Partnering**
-Diagnosing performance problems, influencing stakeholders, scoping work, contracting. The performance consulting skill set.
-
-**19. Organization Development & Culture**
-Systems thinking; culture as a learning environment; OD interventions; team effectiveness.
-
-**20. Talent Strategy & Management**
-Workforce planning, succession, talent pipelines. How L&D connects to broader HR strategy.
-
-**21. Performance Improvement**
-Human performance technology (HPT); analyzing root causes; designing multi-pronged interventions (not just training).
-
-**22. Diversity, Equity & Inclusion**
-Embedding DEI into learning strategy, design, delivery, and evaluation — not as add-on content but as systemic practice.
-
-**23. Future Readiness**
-Anticipating shifts in technology, workforce, and business; designing adaptable learning systems; learning foresight.
+| # | Capability | ID-Specific Application Focus |
+|---|---|---|
+| **Domain 1 — Building Personal Capability** | | |
+| 1 | Communication | Design docs, stakeholder briefs, design review facilitation |
+| 2 | Emotional Intelligence & Decision Making | SME relationships, ambiguous requirements, pushback navigation |
+| 3 | Collaboration & Leadership | Leading without authority; cross-functional project teams |
+| 4 | Cultural Awareness & Inclusion | Global design, equitable scenarios, bias review |
+| 5 | Project Management | Owning scope, schedule, and risk end to end |
+| 6 | Compliance & Ethical Behavior | Copyright, accessibility law, learner data privacy |
+| 7 | Life-Long Learning | Modeling continuous development; staying current |
+| **Domain 2 — Developing Professional Capability** | | |
+| 8 | Learning Sciences | CLT, retrieval, transfer — foundation for every design decision |
+| 9 | Instructional Design | Needs analysis, objectives, assessment, evaluation |
+| 10 | Training Delivery & Facilitation | IDs must understand delivery to design for it |
+| 11 | Technology Application | Authoring tools, LMS, LRS, AI, VR/AR |
+| 12 | Knowledge Management | Performance support, LXD ecosystem, knowledge architecture |
+| 13 | Career & Leadership Development | Career pathways, coaching/mentoring frameworks |
+| 14 | Coaching | 1:1 coaching posture with SMEs, stakeholders, managers |
+| 15 | Evaluating Impact | Kirkpatrick/Phillips execution and stakeholder reporting |
+| 16 | Change Management | Learning as adoption enabler; resistance strategy |
+| **Domain 3 — Impacting Organizational Capability** | | |
+| 17 | Business Insight | Revenue drivers, strategy linkage, moving beyond order-taking |
+| 18 | Consulting & Business Partnering | Performance diagnosis, scoping, contracting |
+| 19 | Organization Development & Culture | Systems thinking, culture as learning environment |
+| 20 | Talent Strategy & Management | Workforce planning, succession, talent pipelines |
+| 21 | Performance Improvement | HPT, root cause analysis, multi-pronged interventions |
+| 22 | Diversity, Equity & Inclusion | Systemic practice embedded in design — not add-on content |
+| 23 | Future Readiness | Anticipating tech/workforce shifts; adaptable learning systems |
 
 ---
 
