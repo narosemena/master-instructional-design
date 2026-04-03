@@ -1,7 +1,7 @@
 ````markdown
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 14 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 18 on-demand reference files.
 
 ---
 
@@ -80,7 +80,7 @@ The reference router hook (`reference-router.py`) automatically hints which refe
 
 **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
 
-**14 reference files** loaded on demand — never all at once, preserving context efficiency:
+**18 reference files** loaded on demand — never all at once, preserving context efficiency:
 
 | Reference file | Covers |
 | :--- | :--- |
@@ -98,6 +98,10 @@ The reference router hook (`reference-router.py`) automatically hints which refe
 | `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
 | `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow and Formative Assessment Architecture |
 | `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick reference |
+| `situational-leadership.md` | SLII development levels (D1–D4), leadership style matching, L&D team coaching, SLII failure modes |
+| `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message mapping, L&D brand voice, CLO presentation structure |
+| `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign design, enrollment metrics |
+| `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion network design, cannot vs. will-not diagnostic |
 
 -----
 

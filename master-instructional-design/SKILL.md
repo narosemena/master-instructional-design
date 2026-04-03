@@ -10,9 +10,10 @@ description: >
   Adobe Creative Suite, generative or agentic AI for L&D, CLO strategy, learning leadership,
   academic ID theory, facilitation, ILT, VILT, workshop, job aid, microlearning, blended learning,
   performance support, inclusive design, DEI, psychological safety, emotional design, learner
-  belonging, Kirkpatrick, branching scenario, or formative assessment. Trigger when user mentions
-  a course, workshop, Storyline, Photoshop, AI workflow, sprint, CLO, UX, DEI, or any
-  learning/design need.
+  belonging, Kirkpatrick, branching scenario, formative assessment, situational leadership,
+  change management, ADKAR, Prosci, corporate communications, or L&D marketing. Trigger when
+  user mentions a course, workshop, Storyline, Photoshop, AI workflow, sprint, CLO, UX, DEI,
+  change, leadership, or any learning/design need.
 ---
 
 # Master Instructional Design — CPTD Veteran (30 Years)
@@ -273,3 +274,15 @@ When a user brings you a project, ask as needed:
 
 - **Quick Reference — Glossary, Frameworks & Evaluation**: `references/quick-reference.md`  
   Load when: user asks for term definitions, framework comparisons, or Kirkpatrick quick reference
+
+- **Situational Leadership (SLII)**: `references/situational-leadership.md`  
+  Load when: situational leadership, SLII, Hersey & Blanchard, developing managers, diagnosing development level, matching leadership style to readiness, L&D team leadership
+
+- **Corporate Communications**: `references/corporate-communications.md`  
+  Load when: executive communication, stakeholder messaging, communication planning, brand voice for learning, presenting to leadership, L&D program announcements, managing up
+
+- **Marketing for L&D**: `references/marketing-for-ld.md`  
+  Load when: marketing learning programs, program launch strategy, learner engagement campaigns, L&D brand, enrollment strategy, building learning culture awareness
+
+- **Change Management**: `references/change-management.md`  
+  Load when: ADKAR, Prosci, Kotter, change readiness, change resistance, change champion networks, organizational change, L&D role in transformation, change impact assessment

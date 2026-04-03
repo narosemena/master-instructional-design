@@ -45,6 +45,11 @@ routes = [
      r"|learning record|\blrs\b|technology stack|\bscorm\b.*track"
      r"|\bxapi\b.*track"),
 
+    ("corporate-communications.md",
+     r"corporate communicat|executive communicat|stakeholder message"
+     r"|communication plan|communicat.*strateg.*learn|brand voice.*learn"
+     r"|messaging.*ld|internal comm.*ld"),
+
     ("project-management.md",
      r"project charter|\braci\b|design document|storyboard standard"
      r"|style guide|scope creep|approval workflow|qa checklist"
@@ -55,14 +60,30 @@ routes = [
      r"|doctoral|\bclo\b.*strateg|academic.*model|smith.*ragan"
      r"|merrill.*principle"),
 
+    ("situational-leadership.md",
+     r"situational leader|\bslii\b|hersey.*blanchard|blanchard.*hersey"
+     r"|development level.*d[1-4]|d[1-4].*development level"
+     r"|directing.*coaching.*support|leader.*readiness"),
+
     ("agile-and-design.md",
      r"\bscrum\b|\bsprint\b|backlog|visual design|typography|color theory"
      r"|\blayout\b|\badobe\b|photoshop|illustrator|\bux\b.*design"
      r"|\bui\b.*design"),
 
+    ("change-management.md",
+     r"change management|\badkar\b|\bprosci\b|\bkotter\b|lewin.*change"
+     r"|change readiness|change resistance|change champion"
+     r"|organizational change|transformation.*learn|change impact"),
+
     ("lxd-and-atd.md",
      r"learner journey|\blxd\b|atd capability|\bcptd\b|empathy map"
      r"|human.centered design|experience design|journey map"),
+
+    ("marketing-for-ld.md",
+     r"marketing.*learn|learn.*marketing|marketing.*course|marketing.*program"
+     r"|\bl.?d brand\b|learner engagement campaign"
+     r"|program launch|launch.*course|launch.*program|learning campaign"
+     r"|enrollment.*strateg|learn.*awareness|course.*promotion"),
 
     ("foundational-texts.md",
      r"book recommend|foundational text|research backing|adult learning theory"
