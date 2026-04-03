@@ -346,11 +346,8 @@ A well-designed TTT program addresses three dimensions:
 ## 8. Blended Learning Architecture
 
 ### The 70-20-10 Framework Applied to Blended Design
-- **70% on-the-job**: Design for application — manager coaching, stretch assignments, performance support at the moment of need
-- **20% social/peer**: Communities of practice, cohort check-ins, peer coaching, mentoring
-- **10% formal**: eLearning modules, ILT workshops, VILT sessions
 
-Blended design error: spending 90% of design effort on the 10% formal learning while ignoring the 70%.
+The model knows 70-20-10. The practitioner failure: **spending 90% of design effort on the 10% formal learning and ignoring the 70%.** Design the on-the-job experience (manager coaching prompts, application challenges, performance support) with the same rigor as the formal session.
 
 ### Blended Program Design Sequence
 

@@ -287,15 +287,8 @@ Anticipating shifts in technology, workforce, and business; designing adaptable 
 6. **Study groups**: ATD chapter study groups significantly improve pass rates
 
 ### Key Concepts Frequently Tested
-- Kirkpatrick's four levels (and how to design evaluation at each)
-- Action Mapping / Performance Consulting approach to needs analysis
-- Bloom's Revised Taxonomy — applying at the right cognitive level
-- Adult learning principles (Knowles' andragogy, Mezirow's transformative learning)
-- Cognitive Load Theory and multimedia principles
-- SCORM vs. xAPI distinction and when to use each
-- ROI methodology (Phillips Level 5)
-- Change management models (Kotter, Prosci ADKAR)
-- Coaching vs. mentoring vs. training — when each is appropriate
+
+The exam is scenario-based — not recall. Questions present realistic situations and ask what an experienced TD practitioner would do. The most tested capabilities: Evaluating Impact (Kirkpatrick/Phillips), Instructional Design (Bloom's, needs analysis, CLT/multimedia principles), Learning Sciences (memory, transfer, motivation), and Technology Application (SCORM/xAPI, LMS selection). Domain 2 carries the most weight.
 
 ### Recertification (every 3 years)
 - 60 Professional Development Points (PDPs) required

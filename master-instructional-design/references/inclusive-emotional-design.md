@@ -397,29 +397,7 @@ Trauma-informed design is required when learning content involves:
 
 ## 10. Universal Design for Learning (UDL) Applied
 
-### The Three UDL Principles
-
-UDL provides a framework for designing learning that works for all learners from the start, rather than accommodating learners with disabilities after the fact.
-
-**Principle 1 — Multiple Means of Representation**
-Provide information in more than one format. Don't make comprehension dependent on one sensory channel.
-- Audio + transcript (not just audio)
-- Text + visual (not just text)
-- Worked example + abstract principle (not just the principle)
-- Multiple vocabulary levels (technical and accessible)
-
-**Principle 2 — Multiple Means of Action and Expression**
-Provide multiple ways for learners to engage with content and demonstrate what they know.
-- Written reflection AND verbal discussion AND visual mapping — not just written quizzes
-- Choice in pacing, sequencing, and depth
-- Assistive technology compatibility built in from the start
-
-**Principle 3 — Multiple Means of Engagement**
-Provide multiple ways to motivate and sustain interest.
-- Choice in context, examples, and application scenarios
-- Varying the level of challenge (learner-controlled difficulty)
-- Social AND individual learning options
-- Clear purpose and relevance for every section
+UDL's three principles (Multiple Means of Representation, Action/Expression, and Engagement) are designed to remove barriers from the start rather than accommodate after the fact. The model knows the principles. What matters in practice:
 
 ### Common UDL Implementation Failures
 

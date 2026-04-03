@@ -80,21 +80,7 @@ Most L&D practitioners are at Tier 1-2 today. Tier 3 (agentic) is rapidly maturi
 
 ## 4. Prompt Engineering Fundamentals
 
-### The Anatomy of a High-Quality Prompt
-
-**Role**: Tell the AI who it is. "You are an expert instructional designer with 20 years of experience in corporate compliance training."
-
-**Context**: What's the situation? Audience, constraints, purpose. The more specific, the better.
-
-**Task**: What exactly do you want? Be precise. "Write" is weaker than "Write a 5-question scenario-based knowledge check."
-
-**Format**: How should the output be structured? "Format as a table with columns: Question | A | B | C | D | Correct Answer | Rationale"
-
-**Constraints**: What should the AI avoid, limit, or include? "Do not use jargon. Keep each question under 40 words."
-
-**Examples**: One or two examples of what good output looks like dramatically improve output quality. (Few-shot prompting)
-
-**Evaluation criteria**: Tell the AI how you'll judge success. "The scenarios should feel realistic to a mid-career HR professional, not a textbook exercise."
+The model knows prompt engineering (Role, Context, Task, Format, Constraints, Examples, Evaluation criteria). The L&D-specific coaching point: **most L&D practitioners under-specify audience and over-specify topic.** "Write a quiz about customer service" tells the AI nothing about who the learner is, what they do wrong, or what realistic looks like. Specificity about the *learner and their real work context* is the highest-leverage prompt improvement.
 
 ### Prompt Quality Levels
 
