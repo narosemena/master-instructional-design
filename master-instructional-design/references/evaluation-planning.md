@@ -138,14 +138,7 @@ _______________________________________________
 
 ## 4. Level 1 — Reaction: Survey Design & Standards
 
-### What a Good L1 Survey Measures
-L1 measures learner reaction — not learning. Four dimensions (Kirkpatrick):
-- **Relevance**: Was this relevant to my job?
-- **Engagement**: Was the experience engaging and worthwhile?
-- **Customer Satisfaction**: Would I recommend this to a colleague?
-- **Intent to Apply**: Do I intend to apply what I learned?
-
-Note: L1 alone does NOT predict learning or transfer. Use it to improve experience quality, not to prove impact.
+**Design note**: L1 measures *reaction*, not learning or transfer. L1 data should drive experience quality improvement — not be used as evidence of program effectiveness. High L1 scores do not predict behavior change.
 
 ### Standard L1 Survey Template
 
@@ -375,18 +368,6 @@ When a direct dollar value isn't available, use expert estimation: ask two or th
 ---
 
 ## 9. Learning Analytics & xAPI Measurement
-
-### What xAPI Enables Beyond SCORM
-
-xAPI unlocks behavioral data that SCORM cannot capture:
-
-| SCORM Tracks | xAPI Also Tracks |
-|---|---|
-| Completed / Not completed | Video watched to 73% and replayed section 3 |
-| Score: 85% | Path through branching scenario; which choices were made |
-| Time in course: 47 min | Specific resources searched for; knowledge base articles accessed |
-| | On-the-job application challenge completed and verified |
-| | Manager confirmed behavior transfer (via mobile check-in) |
 
 ### Key xAPI Statements for L&D Programs
 

@@ -164,47 +164,26 @@ Allen Interactions' SAM (Successive Approximation Model) is already iterative �
 
 ## 6. Visual Design Principles for Learning
 
-### Four Core Visual Design Principles (from Robin Williams' *The Non-Designer's Design Book*)
+The model knows CRAP (Contrast, Repetition, Alignment, Proximity), Gestalt principles, and visual hierarchy. The eLearning-specific applications are:
 
-These four principles — widely known by the acronym CRAP — are foundational to visual communication and are factual design concepts in the public domain. Williams named and popularized them; they are not proprietary, but the original book is the canonical reference.
-
-- **Contrast**: Make different things look different. Same-size, same-color elements read as equal weight. Use contrast to signal hierarchy.
-- **Repetition**: Repeat visual elements (colors, fonts, shapes, spacing) to create unity and reinforce brand.
-- **Alignment**: Every element should have a visual connection to something else. Avoid arbitrary placement.
-- **Proximity**: Group related items. Separate unrelated items. Proximity creates relationship.
-
-### Gestalt Principles Applied to eLearning
-- **Figure/Ground**: Ensure interactive elements stand out from background — low contrast clickables cause usability failures
-- **Similarity**: Use consistent visual treatment for elements of the same type (all buttons same style, all headers same font/size)
-- **Continuity**: Guide the eye through content with visual flow — left to right, top to bottom, or explicitly guided with arrows/lines
-- **Closure**: Learners complete incomplete shapes — use this for progress indicators, interactive reveals
-- **Proximity**: Group instructional content + related practice activity visually; separate feedback from question stem
-
-### Visual Hierarchy for Learning
-Layer 1 (first attention): Learning objective / key question — largest, highest contrast
-Layer 2 (second attention): Primary instructional content — clear, readable, supported by visuals
-Layer 3 (supporting): Examples, captions, labels — smaller, lower contrast
-Layer 4 (peripheral): Navigation, branding — should not compete with content
-
-### Whitespace is Not Wasted Space
-Cognitive load research is clear: dense slides impair learning. Every element added to a screen competes for working memory. Whitespace = breathing room = reduced extraneous load. Coach users away from the "fill the slide" instinct.
+- **Figure/Ground**: Low-contrast clickable elements cause usability failures — test every interactive element against its background
+- **Proximity**: Group instructional content + related practice visually; separate feedback visually from question stem
+- **Similarity**: Consistent treatment across same-type elements (all buttons match, all section headers match) — inconsistency signals inconsistent importance
+- **Visual hierarchy for learning**: Layer 1 (objective/key question) → Layer 2 (primary instruction) → Layer 3 (examples/captions) → Layer 4 (nav/branding). Navigation should never compete with content.
+- **Whitespace is instruction**: Dense slides impair learning via extraneous cognitive load. Every added element competes for working memory. Coach stakeholders and SMEs away from the "fill the slide" instinct — it is the single most common visual design failure in L&D materials.
 
 ---
 
 ## 7. UX Design for eLearning
 
-### Nielsen's 10 Usability Heuristics — Applied to eLearning
+### Nielsen's 10 Usability Heuristics — eLearning Application
 
-1. **Visibility of system status**: Show progress — progress bar, lesson counter, completion indicators
-2. **Match between system and real world**: Use learner's language, not L&D jargon; familiar metaphors
-3. **User control and freedom**: Allow back navigation; don't trap learners in linear paths without escape
-4. **Consistency and standards**: Same button does the same thing everywhere; consistent terminology
-5. **Error prevention**: Don't let learners submit an assessment without answering all questions; confirm destructive actions
-6. **Recognition over recall**: Keep navigation visible; don't make learners remember where things are
-7. **Flexibility and efficiency**: Allow skipping for experienced learners; provide keyboard shortcuts
-8. **Aesthetic and minimalist design**: Every element on screen should earn its place
-9. **Help users recognize, diagnose, and recover from errors**: Clear error messages with corrective guidance
-10. **Help and documentation**: Provide orientation for complex simulations; tooltips for ambiguous interactions
+The model knows Nielsen's heuristics. The most violated in eLearning:
+- **#1 Visibility of status**: Many courses have no progress indicator — learners can't gauge effort remaining
+- **#3 User control**: Locking navigation before audio completes treats learners as incapable; allow skip for experienced users
+- **#5 Error prevention**: Assessment submit without all questions answered; no confirmation before exiting mid-scenario
+- **#6 Recognition over recall**: Complex course menus that require learners to remember where they were; always provide "You are here" orientation
+- **#8 Aesthetic and minimalist**: The most common eLearning failure — every redundant element competes for working memory
 
 ### UX Research Methods for Learning Products
 - **Usability testing**: 5 users reveal ~85% of usability problems (Nielsen). Test early prototypes, not finished courses.

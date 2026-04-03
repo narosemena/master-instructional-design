@@ -261,49 +261,22 @@ Winner of AECT 2019 Outstanding Book Award. Addresses diversity, equity, and glo
 
 ---
 
-## 6. Major ID Theoretical Frameworks Taught at Graduate Level
+## 6. Major ID Theoretical Frameworks — Graduate-Level Application Notes
 
-### Gagné's Conditions of Learning (1965/1985)
-**Core idea**: Five categories of learning outcomes (intellectual skills, verbal information, cognitive strategies, motor skills, attitudes) each require distinct internal and external conditions.
-**Nine Events of Instruction**: Gain attention → Inform objectives → Stimulate recall → Present content → Provide learning guidance → Elicit performance → Provide feedback → Assess performance → Enhance retention/transfer
-**Graduate application**: Used to analyze instructional sequences and audit whether learning conditions are present for each objective type.
+The model knows these frameworks. The notes below reflect how each is applied at the graduate practitioner level — what's tested, what's often missed, and where practitioners over-apply or under-apply the model.
 
-### Bloom's Revised Taxonomy — Anderson & Krathwohl (2001)
-**Core idea**: Six cognitive levels (Remember, Understand, Apply, Analyze, Evaluate, Create) applied to a knowledge dimension (factual, conceptual, procedural, metacognitive). Revised from Bloom's original 1956 taxonomy.
-**Graduate application**: Writing objectives at the correct cognitive level; aligning assessments to objectives; curriculum sequencing from lower to higher order thinking.
-
-### Merrill's First Principles of Instruction (2002)
-**Five principles**: (1) Problem-centered — learning is promoted when learners engage with real-world problems; (2) Activation — prior knowledge activated; (3) Demonstration — learning shown, not just told; (4) Application — learners practice; (5) Integration — new knowledge integrated into real world
-**Graduate application**: Audit any instructional design against the five principles. A course violating any principle is less effective than one honoring all five.
-
-### Reigeluth's Elaboration Theory (1979/1999)
-**Core idea**: Instruction should begin with a simple, epitomizing overview of the whole task, then elaborate in increasing detail. Sequence from simple-to-complex, not part-to-whole.
-**Graduate application**: Curriculum sequencing, course architecture, scope and sequence decisions. Challenges the traditional "foundations first" approach to sequencing.
-
-### van Merriënboer's 4C/ID Model (1997/2018)
-**Four components**: Learning tasks (authentic, whole tasks with variability) + Supportive information (conceptual/theoretical knowledge) + Procedural information (just-in-time how-to) + Part-task practice (for automaticity)
-**Graduate application**: Designing for complex professional competencies where integrated performance matters more than isolated skill mastery.
-
-### Jonassen's Constructivist Learning Environments (CLEs)
-**Core idea**: Designers create environments and challenges, not instruction. Learners construct knowledge through authentic problem-solving, exploration, and reflection.
-**Key elements**: Problem/project + related cases + information resources + cognitive tools + conversation/collaboration tools + social/contextual support
-**Graduate application**: Problem-based learning design, knowledge management, designing for higher-order thinking.
-
-### Keller's ARCS Model of Motivation (1987)
-**Four components**: Attention (gain and maintain it), Relevance (connect to learner goals and values), Confidence (set up for success; build self-efficacy), Satisfaction (intrinsic/extrinsic rewards; fairness)
-**Graduate application**: Motivational design audit of any learning experience. Designing pre-learning to build motivation before content begins.
-
-### Ertmer & Newby's Learning Theory Comparison Framework
-**Three orientations**: Behaviorism (stimulus-response; reinforcement), Cognitivism (information processing; schemas; working memory), Constructivism (knowledge construction; social learning; situated cognition)
-**Graduate application**: Aligning design choices to learning theory. Most programs teach that different content types and learning outcomes call for different theoretical orientations — a pluralistic approach.
-
-### Mezirow's Transformative Learning Theory (1991)
-**Core idea**: Adult learning at its deepest involves perspective transformation — challenging and revising meaning structures (frames of reference) through critical reflection
-**Graduate application**: Designing for deep attitudinal or perspective change; leadership development programs; DEI learning; professional identity development.
-
-### Vygotsky's Zone of Proximal Development
-**Core idea**: Learning happens in the zone between what a learner can do alone and what they can do with guidance. Scaffolding should target this zone, not what learners already know or what's impossibly far ahead.
-**Graduate application**: Scaffolding design; adaptive learning system logic; coaching and mentoring program design.
+| Framework | Graduate/Practitioner Application Note |
+|---|---|
+| **Gagné's Conditions of Learning / Nine Events** | Audit instructional sequences against Nine Events; check that conditions match the *type* of learning outcome (intellectual skill vs. attitude vs. motor) — not a one-size-fits-all template |
+| **Bloom's Revised Taxonomy** | Write objectives at the *correct* cognitive level × knowledge dimension (factual/conceptual/procedural/metacognitive); align assessment to objective level — don't test application when objective is analysis |
+| **Merrill's First Principles** | Audit any design against all five; the most violated is Principle 1 (problem-centered) — courses that teach theory before authentic problems break the model's core premise |
+| **Reigeluth's Elaboration Theory** | Sequencing: simple-to-complex with epitomizing overview first, *not* part-to-whole; directly challenges the "foundations first, advanced later" default |
+| **van Merriënboer's 4C/ID** | For complex professional competencies: whole authentic tasks first, supportive info available (not pre-taught), procedural info just-in-time, part-task practice only for automatable sub-skills. The most common misapplication: fragmenting complex skills into isolated units |
+| **Jonassen's CLEs** | Designers create environments and challenges, not instruction. The ID's job is to design the problem, the resources, and the social structure — not to deliver answers |
+| **Keller's ARCS** | Motivational design audit: which of the four components is actually missing in this design? Most courses under-invest in Relevance (C) and Satisfaction (S). Design pre-learning to build motivation *before* content begins |
+| **Ertmer & Newby's Learning Theory Comparison** | Match design orientation to content type: behavioral for procedural drill/compliance, cognitive for schema-building and information processing, constructivist for complex problem-solving. Pluralistic, not dogmatic |
+| **Mezirow's Transformative Learning** | For attitudinal/perspective-change goals (DEI, leadership, culture change): design for disorienting dilemma → critical reflection → discourse with others. Cannot be achieved through information transfer alone |
+| **Vygotsky's ZPD** | Scaffold in the zone between unaided and guided performance — not below it (boring) or above it (shutdown). Adaptive systems and coaching programs that miss this produce either disengagement or anxiety |
 
 ---
 
@@ -413,31 +386,9 @@ Academic programs emphasize that the modern CLO must be:
 
 ## 11. Organizational Learning Theory — Academic Canon
 
-### Peter Senge — Five Disciplines (1990)
-**Learning organization definition**: An organization that is continually expanding its capacity to create its future.
-**Five disciplines**: Systems thinking (the cornerstone), personal mastery, mental models, building shared vision, team learning
-**CLO application**: Use as an organizational diagnosis framework. Which disciplines are underdeveloped? Design L&D strategy to strengthen them.
+For practitioner-focused notes on Senge (Fifth Discipline), Argyris & Schön (single/double-loop learning), Wenger (Communities of Practice), Mezirow (Transformative Learning), and Schein (organizational culture) → `references/foundational-texts.md` §9.
 
-### Argyris & Schön — Single vs. Double Loop Learning (1978/1996)
-**Single-loop learning**: Detecting and correcting errors within existing assumptions and frameworks
-**Double-loop learning**: Questioning the assumptions and frameworks themselves; fundamental change in mental models
-**Deutero-learning**: Learning how to learn (organizational metacognition)
-**CLO application**: Most training is single-loop. CLOs designing for culture change and innovation must create double-loop learning opportunities.
-
-### Etienne Wenger — Communities of Practice (1998)
-**Core idea**: Learning happens through participation in communities of practice — shared domain, community, and practice
-**Key concepts**: Legitimate peripheral participation (newcomers learn by participating in the margins); boundary objects (artifacts that coordinate between communities); brokering (connecting communities)
-**CLO application**: Designing communities of practice, social learning platforms, and mentoring programs. Understanding how informal learning works.
-
-### Jack Mezirow — Transformative Learning (1991)
-**Core idea**: Transformative learning involves a fundamental shift in frame of reference through critical reflection on assumptions
-**Disorienting dilemma**: Transformation often begins with an experience that challenges existing beliefs
-**CLO application**: Leadership development, DEI programs, culture change initiatives. When the goal is not skill acquisition but perspective transformation.
-
-### Edgar Schein — Organizational Culture and Learning (1992/2017)
-**Culture levels**: Artifacts (visible behaviors and structures) → Espoused values → Underlying assumptions (deepest level)
-**Learning culture**: Psychological safety + acceptance of uncertainty + proactive information seeking + systems thinking
-**CLO application**: Diagnosing organizational culture; understanding why learning initiatives fail when they conflict with underlying assumptions; culture change strategy.
+**CLO-level application summary**: These theories underpin CLO strategy for culture change and learning organization diagnosis. Use Senge's five disciplines as an organizational audit framework; Argyris's double-loop distinction to identify whether L&D initiatives are designed for genuine change vs. compliance reinforcement; Wenger's CoP model for social learning platform strategy; Schein's culture levels to diagnose why training initiatives fail when they conflict with underlying assumptions.
 
 ---
 
