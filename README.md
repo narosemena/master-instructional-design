@@ -1,7 +1,7 @@
 ````markdown
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 18 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 30 on-demand reference files.
 
 ---
 
@@ -80,7 +80,7 @@ The reference router hook (`reference-router.py`) automatically hints which refe
 
 **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
 
-**18 reference files** loaded on demand — never all at once, preserving context efficiency:
+**30 reference files** loaded on demand — never all at once, preserving context efficiency:
 
 | Reference file | Covers |
 | :--- | :--- |
