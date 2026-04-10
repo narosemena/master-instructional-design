@@ -1,6 +1,6 @@
 ---
 name: master-instructional-design
-version: "2.0.0"
+version: "3.0.0"
 license: "CC BY-NC-ND 4.0 — see LICENSE"
 description: >
   Design and develop world-class learning solutions with a context-aware L&D sparring partner
@@ -361,5 +361,5 @@ When reviewing any training artifact, assess across these dimensions:
 
 ---
 
-*v2.0.0 — Major version. Taxonomy decision engine and dual entry point architecture replace
+*v3.0.0 — Major version. Taxonomy decision engine and dual entry point architecture replace
 the modes-only structure of v1.1.0. All v1.1.0 domain reference files carried forward intact.*
