@@ -1,175 +1,135 @@
-````markdown
-# master-instructional-design
+# Master Instructional Design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 30 on-demand reference files.
+> **[→ View the full visual documentation](https://narosemena.github.io/master-instructional-design)**
 
----
+![Version](https://img.shields.io/badge/version-3.0.0-blue)
+![License](https://img.shields.io/badge/license-CC%20BY--NC--ND%204.0-green)
+![Claude](https://img.shields.io/badge/Claude-Pro%20%7C%20Max%20%7C%20Team%20%7C%20Enterprise-orange)
+![CPTD](https://img.shields.io/badge/Built%20by-CPTD%20Practitioner%20·%2030%20Years-purple)
 
-## ⚖️ Proprietary Framework & Terms of Use
+**Design and develop world-class learning solutions with a context-aware L&D sparring partner built on 30 years of practitioner reasoning.**
 
-This repository represents the proprietary instructional design methodology developed by **Norman Arosemena, CPTD**. 
-
-* **For Individuals/Learners:** You are welcome to use this skill for personal research, study, and non-commercial professional development.
-* **For Organizations/Consultancies:** Commercial use, redistribution, or "white-labeling" of this framework or its underlying logic is strictly prohibited without a commercial license. For enterprise licensing or consulting inquiries, please contact me directly.
-
----
-
-## What it does
-
-Activates expert-level guidance across the full L&D spectrum:
-
-* **Instructional Design** — objectives, storyboards, assessments, scenario design, needs analysis, task analysis
-* **eLearning Authoring** — Storyline, Rise, Captivate, Lectora, Camtasia, iSpring; advanced JavaScript/CSS
-* **Facilitation & Live Learning** — ILT/VILT workshop design, facilitation guides, train-the-trainer, VILT platforms
-* **Learner Experience Design (LXD)** — learner journey mapping, empathy mapping, experience ecosystems
-* **Inclusive & Emotional Design** — psychological safety, stereotype threat, DEI content design, emotional arc
-* **Agile/Scrum for L&D** — sprint-based ID, backlog writing, SAM + Scrum integration
-* **Visual Design, UX & UI** — visual hierarchy, typography, color, usability heuristics for eLearning
-* **Adobe Creative Suite** — Photoshop, Illustrator, InDesign, After Effects, Premiere, XD workflows for L&D
-* **Generative AI for L&D** — prompt engineering, AI-assisted ID workflows, agentic pipelines, responsible AI
-* **CLO & Learning Leadership** — organizational learning strategy, talent analytics, skills taxonomy, 3-year L&D strategy
-* **Academic ID Theory** — graduate program canon, major textbooks (Dick & Carey, Gagne, Smith & Ragan, Reigeluth, van Merrienboer, Bloom, Merrill)
-* **LMS/LXP Strategy** — platform selection, RFP process, learning data architecture, xAPI
-* **Project Management** — project charters, RACI matrices, design documents, QA checklists, stakeholder communications
-* **Evaluation Planning** — Kirkpatrick L1–5, ROI calculation, L3 manager observation, learning analytics
+Use when working on a learning project at any stage — from intake through evaluation — or when you need expert guidance on any aspect of instructional design, learning strategy, facilitation, authoring tools, or L&D leadership.
 
 ---
 
-## Who it's for
+## Philosophy
 
-* Instructional designers at all levels — from new practitioners to senior IDs
-* L&D managers and program designers building or auditing learning products
-* Graduate students in ID, LDT, EdTech, or related programs
-* CLOs and learning leaders shaping organizational learning strategy
-* Anyone who designs, builds, facilitates, or leads learning experiences
+I have made this skill to be your L&D partner, coach, and when needed, your sparring buddy. When using this skill you can expect to be exposed to new ideas and angles that maybe you didn't even consider — and that is by design. You always remain the human in the loop.
+
+I have made a conscious effort to never stifle your creativity, ignore your experience, or diminish any challenge you bring.
+
+This skill is not a bookworm — there is already plenty of that out there. It is systematically built to learn about you, your work, your expertise, and meet you where and how you need it.
 
 ---
 
 ## Install
 
-### Claude.ai (Projects)
-
-1.  Download `master-instructional-design.skill` from the [Releases](https://github.com/narosemena/master-instructional-design/releases) page
-2.  Open your Claude Project → Skills → Upload skill
-3.  The skill activates automatically when relevant topics are mentioned
-
-### Claude Code
-
 ```bash
-# 1. Clone the repo
-git clone https://github.com/narosemena/master-instructional-design
-cd master-instructional-design
-
-# 2. Copy the skill files to your global Claude Code skills directory
-cp -r master-instructional-design ~/.claude/skills/
-
-# 3. Copy the hook and settings to your project (or global) Claude config
-#    Run this from inside any project where you want the reference router active:
-mkdir -p .claude/hooks
-cp .claude/hooks/reference-router.py .claude/hooks/
-cp .claude/settings.json .claude/settings.json  # merge manually if you have an existing one
+git clone https://github.com/narosemena/master-instructional-design \
+  ~/.claude/skills/master-instructional-design
 ```
 
-The reference router hook (`reference-router.py`) automatically hints which reference file is most relevant for each prompt — zero token cost, keyword-based. Runs on `UserPromptSubmit`.
+Requires a Claude Pro, Max, Team, or Enterprise account.
 
-> **Already have a `.claude/settings.json`?** Manually merge the `hooks.UserPromptSubmit` block from this repo's `.claude/settings.json` into yours rather than overwriting it.
+---
 
------
+## How It Works
 
-## What's inside
+Every engagement starts with one question:
 
-**SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
+> *"Are we working on a project together, or do you have a question about a specific topic or tool?"*
 
-**30 reference files** loaded on demand — never all at once, preserving context efficiency:
+### Project Mode
 
-| Reference file | Covers |
-| :--- | :--- |
-| `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning, organizational learning |
-| `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job aids, microlearning |
-| `authoring-tools.md` | Storyline, Rise, Captivate, Lectora, Camtasia + JavaScript/CSS/HTML coding patterns |
-| `lxd-and-atd.md` | LXD frameworks, learner journey, ATD Capability Model, CPTD exam prep |
-| `agile-and-design.md` | Agile/Scrum for L\&D, visual design, UX/UI, Adobe Creative Suite |
-| `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |
-| `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy |
-| `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |
-| `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |
-| `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
-| `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
-| `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
-| `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow and Formative Assessment Architecture |
-| `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick reference |
-| `situational-leadership.md` | SLII development levels (D1–D4), leadership style matching, L&D team coaching, SLII failure modes |
-| `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message mapping, L&D brand voice, CLO presentation structure |
-| `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign design, enrollment metrics |
-| `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion network design, cannot vs. will-not diagnostic |
+Activates the taxonomy decision engine. The skill classifies your project across two dimensions — Change vs. New performance, and Hard vs. Soft vs. Mixed content — then routes every coaching decision from intake through evaluation based on that classification.
 
------
+### Domain Mode
 
-## Tested against
+Direct access to 16 L&D domain areas without requiring a project context. Ask about authoring tools, LMS strategy, facilitation design, CLO leadership, academic theory, generative AI for L&D, and more.
 
-10 progressive complexity challenges — from writing a single learning objective (L1) to building a 3-year L\&D capability strategy for a 5,000-person organization (L10).
+---
 
-**Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and consulting posture dimensions.
+## The Classification Matrix
 
------
+| | Hard Skill | Soft Skill | Mixed |
+|---|---|---|---|
+| **New Performance** | ① Full depth | ④ Full depth | ⑥ Structural |
+| **Change in Performance** | ② Full depth | ③ Full depth | ⑤ Structural |
 
-## How to use it
+Full depth cells contain complete decision frameworks — ecosystem audit, fidelity ladder, SME governance, stakeholder communication, workload estimation, scope creep governance, and evaluation architecture. Structural cells provide classification guidance and complexity flagging.
 
-Just mention what you're working on. The skill activates automatically based on context. Examples:
+---
 
-  * *"Audit these 5 learning objectives for a new manager course"*
-  * *"Design a blended onboarding program for software engineers"*
-  * *"Our CSAT dropped 11 points — the sponsor thinks agents need product knowledge training. What do I do?"*
-  * *"Help me write JavaScript to track variable states in Storyline"*
-  * *"Build a 3-year L\&D strategy for a 5,000-person financial services firm"*
+## What's Inside
 
------
+```
+master-instructional-design/
+├── SKILL.md                           # Main entry point · v3.0.0
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── docs/
+│   └── index.html                     # GitHub Pages visual documentation
+└── references/
+    ├── taxonomy-decision-engine.md    # Classification logic
+    ├── hard-new.md                    # Most common scenario
+    ├── hard-change.md                 # Unlearning framework
+    ├── soft-change.md                 # Identity-based change
+    ├── soft-new.md                    # Transfer vs. acquisition
+    ├── mixed.md                       # Judgment + system
+    ├── micro-level-engine.md          # [v3.1.0 — pending]
+    ├── stakeholder-communication.md   # Verbatim language
+    ├── workload-estimation.md         # Uncertainty buffer
+    ├── scope-creep-governance.md      # Criticality taxonomy
+    ├── evaluation-architecture.md     # Kirkpatrick teaching sequence
+    ├── sme-governance.md              # SME role architecture
+    ├── designer-developer-handover.md # Handover framework
+    └── [13 domain reference files]    # Carried from v2.x
+```
 
-## 🚀 Beyond the Core: Enterprise Edition & Consulting
+---
 
-The version of the **Master Instructional Design** skill hosted here is the **Core Edition**—a robust framework for practitioners and students.
+## Example Prompts
 
-For organizations requiring industrial-scale learning transformation, I maintain a proprietary **Enterprise Edition**. This version is integrated with advanced logic, specialized data models, and agentic workflows designed for high-stakes corporate environments.
+**Starting a project:**
+> "I'm a mid-level ID. I've just been assigned a contact center project — rolling out a new QC system. Agents have 5+ years of evaluation experience but have never used this tool. Where do I start?"
 
-### Enterprise-Only Features:
+**Stakeholder conversation prep:**
+> "I need to deliver a scope change finding to a VP tomorrow. The pilot revealed the judgment skill we assumed was present isn't there. Help me prepare."
 
-| Feature | Description |
-| :--- | :--- |
-| **Lean L\&D / TPS Integration** | Applying the **Toyota Production System (TPS)**, JKK, and Kaizen to learning operations to eliminate "educational waste" and accelerate speed-to-proficiency. |
-| **Advanced xAPI & LRS Mapping** | Proprietary logic for mapping instructional interactions to xAPI statements and LRS (Learning Record Store) architectures. |
-| **ROI & Business Impact L5** | Automated Kirkpatrick Level 4 & 5 (ROI) calculators tied to specific business KPIs and financial modeling. |
-| **Agentic ID Workflows** | Specialized sub-agents for automated Storyboarding, Technical Backlog writing (Agile for L\&D), and Accessibility (Section 508/WCAG) auditing. |
-| **Strategic L\&D Roadmap** | A logic-driven engine for generating 3-year capability strategies and organizational skill taxonomies. |
-| **Premium Template Library** | Access to 40+ professional-grade Project Charters, RACI matrices, Design Documents, and high-fidelity Storyline/Rise templates. |
+**Workload estimation:**
+> "I need to estimate a blended program — 4 modules, mixed audience, split design and dev team, SME team fragmented across 3 departments. Help me build a defensible estimate."
 
-### 🛠️ Work with Me
+**Domain question:**
+> "What's the difference between an LXP and an LMS and how do I make the case for one over the other to a CFO who only sees Year 1 license cost?"
 
-If you are looking to elevate your organization's learning ecosystem or require a customized deployment of this AI framework, let's connect.
+**Getting a second opinion:**
+> "Here's the outline for a leadership development program I'm designing. Tell me what's missing and where you'd push back."
 
-  * **Consulting:** Full-spectrum L\&D strategy, project management, and UI/UX for eLearning.
-  * **Licensing:** Enterprise-wide access to the full **Master Instructional Design** proprietary skill.
-  * **Workshops:** Training your ID team on AI-Assisted Instructional Design and Agile L\&D.
+---
 
-**[Contact me via LinkedIn](https://www.linkedin.com/in/normanarosemena/) or open a private inquiry via GitHub Issues.**
+## Changelog
 
------
+See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
-## Attribution & Disclaimer
+**v3.0.0 — Current**
+Complete architectural rebuild. Taxonomy decision engine replaces modes-only structure. Dual entry point, jidoka operating principles, level sensing and situational coaching, 12 new reference files, GitHub Pages visual documentation.
 
-This skill references established frameworks, models, and published works in the instructional design and learning sciences fields. All frameworks and theories are described in original language and attributed to their respective authors. Tool and product names are trademarks of their respective owners.
+**v3.1.0 — Planned**
+Micro-level content block treatment engine — block-level treatment selection for individual interactions.
 
-**This project is a personal endeavor created by Norman Arosemena. It is not affiliated with, endorsed by, or representative of any current or past employers.**
+---
 
------
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+---
 
 ## License
 
-[CC BY-NC-ND 4.0](https://www.google.com/search?q=LICENSE) — This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International License.
+CC BY-NC-ND 4.0 — see [LICENSE](LICENSE)
 
------
-
-## Feedback & Requests
-
-While this is a proprietary framework, I value community feedback. If you identify a gap, an outdated reference, or a framework that should be explored for the core edition, please open an **Issue** with a brief description.
-
------
+Built by [narosemena](https://github.com/narosemena) · CPTD · 30 years L&D
