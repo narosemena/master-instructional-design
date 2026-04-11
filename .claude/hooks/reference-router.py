@@ -20,7 +20,9 @@ routes = [
     ("taxonomy-decision-engine.md",
      r"taxonomy|classify.*project|project.*classif|\bhard.new\b|\bhard.change\b"
      r"|\bsoft.new\b|\bsoft.change\b|mixed.*project|project.*type|decision engine"
-     r"|what (type|kind) of.*project|diagnos.*project|project.*cell"),
+     r"|what (type|kind) of.*project|diagnos.*project|project.*cell"
+     r"|where do i begin|just.*assigned.*project|i.ve been assigned|i have.*been assigned"
+     r"|new project.*where|how do i start.*project|just.*assigned.*course"),
 
     ("hard-new.md",
      r"brand.new.*skill|never.*done.*before|ecosystem audit|fidelity ladder"
@@ -46,7 +48,10 @@ routes = [
      r"\bmixed\b.*classif|classif.*\bmixed\b|judgment.*system.*skill"
      r"|keep together.*separate|separate.*keep together"
      r"|mixed.new|mixed.change|inseparable.*skill|system.*judgment.*design"
-     r"|hard.*soft.*same.*intervention"),
+     r"|hard.*soft.*same.*intervention"
+     r"|never used.*system|rolling out.*new.*system|new.*system.*experienc"
+     r"|system.*never.*used|new.*platform.*experienc|experienc.*new.*system"
+     r"|new.*tool.*experienc|experienc.*new.*tool"),
 
     # --- Governance and project management (specific before general) ---
     ("stakeholder-communication.md",
@@ -97,7 +102,9 @@ routes = [
     ("evaluation-planning.md",
      r"kirkpatrick|\bl1\b|\bl2\b|\bl3\b|\bl4\b|\bl5\b|\broi\b|phillips"
      r"|evaluation strategy|learning analytics|measurement|smile sheet"
-     r"|level.*evaluat"),
+     r"|level [1-4].*evaluat|evaluat.*level [1-4]"
+     r"|measure.*level [1-4]|level [1-4].*behav.*train"
+     r"|level [1-4].*measure|behavior change.*after.*train"),
 
     ("inclusive-emotional-design.md",
      r"\bdei\b|psychological safety|stereotype threat|emotional design"
