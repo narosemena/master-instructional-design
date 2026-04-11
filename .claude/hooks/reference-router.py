@@ -16,6 +16,64 @@ base = "master-instructional-design/references/"
 
 # Priority-ordered routes: first match wins
 routes = [
+    # --- Taxonomy and workflow-specific routes (high priority) ---
+    ("taxonomy-decision-engine.md",
+     r"taxonomy|classify.*project|project.*classif|\bhard.new\b|\bhard.change\b"
+     r"|\bsoft.new\b|\bsoft.change\b|mixed.*project|project.*type|decision engine"
+     r"|what (type|kind) of.*project|diagnos.*project|project.*cell"),
+
+    ("hard-new.md",
+     r"brand.new.*skill|never.*done.*before|ecosystem audit|fidelity ladder"
+     r"|new.*procedure.*learn|new.*process.*learn|anchor trap|partial match"
+     r"|hard new.*workflow|hard.new.*design"),
+
+    ("hard-change.md",
+     r"process.*change.*train|procedure.*change.*train|policy.*change.*train"
+     r"|unlearn.*hard|wiifm.*change|hard.change.*workflow|hard.change.*design"
+     r"|change.*resistance.*procedure"),
+
+    ("soft-change.md",
+     r"soft.change.*workflow|soft.change.*design|identity.*threat.*train"
+     r"|reptilian.*react|andragog|opening protocol.*facilit"
+     r"|mid.session.*resistance|behavior.*change.*identity"),
+
+    ("soft-new.md",
+     r"soft.new.*workflow|soft.new.*design|prior.*scaffolding"
+     r"|heterogeneous.*cohort|transfer.*acquisition.*design|persona card"
+     r"|expert augmenter|cross.level.*pair"),
+
+    # --- Governance and project management (specific before general) ---
+    ("stakeholder-communication.md",
+     r"scope change.*conversation|sponsor.*conversation|pre.launch.*gap"
+     r"|holding response.*sme|escalation.*briefing.*leader"
+     r"|decision.maker.*not.*room|backlog.*urgency.*project"),
+
+    ("workload-estimation.md",
+     r"workload.*estimat|estimat.*workload|story.*point.*id|\bunderestimat\b"
+     r"|uncertainty.*buffer|estimation.*destroy|two.owner.*estimat"
+     r"|definition.*ready.*id"),
+
+    ("scope-creep-governance.md",
+     r"scope creep|criticality.*taxonomy|andon cord|jidoka.*ld"
+     r"|silent absorption|change.*request.*sprint|level [abcd].*change.*request"
+     r"|escalat.*designer.*leader"),
+
+    ("evaluation-architecture.md",
+     r"evaluation.*architecture|evaluation.*plan.*missing|level 4.*timing"
+     r"|measurement.*infrastructure|uninformed.*yes.*eval"
+     r"|evaluation.*baked.*design|approver.*knower.*eval"),
+
+    ("sme-governance.md",
+     r"\bsme\b.*governance|\bsme\b.*onboard|approver.*knower"
+     r"|lead sme|sme.*ecosystem|sme.*verification|sme.*dispute"
+     r"|sme.*involvement|subject matter expert.*govern"),
+
+    ("designer-developer-handover.md",
+     r"handover|designer.*developer|developer.*handover|script.*standard.*build"
+     r"|equivalent value|pre.build.*prototype|developer layer"
+     r"|negotiation.*stack.*build|co.author.*build"),
+
+    # --- Original routes ---
     ("authoring-tools.md",
      r"storyline|rise 360|captivate|lectora|camtasia|ispring|authoring tool"
      r"|\bscorm\b.*build|\bxapi\b.*build|\bjavascript\b|\bcss\b|\bhtml\b"

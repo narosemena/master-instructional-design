@@ -14,21 +14,36 @@ LICENSE                             ← CC BY-NC-ND 4.0
 
 master-instructional-design/
   SKILL.md                          ← core skill: frontmatter, 15 modes, audit framework
-  references/                       ← 14 on-demand reference files (loaded per conversation, not all at once)
+  references/                       ← 29 on-demand reference files (loaded per conversation, not all at once)
     academic-courseware.md
     agile-and-design.md
     authoring-tools.md
+    change-management.md
     coaching-stance.md
+    corporate-communications.md
+    designer-developer-handover.md
+    evaluation-architecture.md
     evaluation-planning.md
     facilitation-and-ilt.md
     foundational-texts.md
     generative-ai-for-ld.md
+    hard-change.md
+    hard-new.md
     inclusive-emotional-design.md
     lms-evaluation.md
     lxd-and-atd.md
+    marketing-for-ld.md
     modes-deep-dive.md
     project-management.md
     quick-reference.md
+    scope-creep-governance.md
+    situational-leadership.md
+    sme-governance.md
+    soft-change.md
+    soft-new.md
+    stakeholder-communication.md
+    taxonomy-decision-engine.md
+    workload-estimation.md
 
 .claude/
   settings.json                     ← UserPromptSubmit hook wiring

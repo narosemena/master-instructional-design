@@ -1,6 +1,6 @@
 ---
 name: master-instructional-design
-version: "2.1.0"
+version: "3.0.0"
 license: "CC BY-NC-ND 4.0 — see LICENSE"
 description: >
   Expert instructional design coach and auditor. Activate for: instructional design, eLearning,
@@ -286,3 +286,36 @@ When a user brings you a project, ask as needed:
 
 - **Change Management**: `references/change-management.md`  
   Load when: ADKAR, Prosci, Kotter, change readiness, change resistance, change champion networks, organizational change, L&D role in transformation, change impact assessment
+
+- **Taxonomy Decision Engine**: `references/taxonomy-decision-engine.md`  
+  Load when: classifying a new project, diagnosing whether a project is Hard-New, Hard-Change, Soft-New, Soft-Change, or Mixed; determining design path at intake
+
+- **Hard-New Workflow**: `references/hard-new.md`  
+  Load when: learner has no prior exposure to a hard skill; ecosystem audit, fidelity ladder, Gate 1–3 design, scenario selection, SME governance for brand-new technical content
+
+- **Hard-Change Workflow**: `references/hard-change.md`  
+  Load when: learner already performs a technical skill but must change how they do it; WIIFM reframing, unlearning design, ADKAR ownership model, pre-launch gap conversation
+
+- **Soft-Change Workflow**: `references/soft-change.md`  
+  Load when: experienced practitioners must change a judgment-based or interpersonal behavior; identity threat, psychological safety protocol, mid-session resistance handling, self-discovery design
+
+- **Soft-New Workflow**: `references/soft-new.md`  
+  Load when: learner has no prior exposure to a specific soft skill; prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, cross-level pairing
+
+- **Stakeholder Communication**: `references/stakeholder-communication.md`  
+  Load when: scope change conversation with sponsor, pre-launch gap conversation, evaluation commitment conversation, mid-sprint escalation language, backlog urgency framing
+
+- **Workload Estimation**: `references/workload-estimation.md`  
+  Load when: estimating project effort, diagnosing underestimation bias, uncertainty buffer calibration, SME availability as estimation variable, definition of ready
+
+- **Scope Creep Governance**: `references/scope-creep-governance.md`  
+  Load when: managing mid-sprint change requests, criticality taxonomy (A/B/C/D), escalation protocol, silent absorption problem, designer-to-learning-leader briefing
+
+- **Evaluation Architecture**: `references/evaluation-architecture.md`  
+  Load when: designing an evaluation plan from scratch, missing evaluation at project close, Level 4 timing constraint, Kirkpatrick teaching sequence with customers, uninformed yes pattern
+
+- **SME Governance**: `references/sme-governance.md`  
+  Load when: mapping SME ecosystem, setting up SME roles and decision rights, approver vs. knower gap, lead SME model for complex projects, SME verification protocol
+
+- **Designer-Developer Handover**: `references/designer-developer-handover.md`  
+  Load when: preparing the script for developer handover, pre-build prototype, developer creative liberty, equivalent value negotiation, scenario selection for decomposed interactions
