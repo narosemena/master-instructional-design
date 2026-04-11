@@ -104,6 +104,44 @@ to ambiguous or non-routine situations where possible.
 
 ---
 
+## Verification Failure — The Separation Rule
+
+When the verification protocol produces independent evidence that
+contradicts the SME's capability claim, apply the separation rule
+immediately. Do not continue evaluating the keep-together path.
+
+The decision rule operates on evidence, not on what the SME believes
+the population can do.
+
+| Condition | Decision |
+|---|---|
+| SME claims capability present; independent evidence confirms it | Keep together — proceed |
+| SME claims capability present; no independent evidence available | Treat as unresolved — complete verification before committing to design path |
+| SME claims capability present; independent evidence contradicts it | Treat as absent — apply separation rule |
+| SME acknowledges capability absent | Separate — no further verification needed |
+
+**Note:** The opening principle of this file — that separation is the
+default error — refers to premature separation made without diagnostic
+work. Evidence-based separation after verification fails is the correct
+application of that same principle, not a contradiction of it.
+
+**The 20% threshold:** An error rate above 20% on observable
+performance tasks is strong independent evidence that the judgment
+skill is not reliably present — regardless of SME confidence level,
+years of prior training, or annual certification completion. Error
+rate data supersedes self-report. Audit findings supersede compliance
+team belief.
+
+When this condition is met: separate the interventions. The executive
+preference for a single course or unified design becomes the
+stakeholder conversation that follows — not the design constraint
+that precedes.
+
+→ `references/stakeholder-communication.md` for the scope change
+conversation sequence once separation is confirmed.
+
+---
+
 ## When Pilot Data Contradicts the SME Claim
 
 When verification reveals the judgment skill is NOT present after
