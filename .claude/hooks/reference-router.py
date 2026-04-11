@@ -42,6 +42,12 @@ routes = [
      r"|heterogeneous.*cohort|transfer.*acquisition.*design|persona card"
      r"|expert augmenter|cross.level.*pair"),
 
+    ("mixed.md",
+     r"\bmixed\b.*classif|classif.*\bmixed\b|judgment.*system.*skill"
+     r"|keep together.*separate|separate.*keep together"
+     r"|mixed.new|mixed.change|inseparable.*skill|system.*judgment.*design"
+     r"|hard.*soft.*same.*intervention"),
+
     # --- Governance and project management (specific before general) ---
     ("stakeholder-communication.md",
      r"scope change.*conversation|sponsor.*conversation|pre.launch.*gap"

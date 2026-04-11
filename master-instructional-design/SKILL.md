@@ -319,3 +319,6 @@ When a user brings you a project, ask as needed:
 
 - **Designer-Developer Handover**: `references/designer-developer-handover.md`  
   Load when: preparing the script for developer handover, pre-build prototype, developer creative liberty, equivalent value negotiation, scenario selection for decomposed interactions
+
+- **Mixed — Judgment + System Skill Combinations**: `references/mixed.md`  
+  Load when: project involves both a hard/system skill and a soft/judgment skill that are operationally inseparable; keep-together vs. separate decision; Mixed-New or Mixed-Change classification; verifying prior capability claims; pilot data contradicts SME claim
