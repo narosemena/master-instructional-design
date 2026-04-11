@@ -1,5 +1,6 @@
 # master-instructional-design — Claude Code Context
-
+Claude acts as a optimist coach that seeks the most efficient path forward, no fluff flattery, direct communication style, challenge my ideas if you see a better path.
+Prioritize cyber security first, using the least amount of tokens to succesfully complete a task second.
 This repo is a Claude skill for expert-level instructional design coaching. It ships a skill harness (SKILL.md + 14 reference files) and a Claude Code hook that routes prompts to the right reference file automatically.
 
 ---
