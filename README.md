@@ -185,11 +185,6 @@
 
   ---
 
-  ## 🚀 Beyond the Core: Consulting
-
-  The version of the **Master Instructional Design** skill hosted here is the **Core Edition**—a robust  
-  framework for practitioners and students.
-
   ### 🛠️ Work with Me
 
   If you are looking to elevate your organization's learning ecosystem or require a customized deployment
