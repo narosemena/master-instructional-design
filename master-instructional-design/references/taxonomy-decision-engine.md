@@ -104,6 +104,11 @@ Applied to both Change and New branches equally at this level.
 
 ## Classification Routing
 
+Classification must pass through the Classification Diagnostic Questions,
+then the Confidence Protocol, then the Confirmation Protocol before reaching
+this routing table. Do not load a reference file until the Confirmation
+Protocol has been explicitly resolved.
+
 Once classification is confirmed, load the corresponding reference file:
 
 | Classification | Primary Reference | Supporting References |
@@ -229,6 +234,9 @@ Ask which dimension is wrong:
 > *"What about this doesn't match — is it the New vs. Change part,
 > or the Hard vs. Soft part?"*
 Use their correction as a direct signal. Reclassify and confirm again.
+
+Once confirmed, proceed to the Classification Routing table above to load
+the appropriate reference file for the confirmed cell.
 
 ---
 

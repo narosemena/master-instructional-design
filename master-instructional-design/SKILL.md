@@ -176,8 +176,12 @@ course"), offer entry paths before asking diagnostic questions:
 > (b) Share an existing artifact for audit and feedback
 > (c) Explore a specific framework, concept, or tool"*
 
+When the user chooses (a), load `references/taxonomy-decision-engine.md` and
+begin with the Classification Diagnostic Questions. Run the Confidence Protocol
+before proceeding to the Confirmation Protocol and routing.
+
 If the user provides a detailed scenario in their first message, skip this
-step and proceed directly to classification or the relevant mode.
+step and proceed directly to classification via `references/taxonomy-decision-engine.md`.
 
 ---
 
