@@ -26,12 +26,16 @@ routes = [
      r"|refus.*change|veteran.*resist|won.t adopt|pushback.*training"
      r"|gut feeling|gut instinct|trust.*instinct|trust.*gut|gut.*trust"
      r"|prefer.*gut|gut.*over.*protocol|resist.*adopt.*soft"
-     r"|actively resist|openly resist"),
+     r"|actively resist|openly resist"
+     r"|muscle memory|professional identity|years.*habit"
+     r"|intimidation.*tactic|aggressive.*empathetic|empathetic.*negotiation"),
 
     ("soft-new.md",
      r"soft.new.*workflow|soft.new.*design|prior.*scaffolding"
      r"|heterogeneous.*cohort|transfer.*acquisition.*design|persona card"
-     r"|expert augmenter|cross.level.*pair"),
+     r"|expert augmenter|cross.level.*pair"
+     r"|newly promoted|first.time manager|never.*feedback"
+     r"|never.*given.*feedback|constructive feedback.*fail"),
 
     ("hard-change.md",
      r"process.*change.*train|procedure.*change.*train|policy.*change.*train"
@@ -52,9 +56,45 @@ routes = [
      r"|hard.*soft.*same.*intervention"
      r"|never used.*system|rolling out.*new.*system|new.*system.*experienc"
      r"|system.*never.*used|new.*platform.*experienc|experienc.*new.*system"
-     r"|new.*tool.*experienc|experienc.*new.*tool"),
+     r"|new.*tool.*experienc|experienc.*new.*tool"
+     r"|waterfall.*agile|know.*system.*but.*resist|jira.*standup"
+     r"|situational judgment|no single right answer"
+     r"|ambiguous.*data.*decid|drone.*data.*decid"),
 
-    # --- Taxonomy fallback (when classification isn't determinable from prompt) ---
+    # --- Governance and project management (before taxonomy — specific signals) ---
+    ("sme-governance.md",
+     r"\bsme\b.*governance|\bsme\b.*onboard|approver.*knower"
+     r"|lead sme|sme.*ecosystem|sme.*verification|sme.*dispute"
+     r"|sme.*involvement|subject matter expert.*govern"
+     r"|sme.*retir|protective.*knowledge|tacit knowledge|resent.*l.d"),
+
+    ("stakeholder-communication.md",
+     r"scope change.*conversation|sponsor.*conversation|pre.launch.*gap"
+     r"|holding response.*sme|escalation.*briefing.*leader"
+     r"|decision.maker.*not.*room|backlog.*urgency.*project"
+     r"|conflicting.*sponsor|competing.*stakeholder|caught.*between.*executive"
+     r"|compliance.*culture.*conflict|legal.*hr.*conflict"),
+
+    ("workload-estimation.md",
+     r"workload.*estimat|estimat.*workload|story.*point.*id|\bunderestimat\b"
+     r"|uncertainty.*buffer|estimation.*destroy|two.owner.*estimat"
+     r"|definition.*ready.*id"
+     r"|vr.*budget|escape room|budget.*fidelity"
+     r"|budget.*timeline.*mismatch|gamif.*budget"),
+
+    ("scope-creep-governance.md",
+     r"scope creep|criticality.*taxonomy|andon cord|jidoka.*ld"
+     r"|silent absorption|change.*request.*sprint|level [abcd].*change.*request"
+     r"|escalat.*designer.*leader"
+     r"|just add.*slides|add a few slides|sponsor.*demand"
+     r"|onboarding.*module.*complex|simple.*module.*complex"),
+
+    ("evaluation-architecture.md",
+     r"evaluation.*architecture|evaluation.*plan.*missing|level 4.*timing"
+     r"|measurement.*infrastructure|uninformed.*yes.*eval"
+     r"|evaluation.*baked.*design|approver.*knower.*eval"),
+
+    # --- Taxonomy fallback (when no specific route matches) ---
     ("taxonomy-decision-engine.md",
      r"taxonomy|classify.*project|project.*classif|\bhard.new\b|\bhard.change\b"
      r"|\bsoft.new\b|\bsoft.change\b|mixed.*project|project.*type|decision engine"
@@ -62,32 +102,6 @@ routes = [
      r"|where do i begin|where do we begin|just.*assigned.*project"
      r"|i.ve been assigned|i have.*been assigned"
      r"|new project.*where|how do i start.*project|just.*assigned.*course"),
-
-    # --- Governance and project management (specific before general) ---
-    ("stakeholder-communication.md",
-     r"scope change.*conversation|sponsor.*conversation|pre.launch.*gap"
-     r"|holding response.*sme|escalation.*briefing.*leader"
-     r"|decision.maker.*not.*room|backlog.*urgency.*project"),
-
-    ("workload-estimation.md",
-     r"workload.*estimat|estimat.*workload|story.*point.*id|\bunderestimat\b"
-     r"|uncertainty.*buffer|estimation.*destroy|two.owner.*estimat"
-     r"|definition.*ready.*id"),
-
-    ("scope-creep-governance.md",
-     r"scope creep|criticality.*taxonomy|andon cord|jidoka.*ld"
-     r"|silent absorption|change.*request.*sprint|level [abcd].*change.*request"
-     r"|escalat.*designer.*leader"),
-
-    ("evaluation-architecture.md",
-     r"evaluation.*architecture|evaluation.*plan.*missing|level 4.*timing"
-     r"|measurement.*infrastructure|uninformed.*yes.*eval"
-     r"|evaluation.*baked.*design|approver.*knower.*eval"),
-
-    ("sme-governance.md",
-     r"\bsme\b.*governance|\bsme\b.*onboard|approver.*knower"
-     r"|lead sme|sme.*ecosystem|sme.*verification|sme.*dispute"
-     r"|sme.*involvement|subject matter expert.*govern"),
 
     ("designer-developer-handover.md",
      r"handover|designer.*developer|developer.*handover|script.*standard.*build"

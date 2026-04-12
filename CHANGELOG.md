@@ -5,6 +5,28 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 
 ---
 
+## [3.0.1] — 2026-04-11
+
+### Added
+- **Classification Confidence Protocol** in `taxonomy-decision-engine.md` — model self-assesses classification confidence (0–100%) after reviewing prompt signals; proceeds at ≥70%, asks up to 2 targeted clarifying questions at <70%; includes collaborative framing and one-question-at-a-time instruction
+- **First Interaction Protocol** in `SKILL.md` — when opening message is vague, skill offers 3 entry paths (classify project / audit artifact / explore framework) before asking diagnostic questions
+- **Classification error recovery** in `taxonomy-decision-engine.md` — explicit instruction for when user rejects a classification: ask which dimension is wrong (New vs. Change, or Hard vs. Soft) and reclassify from correction rather than restarting the full diagnostic
+- **Progress signaling** in Classification Confidence Protocol — skill acknowledges partial information and signals intent before asking clarifying questions
+
+### Improved
+- **Router vocabulary coverage** — added natural-language patterns to 7 routes covering 8 stress-test scenarios; coverage improved from 1/9 → 9/9 on the full scenario suite
+- **Router priority order** — governance routes (sme-governance, stakeholder-communication, workload-estimation, scope-creep-governance, evaluation-architecture) moved above taxonomy fallback; prevents "where do we begin" from intercepting domain-specific prompts
+- **test_router.py** — test harness now imports routes dynamically from production `reference-router.py` at runtime; eliminates manual sync requirement
+
+### Fixed (GitHub hygiene)
+- **`.skill` binary untracked** — removed from git tracking; add to `.gitignore`; should be published via GitHub Releases
+- **`TECHNICAL-ROADMAP.md` untracked** — internal planning document removed from public visibility
+- **`testing-scripts.md` moved** — relocated to `evaluations/` alongside existing eval files
+- **`.gitignore` expanded** — now covers `*.skill`, `test_router.py`, `TECHNICAL-ROADMAP.md`, `*.pyc`, `__pycache__/`
+- **`CLAUDE.md` cleaned** — gstack skill table (local dev tooling) replaced with single-line note; reference count corrected (14 → 30)
+
+---
+
 ## [3.0.0] — 2026-04-11
 
 ### Added

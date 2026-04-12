@@ -138,6 +138,53 @@ answers are known or documented as assumptions.
 
 ---
 
+## Classification Confidence Protocol
+
+After reviewing available information from the user's prompt and any
+diagnostic questions already answered, assess your confidence in the
+classification before proceeding.
+
+### Confidence Score
+
+Rate your classification confidence 0–100% based on:
+- **Signal clarity**: How many taxonomy-relevant signals are present in the prompt?
+- **Signal agreement**: Do available signals point to the same cell, or do they conflict?
+- **Ambiguity level**: Could this project reasonably belong to more than one cell?
+
+### Decision Threshold
+
+| Confidence | Action |
+|---|---|
+| **≥ 70%** | Proceed to Classification Confirmation Protocol. State the classification and the key signals that drove it. |
+| **< 70%** | Ask one targeted clarifying question (see below), process the response, then decide if a second question is needed before proceeding. After 2 questions maximum, classify with the best available information and state assumptions explicitly — do not loop. |
+
+### Clarifying Question Selection
+
+When confidence is below 70%, frame questions as collaborative, not diagnostic:
+> *"This sounds like a [general description]. Before I recommend a design approach,
+> I want to make sure I classify it correctly — [question]."*
+
+Prioritize the question that would most efficiently resolve the ambiguity:
+
+1. **New vs. Change** — *"Is the learner population currently performing any version of this work, or is this entirely new to them?"*
+2. **Hard vs. Soft vs. Mixed** — *"Is the core performance procedural (following steps), judgment-based (making decisions), or both?"*
+3. **Prior capability** — *"Does the audience bring relevant experience from adjacent work that could transfer — or would they be starting from zero?"*
+
+Do not ask questions the user has already answered in their prompt.
+Ask one question at a time — never both in the same message.
+After asking, signal progress before the user's response is processed:
+> *"Once I know that, I can classify the project and recommend a design path."*
+
+### Transparency
+
+When proceeding at ≥ 70%, state the classification directly with the key signals.
+When proceeding after clarification, briefly note what was ambiguous and how the
+clarification resolved it.
+Never display the numeric confidence score to the user — it is an internal
+decision mechanism, not a user-facing metric.
+
+---
+
 ## The Hidden Reclassification Trigger — Soft-New
 
 **Critical warning:** Soft-New projects almost always contain a hidden Change component.
@@ -176,6 +223,12 @@ Before routing to a cell reference file, confirm classification explicitly:
 
 Do not proceed without explicit confirmation. A misclassification at this stage
 produces wrong design recommendations at every subsequent stage.
+
+**When the user rejects the classification**, do not restart the full diagnostic.
+Ask which dimension is wrong:
+> *"What about this doesn't match — is it the New vs. Change part,
+> or the Hard vs. Soft part?"*
+Use their correction as a direct signal. Reclassify and confirm again.
 
 ---
 
