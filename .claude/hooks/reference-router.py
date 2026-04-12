@@ -15,7 +15,100 @@ prompt = (data.get("message") or data.get("prompt") or "").lower()
 base = "master-instructional-design/references/"
 
 # Priority-ordered routes: first match wins
+# Architecture: specific cell routes first (when classification is determinable
+# from the prompt), taxonomy as fallback (when it isn't), everything else below.
 routes = [
+    # --- Cell-specific routes (highest priority — direct classification) ---
+    ("soft-change.md",
+     r"soft.change.*workflow|soft.change.*design|identity.*threat.*train"
+     r"|reptilian.*react|andragog|opening protocol.*facilit"
+     r"|mid.session.*resistance|behavior.*change.*identity"
+     r"|refus.*change|veteran.*resist|won.t adopt|pushback.*training"
+     r"|gut feeling|gut instinct|trust.*instinct|trust.*gut|gut.*trust"
+     r"|prefer.*gut|gut.*over.*protocol|resist.*adopt.*soft"
+     r"|actively resist|openly resist"
+     r"|muscle memory|professional identity|years.*habit"
+     r"|intimidation.*tactic|aggressive.*empathetic|empathetic.*negotiation"),
+
+    ("soft-new.md",
+     r"soft.new.*workflow|soft.new.*design|prior.*scaffolding"
+     r"|heterogeneous.*cohort|transfer.*acquisition.*design|persona card"
+     r"|expert augmenter|cross.level.*pair"
+     r"|newly promoted|first.time manager|never.*feedback"
+     r"|never.*given.*feedback|constructive feedback.*fail"),
+
+    ("hard-change.md",
+     r"process.*change.*train|procedure.*change.*train|policy.*change.*train"
+     r"|unlearn.*hard|wiifm.*change|hard.change.*workflow|hard.change.*design"
+     r"|change.*resistance.*procedure"
+     r"|transitioning.*to.*new|switching.*to.*new|replacing.*with.*new"
+     r"|moving.*from.*to.*system|migrat.*new.*system"),
+
+    ("hard-new.md",
+     r"brand.new.*skill|never.*done.*before|ecosystem audit|fidelity ladder"
+     r"|new.*procedure.*learn|new.*process.*learn|anchor trap|partial match"
+     r"|hard new.*workflow|hard.new.*design"),
+
+    ("mixed.md",
+     r"\bmixed\b.*classif|classif.*\bmixed\b|judgment.*system.*skill"
+     r"|keep together.*separate|separate.*keep together"
+     r"|mixed.new|mixed.change|inseparable.*skill|system.*judgment.*design"
+     r"|hard.*soft.*same.*intervention"
+     r"|never used.*system|rolling out.*new.*system|new.*system.*experienc"
+     r"|system.*never.*used|new.*platform.*experienc|experienc.*new.*system"
+     r"|new.*tool.*experienc|experienc.*new.*tool"
+     r"|waterfall.*agile|know.*system.*but.*resist|jira.*standup"
+     r"|situational judgment|no single right answer"
+     r"|ambiguous.*data.*decid|drone.*data.*decid"),
+
+    # --- Governance and project management (before taxonomy — specific signals) ---
+    ("sme-governance.md",
+     r"\bsme\b.*governance|\bsme\b.*onboard|approver.*knower"
+     r"|lead sme|sme.*ecosystem|sme.*verification|sme.*dispute"
+     r"|sme.*involvement|subject matter expert.*govern"
+     r"|sme.*retir|protective.*knowledge|tacit knowledge|resent.*l.d"),
+
+    ("stakeholder-communication.md",
+     r"scope change.*conversation|sponsor.*conversation|pre.launch.*gap"
+     r"|holding response.*sme|escalation.*briefing.*leader"
+     r"|decision.maker.*not.*room|backlog.*urgency.*project"
+     r"|conflicting.*sponsor|competing.*stakeholder|caught.*between.*executive"
+     r"|compliance.*culture.*conflict|legal.*hr.*conflict"),
+
+    ("workload-estimation.md",
+     r"workload.*estimat|estimat.*workload|story.*point.*id|\bunderestimat\b"
+     r"|uncertainty.*buffer|estimation.*destroy|two.owner.*estimat"
+     r"|definition.*ready.*id"
+     r"|vr.*budget|escape room|budget.*fidelity"
+     r"|budget.*timeline.*mismatch|gamif.*budget"),
+
+    ("scope-creep-governance.md",
+     r"scope creep|criticality.*taxonomy|andon cord|jidoka.*ld"
+     r"|silent absorption|change.*request.*sprint|level [abcd].*change.*request"
+     r"|escalat.*designer.*leader"
+     r"|just add.*slides|add a few slides|sponsor.*demand"
+     r"|onboarding.*module.*complex|simple.*module.*complex"),
+
+    ("evaluation-architecture.md",
+     r"evaluation.*architecture|evaluation.*plan.*missing|level 4.*timing"
+     r"|measurement.*infrastructure|uninformed.*yes.*eval"
+     r"|evaluation.*baked.*design|approver.*knower.*eval"),
+
+    # --- Taxonomy fallback (when no specific route matches) ---
+    ("taxonomy-decision-engine.md",
+     r"taxonomy|classify.*project|project.*classif|\bhard.new\b|\bhard.change\b"
+     r"|\bsoft.new\b|\bsoft.change\b|mixed.*project|project.*type|decision engine"
+     r"|what (type|kind) of.*project|diagnos.*project|project.*cell"
+     r"|where do i begin|where do we begin|just.*assigned.*project"
+     r"|i.ve been assigned|i have.*been assigned"
+     r"|new project.*where|how do i start.*project|just.*assigned.*course"),
+
+    ("designer-developer-handover.md",
+     r"handover|designer.*developer|developer.*handover|script.*standard.*build"
+     r"|equivalent value|pre.build.*prototype|developer layer"
+     r"|negotiation.*stack.*build|co.author.*build"),
+
+    # --- Original routes ---
     ("authoring-tools.md",
      r"storyline|rise 360|captivate|lectora|camtasia|ispring|authoring tool"
      r"|\bscorm\b.*build|\bxapi\b.*build|\bjavascript\b|\bcss\b|\bhtml\b"
@@ -28,12 +121,16 @@ routes = [
 
     ("generative-ai-for-ld.md",
      r"generative ai|agentic ai|prompt engineer|multi.agent|ai.*workflow"
-     r"|responsible ai|ai tool.*learn|chatgpt|claude.*l.d"),
+     r"|responsible ai|ai tool.*learn|chatgpt|claude.*l.d"
+     r"|ai.driven|ai.powered|\bai\b.*crm|\bai\b.*tool.*adopt"
+     r"|artificial intelligence.*learn|machine learning.*train"),
 
     ("evaluation-planning.md",
      r"kirkpatrick|\bl1\b|\bl2\b|\bl3\b|\bl4\b|\bl5\b|\broi\b|phillips"
      r"|evaluation strategy|learning analytics|measurement|smile sheet"
-     r"|level.*evaluat"),
+     r"|level [1-4].*evaluat|evaluat.*level [1-4]"
+     r"|measure.*level [1-4]|level [1-4].*behav.*train"
+     r"|level [1-4].*measure|behavior change.*after.*train"),
 
     ("inclusive-emotional-design.md",
      r"\bdei\b|psychological safety|stereotype threat|emotional design"
@@ -73,7 +170,9 @@ routes = [
     ("change-management.md",
      r"change management|\badkar\b|\bprosci\b|\bkotter\b|lewin.*change"
      r"|change readiness|change resistance|change champion"
-     r"|organizational change|transformation.*learn|change impact"),
+     r"|organizational change|transformation.*learn|change impact"
+     r"|refusing.*use|won.t use|pushback.*tool|resist.*adopt"
+     r"|transition.*adopt|won.t.*adopt"),
 
     ("lxd-and-atd.md",
      r"learner journey|\blxd\b|atd capability|\bcptd\b|empathy map"

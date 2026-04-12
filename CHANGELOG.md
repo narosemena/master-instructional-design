@@ -5,6 +5,76 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 
 ---
 
+## [3.0.1] — 2026-04-11
+
+### Added
+- **Classification Confidence Protocol** in `taxonomy-decision-engine.md` — model self-assesses classification confidence (0–100%) after reviewing prompt signals; proceeds at ≥70%, asks up to 2 targeted clarifying questions at <70%; includes collaborative framing and one-question-at-a-time instruction
+- **First Interaction Protocol** in `SKILL.md` — when opening message is vague, skill offers 3 entry paths (classify project / audit artifact / explore framework) before asking diagnostic questions
+- **Classification error recovery** in `taxonomy-decision-engine.md` — explicit instruction for when user rejects a classification: ask which dimension is wrong (New vs. Change, or Hard vs. Soft) and reclassify from correction rather than restarting the full diagnostic
+- **Progress signaling** in Classification Confidence Protocol — skill acknowledges partial information and signals intent before asking clarifying questions
+
+### Improved
+- **Router vocabulary coverage** — added natural-language patterns to 7 routes covering 8 stress-test scenarios; coverage improved from 1/9 → 9/9 on the full scenario suite
+- **Router priority order** — governance routes (sme-governance, stakeholder-communication, workload-estimation, scope-creep-governance, evaluation-architecture) moved above taxonomy fallback; prevents "where do we begin" from intercepting domain-specific prompts
+- **test_router.py** — test harness now imports routes dynamically from production `reference-router.py` at runtime; eliminates manual sync requirement
+
+### Fixed (GitHub hygiene)
+- **`.skill` binary untracked** — removed from git tracking; add to `.gitignore`; should be published via GitHub Releases
+- **`TECHNICAL-ROADMAP.md` untracked** — internal planning document removed from public visibility
+- **`testing-scripts.md` moved** — relocated to `evaluations/` alongside existing eval files
+- **`.gitignore` expanded** — now covers `*.skill`, `test_router.py`, `TECHNICAL-ROADMAP.md`, `*.pyc`, `__pycache__/`
+- **`CLAUDE.md` cleaned** — gstack skill table (local dev tooling) replaced with single-line note; reference count corrected (14 → 30)
+
+---
+
+## [3.0.0] — 2026-04-11
+
+### Added
+- **Taxonomy Decision Engine** (`references/taxonomy-decision-engine.md`) — two-tier classification engine (Hard/Soft × New/Change) with 6-cell taxonomy matrix; entry point for all Project Mode engagements; routes to all workflow reference files
+- **11 new workflow and governance reference files** completing the v3.0.0 architecture:
+  - `references/hard-new.md` — ecosystem audit, fidelity ladder, Gate 1–3 protocol, scenario selection, designer-developer negotiation
+  - `references/hard-change.md` — WIIFM reframing, unlearning design, ADKAR ownership, pre-launch gap conversation
+  - `references/soft-change.md` — identity threat distinction, andragogical foundation, opening protocol, mid-session resistance handling
+  - `references/soft-new.md` — prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, cross-level pairing
+  - `references/stakeholder-communication.md` — verbatim language frameworks for sponsor conversations, scope change, evaluation commitment, escalation
+  - `references/workload-estimation.md` — two-owner estimation model, SME involvement curve, uncertainty buffer calibration, definition of ready
+  - `references/scope-creep-governance.md` — criticality taxonomy (A/B/C/D), two-decision model, silent absorption problem, jidoka escalation protocol
+  - `references/evaluation-architecture.md` — root cause of missing evaluation, role accountability, Kirkpatrick teaching sequence, Level 4 timing constraint, design-time checklist
+  - `references/sme-governance.md` — ecosystem mapping, approver vs. knower gap, single POC vs. lead SME model, verification protocol
+  - `references/designer-developer-handover.md` — co-authoring reframe, script standards, developer creative liberty, equivalent value negotiation, pre-build prototype
+- **`TECHNICAL-ROADMAP.md`** at repo root — documents planned features for roadmap phases 1–4 (artifact generation, memory persistence, coaching arc, performance analytics)
+- **11 new keyword routes** in `reference-router.py` covering all new reference files; taxonomy routes at high priority
+
+### Changed
+- **SKILL.md version**: `2.1.0` → `3.0.0`
+- **SKILL.md "For More Depth"**: 18 → 29 reference pointers
+- **`CLAUDE.md`** reference count updated: 14 → 29 files; directory listing updated
+- **Reference file count**: 18 → 29 total reference files
+
+### Architecture note
+The v3.0.0 rebuild introduces a taxonomy-first classification system as the entry point for all project coaching. Every incoming project is classified into a cell (Hard-New, Hard-Change, Soft-New, Soft-Change, or Mixed) before any design guidance is offered. Each cell has a dedicated reference file with full workflow, diagnostic protocols, and design principles. The classification router connects intake to the correct workflow automatically.
+
+---
+
+## [2.1.0] — 2026-04-02
+
+### Added
+- **7 new reference files** extracted from SKILL.md and supporting modules:
+  - `references/situational-leadership.md` — SLII framework, development levels D1–D4, leadership style matching
+  - `references/corporate-communications.md` — executive communication, stakeholder messaging, brand voice
+  - `references/marketing-for-ld.md` — program launch strategy, learner engagement campaigns, L&D brand
+  - `references/change-management.md` — ADKAR, Prosci, Kotter, change readiness and resistance
+  - `references/lxd-and-atd.md` — extended LXD and ATD capability model reference
+  - `references/academic-courseware.md` — graduate program canon, CLO strategy, organizational learning
+  - `references/project-management.md` — extended project governance templates and workflows
+- **Additional keyword routes** in `reference-router.py` for new files
+
+### Changed
+- **SKILL.md version**: `1.1.0` → `2.1.0`
+- Total reference files: 14 → 18
+
+---
+
 ## [1.1.0] — 2026-04-02
 
 ### Added

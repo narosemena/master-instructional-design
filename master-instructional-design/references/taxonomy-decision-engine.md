@@ -1,22 +1,42 @@
-# Taxonomy Decision Engine — Classification Sequence and Decision Logic
+<!-- taxonomy-decision-engine.md -->
 
-**Load when:** User needs the full classification sequence and decision logic for any learning project.
+# Taxonomy Decision Engine
+
+This file contains the classification logic that routes every project to the correct
+workflow. It is the entry point for all Project Mode engagements. Load this file first.
+Do not skip the classification sequence — every design decision downstream depends on
+the correct classification result.
 
 ---
 
 ## Foundational Design Principle
 
-> *Accuracy of judgment outranks system fluency. The harder skill to acquire takes sequencing priority.*
+> *Accuracy of judgment outranks system fluency. The harder skill to acquire takes
+> sequencing priority.*
 
-This principle governs every split decision where two skill types must be addressed in a single intervention.
+This principle governs every split decision where two skill types must be addressed
+in a single intervention.
 
 ---
 
 ## The Two-Tier Decision Engine
 
-### Level 1 — First Classification Cut
+This skill operates on two levels simultaneously:
 
-**The first question asked of any content handed to a designer:**
+**Macro level:** Treatment selection for the full intervention — modality, architecture,
+sequencing, blended approach.
+
+**Micro level:** Treatment selection for each individual content block — which interaction
+type, which practice method, which feedback approach serves this specific piece of content.
+
+The taxonomy drives the macro level. The micro-level engine is a separate reference file.
+Both must be active for complete design intelligence.
+
+---
+
+## Level 1 — First Classification Cut
+
+**The first question asked of any project:**
 
 > "Is this a **change in current performance** or a **brand new performance expectation**?"
 
@@ -25,24 +45,29 @@ This principle governs every split decision where two skill types must be addres
 | **Change** | Learner already performs this. Something about the performance must shift — behavior, system, standard, or context. |
 | **New** | Learner has never performed this. No prior baseline exists in this specific context. |
 
-**Critical nuance inside Change:**
-Change is not uniform. These are meaningfully different design problems:
+### Critical nuances inside Change
+
+These are meaningfully different design problems — do not treat them as equivalent:
+
 - Replacing a wrong behavior with a correct one
 - Adding a step to an existing process
 - Performing the same task in a new system or tool
 - Unlearning a deeply habitual behavior *(hardest design problem in the field)*
 
-**Critical nuance inside New:**
+### Critical nuances inside New
+
 New is not uniform either:
+
 - No prior context whatsoever
 - Prior knowledge exists in a transferable adjacent domain
-- Learner believes they already know it but doesn't *(dangerous — combines New with Change dynamics)*
+- Learner believes they already know it but doesn't *(dangerous — combines New with
+  Change dynamics)*
 
 ---
 
-### Level 2 — Content Nature Classification
+## Level 2 — Content Nature Classification
 
-Applied to both Change and New branches equally.
+Applied to both Change and New branches equally at this level.
 
 | Type | Definition |
 |---|---|
@@ -50,127 +75,161 @@ Applied to both Change and New branches equally.
 | **Soft** | Judgment, communication, leadership, relationship, decision-making under ambiguity — contextual, harder to observe, harder to measure |
 | **Mixed** | Intervention requires both hard and soft skill development; the two are operationally inseparable in the moment of performance |
 
-**The 2×3 taxonomy matrix — the core output of classification:**
+---
+
+## The Core Taxonomy Matrix
 
 | | Hard | Soft | Mixed |
 |---|---|---|---|
-| **Change** | ② | ③ | ⑤ |
-| **New** | ① | ④ | ⑥ |
+| **New Performance** | ① Hard-New | ④ Soft-New | ⑥ Mixed-New |
+| **Change in Performance** | ② Hard-Change | ③ Soft-Change | ⑤ Mixed-Change |
 
 ---
 
-## MVP Priority Ranking (by real-world frequency)
+## MVP Priority Ranking
 
 | Priority | Cell | Frequency Rationale |
 |---|---|---|
-| 1 | **Hard-New** ① | Most common enterprise trigger: system implementations, new processes, compliance |
-| 2 | **Hard-Change** ② | Second most common: system upgrades, process redesigns, policy shifts |
-| 3 | **Soft-Change** ③ | Frequent: behavior shift initiatives, leadership development, culture change |
-| 4 | **Soft-New** ④ | Less common: organizations rarely hire for zero soft skill baseline |
-| 5 | **Mixed-Change** ⑤ | Complex: role evolution requiring simultaneous hard and soft redesign |
-| 6 | **Mixed-New** ⑥ | Rarest: new role creation, major organizational transformation |
+| 1 | **Hard-New** | Most common enterprise trigger: system implementations, new processes, compliance |
+| 2 | **Hard-Change** | Second most common: system upgrades, process redesigns, policy shifts |
+| 3 | **Soft-Change** | Frequent: behavior shift initiatives, leadership development, culture change |
+| 4 | **Soft-New** | Less common: organizations rarely hire for zero soft skill baseline |
+| 5 | **Mixed-Change** | Complex: role evolution requiring simultaneous hard and soft redesign |
+| 6 | **Mixed-New** | Rarest: new role creation, major organizational transformation |
 
-**MVP scope:** Full depth on cells 1, 2, 3, 4. Structural guidance + complexity flag on cells 5, 6.
-
----
-
-## Level 3 — The Keep-Together vs. Separate Decision (Mixed Only)
-
-When content is classified as Mixed (cells ⑤ or ⑥), the designer must decide whether to treat hard and soft skills within a single intervention or as separate sequential interventions.
-
-### Decision Rule
-
-| Condition | Recommendation |
-|---|---|
-| **Judgment/soft skill already present** in learner (from experience, industry standards, education, or combination) | Keep together. Prioritize hard skill. Pepper in exceptions to standards as they apply to the specific environment. |
-| **Judgment/soft skill NOT yet present** | Separate into two distinct interventions. Assess most logical sequence to shorten time to proficiency. |
-
-### Sequencing Principle
-The harder-to-acquire skill takes sequencing priority. Judgment accuracy outranks system fluency because:
-- Judgment is harder to develop
-- Judgment errors have higher downstream consequence
-- System navigation can be supported with job aids; poor judgment cannot
-
-### Sequence Dependency
-The soft/judgment skill generally precedes the hard/system skill — **unless** the learner already possesses the judgment capability, in which case the sequence can begin with the hard skill and use the system context to surface judgment application.
-
-→ Full Mixed excavation: `references/mixed.md`
+**Full depth coaching:** Cells 1, 2, 3, 4
+**Structural guidance + complexity flag:** Cells 5, 6
 
 ---
 
-## Level 4 — Verifying Prior Capability Claims
+## Classification Routing
 
-### The Core Problem
-Self-reported prior knowledge ≠ transferable capability. A learner can have extensive experience in an adjacent domain where judgment criteria partially overlap but differ meaningfully enough to cause systematic errors.
+Once classification is confirmed, load the corresponding reference file:
 
-### Verification Protocol
-
-**Step 1 — SME Intake Query**
-Ask the SME directly. Use these three lines of inquiry:
-1. Clear definition of job description and role expectations
-2. Success metrics in this specific context
-3. Failure occurrence patterns — *"Are errors in judgment a recurrent issue, or does it tilt more toward system errors?"*
-
-**Step 2 — Read the SME**
-- Confident, specific answer → provisionally accept, document the claim
-- Hesitation → probe deeper using the three lines above
-- Ask explicitly: *"How confident are you about this?"*
-- Document the confidence level alongside the claim
-
-**Step 3 — Independent Evidence Sources**
-Do not rely on SME confidence alone. Seek corroborating evidence:
-- Performance data
-- Incident reports
-- Job descriptions and role requirements
-- Quality metrics and error logs
-
-**Step 4 — Minimum Viable Verification (evidence-desert environments)**
-When no historical data exists (new role, new organization, greenfield):
-- **Preferred:** On-the-job observation *(discreet, preserves learner dignity, yields behavioral data without triggering defensiveness)*
-- Encode the assumption formally in job description or role goals as a documented departure point
-- Flag as unverified assumption in design documentation
-
-### Observation Protocol Note
-Observation has a sampling problem: routine performance may appear competent while edge case judgment remains untested. Structure the observation window where possible to include exposure to ambiguous or non-routine situations.
-
----
-
-## Level 5 — When Verification Fails (Pilot Reveals Wrong Assumption)
-
-When pilot data contradicts the SME's intake claim about prior capability:
-
-### Design Response
-1. Create a new vertical to treat the missing skill specifically
-2. Do not collapse it into the existing intervention
-3. Document the distinction explicitly with rationale
-4. Articulate why separation is recommended and how the two verticals connect at the moment of performance
-
-### Required Skill Outputs at This Decision Point
-
-| Artifact | Purpose |
-|---|---|
-| **Diagnosis statement** | Plain language explanation of what the data revealed and why it changes the design classification |
-| **Recommendation document** | New vertical proposal with sequencing rationale in non-ID stakeholder language |
-| **Conversation guide** | How to deliver the finding without making the SME lose face |
-
----
-
-## Reference File Cascade
-
-| Classification Result | Primary Reference | Supporting References |
+| Classification | Primary Reference | Supporting References |
 |---|---|---|
-| Hard-New ① | `references/hard-new.md` | `references/workload-estimation.md`, `references/sme-governance.md` |
-| Hard-Change ② | `references/hard-change.md` | `references/stakeholder-communication.md` |
-| Soft-Change ③ | `references/soft-change.md` | `references/inclusive-emotional-design.md` |
-| Soft-New ④ | `references/soft-new.md` | `references/soft-change.md` |
-| Mixed-Change ⑤ | `references/mixed.md` | `references/hard-change.md`, `references/soft-change.md` |
-| Mixed-New ⑥ | `references/mixed.md` | `references/hard-new.md`, `references/soft-new.md` |
+| Hard-New | `hard-new.md` | `workload-estimation.md`, `sme-governance.md` |
+| Hard-Change | `hard-change.md` | `stakeholder-communication.md` |
+| Soft-Change | `soft-change.md` | `inclusive-emotional-design.md` |
+| Soft-New | `soft-new.md` | `soft-change.md` |
+| Mixed-Change | `mixed.md` | `hard-change.md`, `soft-change.md` |
+| Mixed-New | `mixed.md` | `hard-new.md`, `soft-new.md` |
 
 **Always load alongside any classification:**
-- `references/scope-creep-governance.md` — when project is in active sprint
-- `references/evaluation-architecture.md` — when evaluation has not been discussed
-- `references/designer-developer-handover.md` — when design-development transition is approaching
+- `scope-creep-governance.md` — when project is in active sprint
+- `evaluation-architecture.md` — when evaluation has not been discussed
+- `designer-developer-handover.md` — when design-development transition is approaching
 
 ---
 
-*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*
+## Classification Diagnostic Questions
+
+Ask these before confirming classification. Do not proceed to routing until all
+answers are known or documented as assumptions.
+
+1. Is the learner population currently performing any version of this task?
+2. If yes — what specifically needs to change about how they perform it?
+3. If no — does any transferable prior knowledge exist in an adjacent domain?
+4. Is the performance primarily procedural (hard), judgment-based (soft), or both (mixed)?
+5. If mixed — does the learner already possess the judgment component, or is that also new?
+6. What does the SME say about prior learner capability — and how confident are they?
+7. Is there independent evidence (performance data, incident reports, job descriptions)
+   that corroborates or contradicts the SME's claim?
+
+---
+
+## Classification Confidence Protocol
+
+After reviewing available information from the user's prompt and any
+diagnostic questions already answered, assess your confidence in the
+classification before proceeding.
+
+### Confidence Score
+
+Rate your classification confidence 0–100% based on:
+- **Signal clarity**: How many taxonomy-relevant signals are present in the prompt?
+- **Signal agreement**: Do available signals point to the same cell, or do they conflict?
+- **Ambiguity level**: Could this project reasonably belong to more than one cell?
+
+### Decision Threshold
+
+| Confidence | Action |
+|---|---|
+| **≥ 70%** | Proceed to Classification Confirmation Protocol. State the classification and the key signals that drove it. |
+| **< 70%** | Ask one targeted clarifying question (see below), process the response, then decide if a second question is needed before proceeding. After 2 questions maximum, classify with the best available information and state assumptions explicitly — do not loop. |
+
+### Clarifying Question Selection
+
+When confidence is below 70%, frame questions as collaborative, not diagnostic:
+> *"This sounds like a [general description]. Before I recommend a design approach,
+> I want to make sure I classify it correctly — [question]."*
+
+Prioritize the question that would most efficiently resolve the ambiguity:
+
+1. **New vs. Change** — *"Is the learner population currently performing any version of this work, or is this entirely new to them?"*
+2. **Hard vs. Soft vs. Mixed** — *"Is the core performance procedural (following steps), judgment-based (making decisions), or both?"*
+3. **Prior capability** — *"Does the audience bring relevant experience from adjacent work that could transfer — or would they be starting from zero?"*
+
+Do not ask questions the user has already answered in their prompt.
+Ask one question at a time — never both in the same message.
+After asking, signal progress before the user's response is processed:
+> *"Once I know that, I can classify the project and recommend a design path."*
+
+### Transparency
+
+When proceeding at ≥ 70%, state the classification directly with the key signals.
+When proceeding after clarification, briefly note what was ambiguous and how the
+clarification resolved it.
+Never display the numeric confidence score to the user — it is an internal
+decision mechanism, not a user-facing metric.
+
+---
+
+## The Hidden Reclassification Trigger — Soft-New
+
+**Critical warning:** Soft-New projects almost always contain a hidden Change component.
+
+A learner with strong general interpersonal competence is often harder to develop in
+a specific soft skill than a learner with no competence at all — because existing
+patterns interfere with new acquisition even when they are not formally wrong.
+
+**Before committing to a Soft-New acquisition design, always run the prior scaffolding
+diagnostic:**
+
+Ask the SME: *"What other types of work demand a similar performance from this
+population?"*
+
+If relevant prior scaffolding exists — reclassify as Soft-Change or Transfer before
+designing. The design changes completely.
+
+**Reclassification outcomes:**
+
+| Outcome | Condition | Design Path |
+|---|---|---|
+| **Pure Soft-New** | No relevant prior scaffolding | True acquisition — build mental models from ground up |
+| **Hidden Soft-Change** | Existing scaffolding conflicts with new skill | Unlearning required first — apply Soft-Change protocol |
+| **Transfer opportunity** | Relevant scaffolding in adjacent domain | Adapt existing models — do not rebuild from scratch |
+| **Mixed foundation** | Heterogeneous cohort | Separate populations or use expert augmenter model |
+
+---
+
+## Classification Confirmation Protocol
+
+Before routing to a cell reference file, confirm classification explicitly:
+
+> *"Based on what you've shared, I'm classifying this as [Cell Name]. This means
+> [one-sentence description of what that classification implies for design].
+> Does that match your understanding of the project?"*
+
+Do not proceed without explicit confirmation. A misclassification at this stage
+produces wrong design recommendations at every subsequent stage.
+
+**When the user rejects the classification**, do not restart the full diagnostic.
+Ask which dimension is wrong:
+> *"What about this doesn't match — is it the New vs. Change part,
+> or the Hard vs. Soft part?"*
+Use their correction as a direct signal. Reclassify and confirm again.
+
+---
+
+*© 2026 Norman Arosemena, CPTD. Licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Commercial use prohibited without a license.*

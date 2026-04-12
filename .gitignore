@@ -1,2 +1,7 @@
 .claude/hooks/__pycache__/
 .claude/skills/
+*.skill
+test_router.py
+TECHNICAL-ROADMAP.md
+*.pyc
+__pycache__/

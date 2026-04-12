@@ -1,124 +1,299 @@
-# Mixed (Cells ⑤ and ⑥) — Design Reference
+<!-- mixed.md -->
 
-**Load when:** Classification result is Mixed-Change ⑤ or Mixed-New ⑥. Covers the keep-together vs. separate decision, sequencing principles, and the structural logic for combined hard/soft interventions.
-Load alongside `references/hard-change.md` and `references/soft-change.md` for Mixed-Change, or `references/hard-new.md` and `references/soft-new.md` for Mixed-New.
-
----
-
-## What Makes Mixed a Distinct Design Problem
-
-Mixed is not a harder version of Hard or Soft. It is a different design problem entirely.
-
-In a Mixed intervention, hard and soft skill development are operationally inseparable in the moment of performance. The learner cannot execute the system correctly without exercising judgment, and cannot exercise judgment without navigating the system. These cannot be decoupled at the job level — only at the design level, and only if the conditions justify it.
-
-The design question is not "how do we teach both?" It is "do we teach both together, or do we teach one first?"
+# Mixed — Judgment + System Skill Combinations
 
 ---
 
-## The Foundational Principle
+## What Makes Mixed Classification Different
 
-> *Accuracy of judgment outranks system fluency. The harder skill to acquire takes sequencing priority.*
+Mixed interventions require both hard and soft skill development
+simultaneously — and the two are operationally inseparable in the
+moment of performance.
 
-When the two skills cannot be learned simultaneously without compromising both, the skill that is harder to acquire and more consequential when wrong gets sequenced first.
+The learner cannot execute the system correctly without the judgment.
+The judgment has no operational expression without the system.
+Separating them cleanly in the learning design is the default error.
 
-**Why judgment precedes system fluency when forced to choose:**
-- Judgment is harder to develop
-- Judgment errors have higher downstream consequence
-- System navigation can be supported with job aids; poor judgment cannot
+**The design challenge:** You cannot treat this as two sequential
+interventions bolted together. You must understand the relationship
+between the judgment component and the system component before making
+any design decision.
 
 ---
 
-## The Keep-Together vs. Separate Decision
+## The First Decision — Keep Together vs. Separate
 
-This decision is made at the macro level before any design work begins.
+When content is classified as Mixed, the designer must decide whether
+to treat hard and soft skills within a single intervention or as
+separate sequential interventions.
 
 ### Decision Rule
 
 | Condition | Recommendation |
 |---|---|
-| **Judgment/soft skill already present** in learner (from experience, industry standards, education, or combination) | Keep together. Prioritize hard skill. Surface exceptions to standards as they apply to the specific environment. |
+| **Judgment/soft skill already present** in learner population | Keep together. Prioritize hard skill. Surface judgment application in the system context. Pepper in exceptions and edge cases as they apply to the specific environment. |
 | **Judgment/soft skill NOT yet present** | Separate into two distinct interventions. Assess most logical sequence to shorten time to proficiency. |
 
-### How to Determine If the Soft Skill Is Already Present
+### The Sequencing Principle
 
-Apply the Level 4 verification protocol from `references/taxonomy-decision-engine.md`:
-1. SME intake query — three lines of inquiry (role definition, success metrics, failure pattern)
-2. Read the SME — confidence level, hesitation signals
-3. Independent evidence — performance data, incident reports, quality metrics
-4. Minimum viable verification — observation or encoded assumption when evidence is absent
+The harder-to-acquire skill takes sequencing priority. Judgment
+accuracy outranks system fluency because:
+- Judgment is harder to develop
+- Judgment errors have higher downstream consequence
+- System navigation can be supported with job aids; poor judgment
+  cannot
 
-Do not rely on SME confidence alone. Seek corroborating evidence.
+### Sequence Dependency
+
+The soft/judgment skill generally precedes the hard/system skill —
+**unless** the learner already possesses the judgment capability,
+in which case the sequence can begin with the hard skill and use
+the system context to surface judgment application.
 
 ---
 
-## Sequencing Logic When Separation Is Required
+## Verifying Prior Capability Claims
 
-When the soft skill is not yet present and separation is required, the designer must determine which vertical runs first.
+Before committing to the keep-together path, verify that the judgment
+skill the SME claims the learner population has is actually present
+and transferable — not just assumed.
 
-### The Default Sequence
+### The Core Problem
 
-| Step | Rationale |
+Self-reported prior knowledge does not equal transferable capability.
+A learner can have extensive experience in an adjacent domain where
+judgment criteria partially overlap but differ meaningfully enough
+to cause systematic errors in the new context.
+
+### Verification Protocol
+
+**Step 1 — SME intake query:**
+Ask the SME directly. Use these three lines of inquiry:
+1. Clear definition of job description and role expectations
+2. Success metrics in this specific context
+3. Failure occurrence patterns:
+   *"Are errors in judgment a recurrent issue, or does it tilt more
+   toward system errors?"*
+
+**Step 2 — Read the SME:**
+- Confident, specific answer → provisionally accept, document the
+  claim
+- Hesitation → probe deeper using the three lines above
+- Ask explicitly: *"How confident are you about this?"*
+- Document the confidence level alongside the claim
+
+**Step 3 — Independent evidence sources:**
+Do not rely on SME confidence alone. Seek corroborating evidence:
+- Performance data
+- Incident reports
+- Job descriptions and role requirements
+- Quality metrics and error logs
+
+**Step 4 — Minimum viable verification:**
+When no historical data exists:
+- **Preferred:** On-the-job observation — discreet, preserves learner
+  dignity, yields behavioral data without triggering defensiveness
+- Encode the assumption formally in job description or role goals as
+  a documented departure point
+- Flag as unverified assumption in design documentation
+
+**Observation sampling problem:**
+Routine performance may appear competent while edge case judgment
+remains untested. Structure the observation window to include exposure
+to ambiguous or non-routine situations where possible.
+
+---
+
+## Verification Failure — The Separation Rule
+
+When the verification protocol produces independent evidence that
+contradicts the SME's capability claim, apply the separation rule
+immediately. Do not continue evaluating the keep-together path.
+
+The decision rule operates on evidence, not on what the SME believes
+the population can do.
+
+| Condition | Decision |
 |---|---|
-| **1. Soft/judgment skill first** | Judgment accuracy is harder to develop; it takes sequencing priority per the foundational principle |
-| **2. Hard/system skill second** | Once judgment is established, the system context gives the learner decision points to apply their judgment in real conditions |
+| SME claims capability present; independent evidence confirms it | Keep together — proceed |
+| SME claims capability present; no independent evidence available | Treat as unresolved — complete verification before committing to design path |
+| SME claims capability present; independent evidence contradicts it | Treat as absent — apply separation rule |
+| SME acknowledges capability absent | Separate — no further verification needed |
 
-### When the Default Sequence Inverts
+**Note:** The opening principle of this file — that separation is the
+default error — refers to premature separation made without diagnostic
+work. Evidence-based separation after verification fails is the correct
+application of that same principle, not a contradiction of it.
 
-The soft/judgment skill does not always precede the hard/system skill. The sequence inverts when:
+**The 20% threshold:** An error rate above 20% on observable
+performance tasks is strong independent evidence that the judgment
+skill is not reliably present — regardless of SME confidence level,
+years of prior training, or annual certification completion. Error
+rate data supersedes self-report. Audit findings supersede compliance
+team belief.
 
-- The learner already possesses the judgment capability *(classification becomes Hard-New or Hard-Change, not Mixed)*
-- The system itself is the primary driver of judgment — where what the system surfaces determines what judgment is needed *(the sequence begins with hard skill and uses system context to elicit judgment decisions)*
+When this condition is met: separate the interventions. The executive
+preference for a single course or unified design becomes the
+stakeholder conversation that follows — not the design constraint
+that precedes.
 
-When the sequence inverts, document the rationale explicitly. This is a non-default choice and must be defensible to the learning leader and sponsor.
-
----
-
-## The Vertical Architecture (When Separated)
-
-When Mixed content is separated into two distinct interventions:
-
-### Requirements for Each Vertical
-1. Treated as a complete, independent learning intervention — it has its own objectives, assessment, and transfer strategy
-2. Connected to the other vertical at the design level — the learner must understand how the two skills come together in the moment of performance
-3. Document the connection point explicitly — *"After completing this vertical, learners will apply [judgment skill] in the [system context] covered in the second vertical"*
-
-### Pilot Protocol for Mixed Separations
-When pilot data contradicts the assumed sequencing or soft skill baseline, apply the Level 5 response from `references/taxonomy-decision-engine.md`:
-- Create a new vertical to treat the missing or mis-sequenced skill
-- Do not collapse it into the existing intervention
-- Produce the three required artifacts: diagnosis statement, recommendation document, conversation guide
+→ `references/stakeholder-communication.md` for the scope change
+conversation sequence once separation is confirmed.
 
 ---
 
-## Mixed-Change ⑤ vs. Mixed-New ⑥
+## When Pilot Data Contradicts the SME Claim
 
-| Dimension | Mixed-Change ⑤ | Mixed-New ⑥ |
-|---|---|---|
-| **Baseline** | Learner currently performs a version of this; something must change in both the hard and soft components | Learner has never performed this in any form |
-| **Primary complexity** | Unlearning in both domains simultaneously; resistance is compound — both competence and identity are threatened | Acquisition in both domains; no competing habits, but also no scaffolding to build on |
-| **Most common context** | Role evolution — existing role gains new system and new judgment requirements simultaneously | New role creation; major organizational transformation |
-| **Design priority** | Diagnose resistance type in both skill domains independently before designing | Run the prior scaffolding diagnostic (soft) and ecosystem audit (hard) before classifying as true Mixed-New |
+When verification reveals the judgment skill is NOT present after
+the SME said it was:
 
-**The Mixed-New caution:**
-True Mixed-New is rare. Before accepting the classification, verify that no adjacent scaffolding exists in either domain. A learner classified as Mixed-New who actually has adjacent soft skill scaffolding will hit Soft-Change resistance mid-intervention that the design cannot explain.
+### Design Response
+1. Create a new vertical to treat the missing skill specifically
+2. Do not collapse it into the existing intervention
+3. Document the distinction explicitly with rationale
+4. Articulate why separation is recommended and how the two
+   verticals connect at the moment of performance
 
----
+### Required Outputs at This Decision Point
 
-## Structural Guidance for Cells ⑤ and ⑥
-
-These cells receive structural guidance, not full excavation depth, in the current MVP. Full excavation of Mixed is a future session.
-
-**What is available now:**
-- The keep-together vs. separate decision (this file)
-- Sequencing logic
-- Vertical architecture requirements
-- Hard and Soft reference files for each component
-
-**What is pending:**
-- Mixed-specific facilitation patterns
-- Compound resistance design
-- Mixed fidelity ladder variations
+| Artifact | Purpose |
+|---|---|
+| **Diagnosis statement** | Plain language explanation of what the data revealed and why it changes the design classification |
+| **Recommendation document** | New vertical proposal with sequencing rationale in non-ID stakeholder language |
+| **Conversation guide** | How to deliver the finding without making the SME lose face |
 
 ---
 
-*© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*
+## The Stakeholder Conversation — Scope Change
+
+When pilot or observation data requires a scope change conversation:
+
+**Opening — the finding:**
+> *"As we continue to analyze the work ahead, we have found that
+> through systematic observation of learners in the place of work,
+> we must recommend we reevaluate the scope of this learning
+> intervention. In observations we could not find visible evidence
+> that team members have the necessary mastery of the non-system
+> side of the work."*
+
+**The recommendation:**
+> *"I am going to recommend we make a clean distinction in the skills
+> needed to do this work and address these individually as goals for
+> the learner to master, while at the same time showing how they come
+> together in the moment of truth."*
+
+**Opportunity + risk:**
+> *"We recommend we move forward with this approach to make sure we
+> diminish quality issues — errors in QC, missed target metrics,
+> downstream problems with checked agent calls. A poorly judged
+> customer call is an agent who will not get coached, or could be
+> put on a performance improvement plan unnecessarily. This approach
+> lets us build quality into the process."*
+
+For the full stakeholder conversation sequence including the close,
+delay response, and escalation language →
+`references/stakeholder-communication.md`
+
+---
+
+## Mixed-Change vs. Mixed-New
+
+### Mixed-Change (Cell 5)
+
+The learner currently performs a version of this work. Both the
+judgment component and the system component need to shift.
+
+**Primary design risk:** Existing habits in both domains. The learner
+has automated responses for the system AND entrenched judgment
+patterns. Both need to change simultaneously.
+
+**Design approach:**
+- Diagnose which component has stronger existing patterns
+- Address the harder-to-change component first
+- Use the system change as a concrete anchor for the judgment change
+  where possible
+- Apply Hard-Change unlearning protocols to the system component
+- Apply Soft-Change identity and resistance protocols to the judgment
+  component
+
+→ `references/hard-change.md` for unlearning framework
+→ `references/soft-change.md` for identity-based change protocol
+
+### Mixed-New (Cell 6)
+
+The learner has never performed this work. Both components are new.
+This is the rarest and most complex classification.
+
+**Primary design risk:** Building both components simultaneously
+creates cognitive overload. The learner has no existing scaffold
+for either domain.
+
+**Design approach:**
+- Almost always separate into two sequential interventions
+- Judgment component first — it is the harder acquisition and the
+  prerequisite for meaningful system practice
+- System component second — with judgment established, system
+  practice has a cognitive framework to attach to
+- Exception: if a highly scaffolded simulation environment exists
+  that can build both simultaneously with sufficient support
+  structure, a combined approach may be considered
+
+**Complexity flag:** Mixed-New projects almost always require more
+discovery time, more SME involvement, and a wider uncertainty buffer
+than any other classification. Apply the 40–50% buffer range as a
+starting point and adjust based on the three uncertainty diagnostic
+levels.
+
+→ `references/workload-estimation.md` for uncertainty calibration
+
+---
+
+## The QC System Example — Reference Case
+
+A contact center rolls out a new quality management system.
+Evaluators must:
+- Learn to navigate and operate the QC platform (hard skill)
+- Develop or apply judgment about call quality evaluation (soft skill)
+
+**Classification:** Mixed — the two are inseparable in the moment
+of performance. An evaluator cannot use the system correctly without
+the judgment. The judgment has no output mechanism without the system.
+
+**Keep together or separate decision:**
+
+*If evaluators bring 5+ years of quality evaluation experience:*
+Keep together. Prioritize system training. Surface judgment
+application through the system interface — use real evaluation
+scenarios as the practice context. Exception cases and edge cases
+pepper the system training with judgment application moments.
+
+*If evaluators are new to quality evaluation:*
+Separate. Judgment first — build the evaluation framework,
+calibrate against standards, develop accuracy before introducing
+system complexity. System second — once judgment is established,
+the system becomes the tool that captures and records it.
+
+**The sequencing principle applied:**
+A poorly calibrated evaluator using the system correctly still
+produces bad evaluation data. System proficiency does not compensate
+for judgment deficiency. Judgment accuracy outranks system fluency.
+
+---
+
+## Complexity Flags for Mixed Classifications
+
+Before proceeding with any Mixed project, document these explicitly:
+
+- [ ] Is the judgment component present, transferable, or absent?
+- [ ] Has that claim been verified independently of SME self-report?
+- [ ] Is the sequence judgment-first or system-first — and why?
+- [ ] If keeping together — what is the integration mechanism?
+- [ ] If separating — what is the handoff point between verticals?
+- [ ] How do the two verticals reconnect at the moment of performance?
+- [ ] What does the learner experience when both skills must operate
+      simultaneously on the job?
+- [ ] Is the uncertainty buffer sized for Mixed complexity?
+
+---
+
+*© 2026 Norman Arosemena, CPTD. Licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Commercial use prohibited without a license.*
