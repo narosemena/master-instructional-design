@@ -15,34 +15,35 @@ prompt = (data.get("message") or data.get("prompt") or "").lower()
 base = "master-instructional-design/references/"
 
 # Priority-ordered routes: first match wins
+# Architecture: specific cell routes first (when classification is determinable
+# from the prompt), taxonomy as fallback (when it isn't), everything else below.
 routes = [
-    # --- Taxonomy and workflow-specific routes (high priority) ---
-    ("taxonomy-decision-engine.md",
-     r"taxonomy|classify.*project|project.*classif|\bhard.new\b|\bhard.change\b"
-     r"|\bsoft.new\b|\bsoft.change\b|mixed.*project|project.*type|decision engine"
-     r"|what (type|kind) of.*project|diagnos.*project|project.*cell"
-     r"|where do i begin|just.*assigned.*project|i.ve been assigned|i have.*been assigned"
-     r"|new project.*where|how do i start.*project|just.*assigned.*course"),
-
-    ("hard-new.md",
-     r"brand.new.*skill|never.*done.*before|ecosystem audit|fidelity ladder"
-     r"|new.*procedure.*learn|new.*process.*learn|anchor trap|partial match"
-     r"|hard new.*workflow|hard.new.*design"),
-
-    ("hard-change.md",
-     r"process.*change.*train|procedure.*change.*train|policy.*change.*train"
-     r"|unlearn.*hard|wiifm.*change|hard.change.*workflow|hard.change.*design"
-     r"|change.*resistance.*procedure"),
-
+    # --- Cell-specific routes (highest priority — direct classification) ---
     ("soft-change.md",
      r"soft.change.*workflow|soft.change.*design|identity.*threat.*train"
      r"|reptilian.*react|andragog|opening protocol.*facilit"
-     r"|mid.session.*resistance|behavior.*change.*identity"),
+     r"|mid.session.*resistance|behavior.*change.*identity"
+     r"|refus.*change|veteran.*resist|won.t adopt|pushback.*training"
+     r"|gut feeling|gut instinct|trust.*instinct|trust.*gut|gut.*trust"
+     r"|prefer.*gut|gut.*over.*protocol|resist.*adopt.*soft"
+     r"|actively resist|openly resist"),
 
     ("soft-new.md",
      r"soft.new.*workflow|soft.new.*design|prior.*scaffolding"
      r"|heterogeneous.*cohort|transfer.*acquisition.*design|persona card"
      r"|expert augmenter|cross.level.*pair"),
+
+    ("hard-change.md",
+     r"process.*change.*train|procedure.*change.*train|policy.*change.*train"
+     r"|unlearn.*hard|wiifm.*change|hard.change.*workflow|hard.change.*design"
+     r"|change.*resistance.*procedure"
+     r"|transitioning.*to.*new|switching.*to.*new|replacing.*with.*new"
+     r"|moving.*from.*to.*system|migrat.*new.*system"),
+
+    ("hard-new.md",
+     r"brand.new.*skill|never.*done.*before|ecosystem audit|fidelity ladder"
+     r"|new.*procedure.*learn|new.*process.*learn|anchor trap|partial match"
+     r"|hard new.*workflow|hard.new.*design"),
 
     ("mixed.md",
      r"\bmixed\b.*classif|classif.*\bmixed\b|judgment.*system.*skill"
@@ -52,6 +53,15 @@ routes = [
      r"|never used.*system|rolling out.*new.*system|new.*system.*experienc"
      r"|system.*never.*used|new.*platform.*experienc|experienc.*new.*system"
      r"|new.*tool.*experienc|experienc.*new.*tool"),
+
+    # --- Taxonomy fallback (when classification isn't determinable from prompt) ---
+    ("taxonomy-decision-engine.md",
+     r"taxonomy|classify.*project|project.*classif|\bhard.new\b|\bhard.change\b"
+     r"|\bsoft.new\b|\bsoft.change\b|mixed.*project|project.*type|decision engine"
+     r"|what (type|kind) of.*project|diagnos.*project|project.*cell"
+     r"|where do i begin|where do we begin|just.*assigned.*project"
+     r"|i.ve been assigned|i have.*been assigned"
+     r"|new project.*where|how do i start.*project|just.*assigned.*course"),
 
     # --- Governance and project management (specific before general) ---
     ("stakeholder-communication.md",
@@ -97,7 +107,9 @@ routes = [
 
     ("generative-ai-for-ld.md",
      r"generative ai|agentic ai|prompt engineer|multi.agent|ai.*workflow"
-     r"|responsible ai|ai tool.*learn|chatgpt|claude.*l.d"),
+     r"|responsible ai|ai tool.*learn|chatgpt|claude.*l.d"
+     r"|ai.driven|ai.powered|\bai\b.*crm|\bai\b.*tool.*adopt"
+     r"|artificial intelligence.*learn|machine learning.*train"),
 
     ("evaluation-planning.md",
      r"kirkpatrick|\bl1\b|\bl2\b|\bl3\b|\bl4\b|\bl5\b|\broi\b|phillips"
@@ -144,7 +156,9 @@ routes = [
     ("change-management.md",
      r"change management|\badkar\b|\bprosci\b|\bkotter\b|lewin.*change"
      r"|change readiness|change resistance|change champion"
-     r"|organizational change|transformation.*learn|change impact"),
+     r"|organizational change|transformation.*learn|change impact"
+     r"|refusing.*use|won.t use|pushback.*tool|resist.*adopt"
+     r"|transition.*adopt|won.t.*adopt"),
 
     ("lxd-and-atd.md",
      r"learner journey|\blxd\b|atd capability|\bcptd\b|empathy map"
