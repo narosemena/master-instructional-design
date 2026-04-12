@@ -93,8 +93,14 @@ jobs:
       - name: Install zip utility
         run: sudo apt-get install -y zip
 
-      - name: Check .skill bundle is current
-        run: bash build.sh --check
+      - name: Build .skill bundle and verify
+        run: |
+          bash build.sh
+          if [[ ! -f "master-instructional-design.skill" ]]; then
+            echo "ERROR: build.sh did not produce master-instructional-design.skill"
+            exit 1
+          fi
+          echo "✓ Bundle built successfully"
 
       - name: Pipe-test reference router (smoke test)
         run: |

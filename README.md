@@ -1,7 +1,7 @@
 ````markdown
 # master-instructional-design
 
-A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 18 on-demand reference files.
+A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, and elevating every dimension of your L&D practice across 15 engagement modes and 30 on-demand reference files.
 
 ---
 
@@ -80,7 +80,7 @@ The reference router hook (`reference-router.py`) automatically hints which refe
 
 **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, and evaluation planning framework.
 
-**18 reference files** loaded on demand — never all at once, preserving context efficiency:
+**30 reference files** loaded on demand — never all at once, preserving context efficiency:
 
 | Reference file | Covers |
 | :--- | :--- |
@@ -102,6 +102,18 @@ The reference router hook (`reference-router.py`) automatically hints which refe
 | `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message mapping, L&D brand voice, CLO presentation structure |
 | `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign design, enrollment metrics |
 | `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion network design, cannot vs. will-not diagnostic |
+| `taxonomy-decision-engine.md` | Two-tier classification engine (Hard/Soft × New/Change); 6-cell taxonomy matrix; entry point for all project mode engagements |
+| `hard-new.md` | Ecosystem audit, fidelity ladder, Gate 1–3 protocol, scenario selection, SME governance for brand-new hard skills |
+| `hard-change.md` | WIIFM reframing, unlearning design, ADKAR ownership model, pre-launch gap conversation |
+| `soft-change.md` | Identity threat distinction, andragogical foundation, opening protocol, mid-session resistance handling |
+| `soft-new.md` | Prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, cross-level pairing |
+| `mixed.md` | Keep-together vs. separate decision rule, judgment/system sequencing, verification failure → separation rule |
+| `stakeholder-communication.md` | Verbatim language for sponsor conversations, scope change, evaluation commitment, escalation |
+| `workload-estimation.md` | Two-owner estimation model, SME involvement curve, uncertainty buffer calibration, definition of ready |
+| `scope-creep-governance.md` | Criticality taxonomy (A/B/C/D), silent absorption problem, jidoka escalation protocol |
+| `evaluation-architecture.md` | Root cause of missing evaluation, role accountability, Kirkpatrick teaching sequence, Level 4 timing |
+| `sme-governance.md` | Ecosystem mapping, approver vs. knower gap, lead SME model, verification protocol |
+| `designer-developer-handover.md` | Co-authoring reframe, script standards, developer creative liberty, equivalent value negotiation |
 
 -----
 
