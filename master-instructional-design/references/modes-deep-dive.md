@@ -68,6 +68,8 @@ When the user wants to understand a concept, compare frameworks, or deepen their
 - Reference foundational texts when relevant
 - Offer nuanced perspectives — acknowledge where experts disagree
 
+→ Reference files: `references/foundational-texts.md`, `references/academic-courseware.md`
+
 ---
 
 ## 4. ✍️ Co-Creation Mode
@@ -86,6 +88,8 @@ Every piece of content co-created should include an explicit formative assessmen
 
 A design without formative assessment architecture is a design that can't adapt. Name it explicitly every time.
 
+→ Reference file: `SKILL.md` (Audit Framework, Bloom's taxonomy guidance)
+
 ---
 
 ## 5. 🛠️ Authoring Tool Expert Mode
@@ -96,6 +100,8 @@ When the user is building in Storyline, Rise, Captivate, Lectora, Camtasia, or a
 - Recommend the right tool for the job based on project requirements and constraints
 - Advise on LMS compatibility, SCORM/xAPI publishing settings, and tracking configuration
 
+→ Reference file: `references/authoring-tools.md`
+
 ---
 
 ## 6. 🗺️ Learner Experience Design (LXD) Mode
@@ -105,6 +111,8 @@ When the user wants to go beyond course design into full learning experience arc
 - Design for emotion, motivation, identity, and belonging — not just knowledge transfer
 - Integrate performance support, social learning, and microlearning touchpoints
 - Connect LXD strategy to business outcomes and talent development goals
+
+→ Reference file: `references/lxd-and-atd.md`
 
 ---
 
@@ -139,6 +147,8 @@ When the user is managing learning projects or teams using Agile or Scrum:
 - Bridge SAM (Successive Approximation Model) and Scrum — show where they align and diverge
 - Guide Agile portfolio management for L&D teams managing multiple concurrent projects
 
+→ Reference file: `references/agile-and-design.md`
+
 ---
 
 ## 9. 🖌️ Graphic, UX & UI Design Mode
@@ -152,6 +162,8 @@ When the user needs visual design, interface design, or UX guidance for learning
 
 *Mode 9 defines what good design looks like — the principles. Mode 10 is how you build it — the Adobe tools that execute those principles.*
 
+→ Reference file: `references/agile-and-design.md`
+
 ---
 
 ## 10. 🎨 Adobe Creative Suite Mode
@@ -161,6 +173,8 @@ When the user is working in any Adobe application:
 - Teach advanced techniques: masking, smart objects, blend modes, motion paths, audio sweetening
 - Create efficient workflows: linked assets, Libraries, CC collaboration, export presets for eLearning
 - Advise on file prep for authoring tool handoff (PNG/SVG export settings, video compression for SCORM)
+
+→ Reference file: `references/agile-and-design.md`
 
 ---
 
@@ -172,6 +186,8 @@ When the user wants to leverage AI in their L&D work:
 - Advise on responsible AI use: bias, accuracy auditing, learner data privacy, transparency with stakeholders
 - Evaluate and recommend AI tools purpose-built for L&D vs. general-purpose tools
 - Coach the skill of "AI as thought partner" — using AI to stress-test designs and challenge assumptions
+
+→ Reference file: `references/generative-ai-for-ld.md`
 
 ---
 
@@ -195,6 +211,8 @@ When the user wants to engage at the graduate academic level of ID theory and re
 - Support graduate students with course concepts, thesis framing, and research design in ID/LT
 - Advise on doctoral-level ID research methodology, AECT standards, IBSTPI competencies
 
+→ Reference file: `references/academic-courseware.md`
+
 ---
 
 ## 14. 📋 L&D Project Management Mode
@@ -208,6 +226,8 @@ When the user needs to manage, structure, or communicate about a learning projec
 - Coach change control — how to handle scope creep without burning stakeholder relationships
 - Run the pre-launch QA checklist
 
+→ Reference file: `references/project-management.md`
+
 ---
 
 ## 15. 🏢 CLO & Learning Leadership Mode
@@ -219,6 +239,7 @@ When the user operates at the strategic, executive, or organizational learning l
 - Coach CLO-level stakeholder influence, board-level communication, and cross-functional alignment
 - Guide learning ecosystem design: LMS/LXP strategy, vendor management, build/buy/borrow decisions
 
+→ Reference file: `references/academic-courseware.md`
 
 ---
 *© 2026 Norman Arosemena, CPTD. [CC BY-NC-ND 4.0](../../../LICENSE) — personal/educational use only; commercial use prohibited.*
