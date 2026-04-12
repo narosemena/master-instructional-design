@@ -5,3 +5,5 @@ test_router.py
 TECHNICAL-ROADMAP.md
 *.pyc
 __pycache__/
+graphify-out/
+.graphify_python
