@@ -47,6 +47,7 @@
   stakeholder communications
   * **Evaluation Planning** — Kirkpatrick L1–5, ROI calculation, L3 manager observation, learning        
   analytics
+  * **Document & Artifact Generation** — on-demand production of complete, populated L&D documents: facilitator guides, job aids, storyboards, audience analysis reports, alignment matrices, SME interview protocols, content audits, and communication plans; generation is consultative — the skill diagnoses before drafting and challenges assumptions during the build
 
   ---
 
@@ -96,8 +97,7 @@
 
   ## What's inside
 
-  **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching   
-  response patterns, diagnostic questions, and evaluation planning framework.
+  **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, evaluation planning framework, and the **Artifact & Document Output Protocol** — a consultative document generation system that diagnoses before drafting, applies the three design lenses during the build, and closes with the most important design risk the document reveals.
 
   **31 reference files** loaded on demand — never all at once, preserving context efficiency:
 
@@ -164,12 +164,37 @@
 
   ## Tested against
 
-  10 progressive complexity challenges — from writing a single learning objective (L1) to building a     
-  3-year L&D capability strategy for a 5,000-person organization (L10).
+  **Complexity challenges (L1–L10)** — from writing a single learning objective to building a 3-year L&D capability strategy for a 5,000-person organization.
 
-  **Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, 
-  feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and  
-  consulting posture dimensions.
+  **Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and consulting posture dimensions.
+
+  **Router accuracy** — 19-pattern keyword router smoke-tested across all reference files.
+
+  **Result: 12/13 pass** (1 acceptable edge case: "how do I create a job aid" routes to `document-templates.md` rather than `facilitation-and-ilt.md` — correct behavior since the scaffold is the useful context for that request).
+
+  **Consultative stance validation** — 10 artifact generation scenarios tested to confirm the Artifact Protocol does not bypass the skill's coaching identity.
+
+  **Result: 10/10 pass** across: minimal-context requests (diagnose before drafting), sufficient-context requests (proceed directly), compliance traps (performance lens fires before scaffold is touched), emotional high-risk topics (all three lenses fire before the document is started), specific constraints (addressed inline during the build), and scope-undefined requests (minimum load-bearing questions asked). Every test closed with a practitioner-level design risk, not a generic placeholder note.
+
+  ---
+
+  ## Recent Enhancements
+
+  **v2.2.0 — Artifact & Document Generation**
+  * New `document-templates.md` — 8 structural scaffolds (facilitator guide, job aid, storyboard, audience analysis, alignment matrix, SME interview protocol, content audit, program communication plan)
+  * New **Artifact & Document Output Protocol** in SKILL.md — consultative generation: diagnose before drafting, consult during the build, close with the key design risk
+  * Router updated with generation-intent pattern (position 2 — high priority)
+  * Protocol refined after 10-case consultative stance test: generation does not bypass coaching identity; documents emerge from the consulting process, not in place of it
+
+  **v2.1.0 — Four New Domains + Efficiency Audit**
+  * 4 new reference files: `situational-leadership.md`, `corporate-communications.md`, `marketing-for-ld.md`, `change-management.md`
+  * Two-pass Bitter Lesson efficiency audit across 9 files — removed encyclopedic content the model already knows (Bloom's definitions, Kirkpatrick level descriptions, CRAP principles, Nielsen's heuristics, UDL principle descriptions, 70-20-10 breakdown, WCAG numbered criteria, 23 TD Capabilities prose); replaced with practitioner-specific decision trees, failure modes, and application tables
+  * Bundle reduced ~2.3% compressed; router expanded to 18 patterns
+
+  **v3.0.0 — Taxonomy Decision Engine (prior release)**
+  * Two-tier project classification: Hard/Soft × New/Change — 4 cell-specific reference files plus a `mixed.md` for inseparable skills
+  * 11 new governance and project management reference files (SME governance, scope creep, workload estimation, evaluation architecture, stakeholder communication, designer-developer handover)
+  * Knowledge graph of all skill nodes via graphify
 
   ---
 
