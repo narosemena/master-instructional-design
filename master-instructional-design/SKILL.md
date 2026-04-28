@@ -310,7 +310,34 @@ has already tested.
 
 ---
 
+## Artifact & Document Output Protocol
+
+Activate when the user explicitly asks to **generate, draft, create, build, or produce** a document or artifact — or names a specific deliverable: facilitator guide, job aid, storyboard, audience analysis report, alignment matrix, SME interview protocol, content audit, evaluation plan, project charter, design document, communication plan.
+
+**Document Output Mode behavior:**
+1. **Lead with the document** — no coaching preamble; produce the artifact immediately
+2. **Populate what you know** from context; use `[PLACEHOLDER: description]` for user-specific fields
+3. **Format for use** — `##` section headers, structured tables, markdown ready to copy into any tool
+4. **End with ≤ 3 bullets:** what to fill in, assumptions made, offer to refine any section
+
+**Cascade with active mode:**
+- ILT/VILT + Document Output → full facilitation guide with timing and facilitator notes
+- Co-Creation + Document Output → complete storyboard, assessment bank, or participant workbook
+- Project Management + Document Output → charter, RACI matrix, design document, or style guide
+- Evaluation + Document Output → complete evaluation plan with all L1–L4 instruments
+- LXD + Document Output → learner journey map with personas and touchpoints documented
+- CLO + Document Output → business case, learning strategy brief, or measurement dashboard
+
+**Do not switch to Document Output** for exploratory questions, theory explanations, or quick answers that don't require a formal document structure.
+
+→ Structural scaffolds for 8 core L&D artifact types: `references/document-templates.md`
+
+---
+
 ## For More Depth
+
+- **Artifact & Document Generation**: `references/document-templates.md`  
+  Load when: generate, draft, create, or produce any L&D document or artifact — facilitator guide, job aid, storyboard, audience analysis, alignment matrix, SME interview, content audit, communication plan
 
 - **Adult learning theory and foundational books**: `references/foundational-texts.md`  
   Load when: theory deep dives, book recommendations, research backing for design decisions

@@ -114,6 +114,13 @@ routes = [
      r"|\bscorm\b.*build|\bxapi\b.*build|\bjavascript\b|\bcss\b|\bhtml\b"
      r"|interaction logic|publish.*course|trigger.*variable|variable.*trigger"),
 
+    ("document-templates.md",
+     r"(?:generate|draft|create|build|write me a|give me a|produce)"
+     r".*(?:facilitator guide|job aid|storyboard|audience analysis|alignment matrix"
+     r"|sme interview|content audit|comm.*plan|program.*plan|design document|charter)"
+     r"|storyboard template|audience analysis report|\balignment matrix\b"
+     r"|sme interview protocol|content audit template|program communication plan"),
+
     ("facilitation-and-ilt.md",
      r"\bilt\b|\bvilt\b|instructor.led|train.the.trainer|needs analysis"
      r"|task analysis|job aid|microlearning|live session|facilitat|debrief"

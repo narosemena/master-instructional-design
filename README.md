@@ -1,7 +1,7 @@
 ---                                                                                                    
   # master-instructional-design                                                                                                                                                                                   
   A Claude skill that embodies a 30-year veteran instructional design practitioner — coaching, auditing, 
-  and elevating every dimension of your L&D practice across 15 engagement modes and 30 on-demand       
+  and elevating every dimension of your L&D practice across 15 engagement modes and 31 on-demand       
   reference files.
 
   ---
@@ -99,10 +99,11 @@
   **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching   
   response patterns, diagnostic questions, and evaluation planning framework.
 
-  **30 reference files** loaded on demand — never all at once, preserving context efficiency:
+  **31 reference files** loaded on demand — never all at once, preserving context efficiency:
 
   | Reference file | Covers |
   | :--- | :--- |
+  | `document-templates.md` | Structural scaffolds for 8 core L&D artifacts: facilitator guide, job aid, storyboard, audience analysis, alignment matrix, SME interview, content audit, communication plan |
   | `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning,    
   organizational learning |
   | `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job  
