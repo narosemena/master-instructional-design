@@ -7,18 +7,71 @@ Usage:
 
 Output (stdout): JSON describing the template's structural elements.
 
-  .pptx  — slide layouts (name, placeholder idx/name/type), existing slide count
-            and per-slide layout + text preview
-  .docx  — paragraph styles used, heading hierarchy, table headers and dimensions
+  .pptx  — all shapes per layout (placeholders + free text boxes), semantic
+            hints for VO/dev-notes/visual containers, background presence,
+            existing slide count and per-slide preview
+  .docx  — paragraph styles used, heading hierarchy, table column headers
   .xlsx  — sheet names, header row values, row count per sheet
 
-The output is intended to be read by Claude to surface mapping questions
-before any population is attempted.
+Shape hints in pptx output:
+  candidate_narration   — shape name contains VO/narration/script/audio signal
+  candidate_dev_notes   — shape name contains dev/production note signal
+  candidate_visual      — shape name contains visual/art direction signal
+  candidate_interaction — shape name contains interaction/interactivity signal
+
+These hints surface during excavation so field destinations are confirmed,
+never assumed.
 """
 import argparse
 import json
 import os
 import sys
+
+# Keyword sets used to classify shape names as likely content containers
+_VO_SIGNALS      = frozenset(["voice over", "vo", "narration", "script", "audio", "speaker"])
+_DEV_SIGNALS     = frozenset(["dev note", "developer", "dev notes", "production note", "for dev"])
+_VISUAL_SIGNALS  = frozenset(["visual", "image desc", "art direction", "graphic desc", "illustration"])
+_INTERACT_SIGNALS = frozenset(["interaction", "interaction type", "interactivity", "user action"])
+
+
+def _shape_hint(name):
+    """Return a semantic hint if the shape name signals a specific content type."""
+    n = name.lower()
+    for sig in _VO_SIGNALS:
+        if sig in n:
+            return "candidate_narration"
+    for sig in _DEV_SIGNALS:
+        if sig in n:
+            return "candidate_dev_notes"
+    for sig in _VISUAL_SIGNALS:
+        if sig in n:
+            return "candidate_visual"
+    for sig in _INTERACT_SIGNALS:
+        if sig in n:
+            return "candidate_interaction"
+    return None
+
+
+def _layout_has_background(layout):
+    """True if the layout has an explicit non-transparent background fill."""
+    try:
+        from pptx.oxml.ns import qn
+        elem = layout._element
+        cSld = elem.find(qn('p:cSld'))
+        if cSld is None:
+            return False
+        bg = cSld.find(qn('p:bg'))
+        if bg is None:
+            return False
+        bgPr = bg.find(qn('p:bgPr'))
+        if bgPr is None:
+            return False
+        for fill_tag in ('a:solidFill', 'a:gradFill', 'a:blipFill', 'a:pattFill'):
+            if bgPr.find(qn(fill_tag)) is not None:
+                return True
+        return False
+    except Exception:
+        return False
 
 
 def analyze_pptx(path):
@@ -28,27 +81,47 @@ def analyze_pptx(path):
 
     layouts = []
     for layout in prs.slide_layouts:
-        placeholders = []
-        for ph in layout.placeholders:
-            placeholders.append({
-                "idx": ph.placeholder_format.idx,
-                "name": ph.name,
-                "type": str(ph.placeholder_format.type).split(".")[-1],
-            })
-        layouts.append({"name": layout.name, "placeholders": placeholders})
+        shapes = []
+        for shape in layout.shapes:
+            info = {
+                "name": shape.name,
+                "has_text_frame": shape.has_text_frame,
+                "is_placeholder": shape.is_placeholder,
+            }
+            if shape.is_placeholder:
+                info["placeholder_idx"] = shape.placeholder_format.idx
+                info["placeholder_type"] = (
+                    str(shape.placeholder_format.type).split(".")[-1]
+                )
+            hint = _shape_hint(shape.name)
+            if hint:
+                info["hint"] = hint
+            shapes.append(info)
+
+        layouts.append({
+            "name": layout.name,
+            "has_background": _layout_has_background(layout),
+            "shapes": shapes,
+        })
 
     existing_slides = []
     for i, slide in enumerate(prs.slides):
-        frames = []
+        non_ph_shapes = []
         for shape in slide.shapes:
-            if shape.has_text_frame:
+            if not shape.is_placeholder and shape.has_text_frame:
                 text = shape.text_frame.text.strip()
+                entry = {"name": shape.name}
+                hint = _shape_hint(shape.name)
+                if hint:
+                    entry["hint"] = hint
                 if text:
-                    frames.append({"shape": shape.name, "preview": text[:80]})
+                    entry["preview"] = text[:80]
+                non_ph_shapes.append(entry)
+
         existing_slides.append({
             "num": i + 1,
             "layout": slide.slide_layout.name,
-            "text_frames": frames,
+            "non_placeholder_shapes": non_ph_shapes,
         })
 
     return {

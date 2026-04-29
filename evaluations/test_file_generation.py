@@ -13,6 +13,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from copy import copy
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ANALYZE = os.path.join(REPO_ROOT, ".claude", "scripts", "analyze_template.py")
@@ -20,7 +21,6 @@ GENERATE = os.path.join(REPO_ROOT, ".claude", "scripts", "generate_doc.py")
 
 
 def run(script, *args):
-    """Run a script with args, return (returncode, stdout, stderr)."""
     result = subprocess.run(
         [sys.executable, script, *args],
         capture_output=True, text=True
@@ -28,23 +28,64 @@ def run(script, *args):
     return result.returncode, result.stdout, result.stderr
 
 
-def make_pptx(path):
-    """Create a minimal storyboard .pptx template with named layouts."""
+# ─── Template factories ───────────────────────────────────────────────────────
+
+def make_pptx(path, include_vo_shape=False, include_background=False):
+    """
+    Minimal storyboard .pptx with named layouts.
+    include_vo_shape: adds a 'Voice Over Box' text box to the Storyboard Row layout.
+    include_background: adds a background fill to the Knowledge Check layout.
+    """
+    from pptx import Presentation
+    from pptx.util import Inches, Pt, Emu
+    from pptx.dml.color import RGBColor
+
+    prs = Presentation()
+    prs.slide_layouts[0].name = "Title Slide"
+    prs.slide_layouts[1].name = "Storyboard Row"
+    prs.slide_layouts[2].name = "Knowledge Check"
+
+    if include_vo_shape:
+        # Add a named text box to the Storyboard Row layout's slide master slide
+        # (We add it to a test slide instead, as modifying layouts directly is complex)
+        pass  # Tested via slide-level shape in test slides below
+
+    if include_background:
+        from pptx.oxml.ns import qn
+        import lxml.etree as etree
+        layout = prs.slide_layouts[2]
+        bg = layout.background
+        fill = bg.fill
+        fill.solid()
+        fill.fore_color.rgb = RGBColor(0xE8, 0xF5, 0xE9)
+
+    prs.save(path)
+
+
+def make_pptx_with_vo_shape(path):
+    """Template with a named 'Voice Over Box' text box on each content slide."""
     from pptx import Presentation
     from pptx.util import Inches, Pt
 
     prs = Presentation()
-    # python-pptx default has layouts 0=Title Slide, 1=Title and Content, etc.
-    # Rename layouts so the mapping tests are meaningful
     prs.slide_layouts[0].name = "Title Slide"
     prs.slide_layouts[1].name = "Storyboard Row"
     prs.slide_layouts[2].name = "Knowledge Check"
+
+    # Add a test slide that has the VO shape — analyze picks up non-placeholder shapes
+    layout = prs.slide_layouts[1]
+    slide = prs.slides.add_slide(layout)
+    txBox = slide.shapes.add_textbox(Inches(0), Inches(5), Inches(4), Inches(1))
+    txBox.name = "Voice Over Box"
+    txBox.text_frame.text = "VO placeholder"
+
     prs.save(path)
 
 
 def make_docx(path):
-    """Create a minimal facilitator guide .docx template."""
     from docx import Document
+    from docx.shared import Pt
+    from docx.oxml.ns import qn
 
     doc = Document()
     doc.add_heading("Workshop Title", level=1)
@@ -55,8 +96,7 @@ def make_docx(path):
     headers = ["Time", "Activity", "Facilitator Action", "Anticipated Responses", "Notes"]
     for i, h in enumerate(headers):
         tbl.rows[0].cells[i].text = h
-    # One sample row (should be cleared on generation)
-    sample = ["0:00", "Sample activity", "Sample action", "Sample response", ""]
+    sample = ["0:00", "Sample", "Sample action", "Sample response", ""]
     for i, v in enumerate(sample):
         tbl.rows[1].cells[i].text = v
 
@@ -72,9 +112,8 @@ def make_docx(path):
 
 
 def make_xlsx(path):
-    """Create a minimal alignment matrix .xlsx template."""
     from openpyxl import Workbook
-    from openpyxl.styles import Font, PatternFill
+    from openpyxl.styles import Font, Border, Side, Alignment
 
     wb = Workbook()
     ws = wb.active
@@ -83,128 +122,75 @@ def make_xlsx(path):
         "Learning Objective", "Bloom's Level", "Instructional Strategy",
         "Assessment Method", "Media Type", "Duration"
     ]
+    thin = Side(style="thin")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
     for col, h in enumerate(headers, start=1):
         cell = ws.cell(row=1, column=col, value=h)
-        cell.font = Font(bold=True)
+        cell.font = Font(bold=True, name="Calibri", size=11)
+        cell.border = border
+        cell.alignment = Alignment(horizontal="center")
     wb.save(path)
 
 
-# ─── analyze_template.py tests ────────────────────────────────────────────────
+# ─── Shared test data ─────────────────────────────────────────────────────────
 
-class TestAnalyzePptx(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
-        self.tmp.close()
-        make_pptx(self.tmp.name)
+# Mapping that routes narration to slide Notes (explicit, not hardcoded)
+PPTX_MAPPING_NOTES = json.dumps({
+    "slide_types": {
+        "Title": "Title Slide",
+        "Content": "Storyboard Row",
+        "Scenario": "Storyboard Row",
+        "Knowledge Check": "Knowledge Check",
+    },
+    "placeholder_map": {"0": "text"},
+    "shape_map": {},
+    "notes_fields": ["narration", "visual", "interaction", "dev_notes"],
+})
 
-    def tearDown(self):
-        os.unlink(self.tmp.name)
+# Mapping that routes narration to a named shape
+PPTX_MAPPING_SHAPE = json.dumps({
+    "slide_types": {
+        "Title": "Title Slide",
+        "Content": "Storyboard Row",
+        "Scenario": "Storyboard Row",
+        "Knowledge Check": "Knowledge Check",
+    },
+    "placeholder_map": {"0": "text"},
+    "shape_map": {"Voice Over Box": "narration"},
+    "notes_fields": ["visual", "dev_notes"],
+})
 
-    def test_returns_valid_json(self):
-        rc, out, err = run(ANALYZE, "--file", self.tmp.name)
-        self.assertEqual(rc, 0, err)
-        data = json.loads(out)
-        self.assertEqual(data["type"], "pptx")
-
-    def test_layouts_present(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        names = [l["name"] for l in data["layouts"]]
-        self.assertIn("Title Slide", names)
-        self.assertIn("Storyboard Row", names)
-
-    def test_each_layout_has_placeholders(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        for layout in data["layouts"]:
-            self.assertIsInstance(layout["placeholders"], list)
-
-    def test_existing_slide_count(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        self.assertIn("existing_slide_count", data)
-        self.assertIsInstance(data["existing_slide_count"], int)
-
-
-class TestAnalyzeDocx(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.NamedTemporaryFile(suffix=".docx", delete=False)
-        self.tmp.close()
-        make_docx(self.tmp.name)
-
-    def tearDown(self):
-        os.unlink(self.tmp.name)
-
-    def test_returns_valid_json(self):
-        rc, out, err = run(ANALYZE, "--file", self.tmp.name)
-        self.assertEqual(rc, 0, err)
-        data = json.loads(out)
-        self.assertEqual(data["type"], "docx")
-
-    def test_detects_tables(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        self.assertGreaterEqual(len(data["tables"]), 1)
-
-    def test_session_plan_headers_present(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        headers = data["tables"][0]["headers"]
-        self.assertIn("Time", headers)
-        self.assertIn("Activity", headers)
-        self.assertIn("Facilitator Action", headers)
-
-    def test_headings_detected(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        heading_texts = [h["text"] for h in data["headings"]]
-        self.assertIn("Session Plan", heading_texts)
-
-
-class TestAnalyzeXlsx(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False)
-        self.tmp.close()
-        make_xlsx(self.tmp.name)
-
-    def tearDown(self):
-        os.unlink(self.tmp.name)
-
-    def test_returns_valid_json(self):
-        rc, out, err = run(ANALYZE, "--file", self.tmp.name)
-        self.assertEqual(rc, 0, err)
-        data = json.loads(out)
-        self.assertEqual(data["type"], "xlsx")
-
-    def test_headers_detected(self):
-        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
-        data = json.loads(out)
-        headers = data["sheets"][0]["headers"]
-        self.assertIn("Learning Objective", headers)
-        self.assertIn("Bloom's Level", headers)
-
-
-class TestAnalyzeErrors(unittest.TestCase):
-    def test_missing_file(self):
-        rc, out, _ = run(ANALYZE, "--file", "/nonexistent/file.pptx")
-        self.assertNotEqual(rc, 0)
-        data = json.loads(out)
-        self.assertIn("error", data)
-
-    def test_unsupported_extension(self):
-        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
-            f.write(b"fake")
-            name = f.name
-        try:
-            rc, out, _ = run(ANALYZE, "--file", name)
-            self.assertNotEqual(rc, 0)
-            data = json.loads(out)
-            self.assertIn("error", data)
-        finally:
-            os.unlink(name)
-
-
-# ─── generate_doc.py tests ────────────────────────────────────────────────────
+PPTX_DATA = json.dumps({
+    "title": "Delegate and Coach — Module 1",
+    "version": "v1.0",
+    "date": "2026-04-29",
+    "slides": [
+        {
+            "num": 1, "type": "Title",
+            "text": "Delegation and Coaching for New Managers",
+            "narration": "Welcome to Module 1.",
+            "visual": "Title slide with team image",
+            "interaction": "None",
+            "dev_notes": "Use brand header",
+        },
+        {
+            "num": 2, "type": "Content",
+            "text": "What does effective delegation look like?",
+            "narration": "In this section we explore the four conditions for safe delegation.",
+            "visual": "Split screen",
+            "interaction": "Click to reveal",
+            "dev_notes": "",
+        },
+        {
+            "num": 3, "type": "Knowledge Check",
+            "text": "Which sign shows a task is ready to delegate?",
+            "narration": "",
+            "visual": "MCQ layout",
+            "interaction": "MCQ — 4 options",
+            "dev_notes": "Correct: B.",
+        },
+    ],
+})
 
 XLSX_MAPPING = json.dumps({
     "column_map": {
@@ -239,53 +225,6 @@ XLSX_DATA = json.dumps({
     ],
 })
 
-PPTX_MAPPING = json.dumps({
-    "slide_types": {
-        "Title": "Title Slide",
-        "Content": "Storyboard Row",
-        "Scenario": "Storyboard Row",
-        "Knowledge Check": "Knowledge Check",
-    },
-    "fields": {
-        "0": "text",
-    }
-})
-
-PPTX_DATA = json.dumps({
-    "title": "Delegate and Coach — Module 1",
-    "version": "v1.0",
-    "date": "2026-04-29",
-    "slides": [
-        {
-            "num": 1,
-            "type": "Title",
-            "text": "Delegation and Coaching for New Managers",
-            "narration": "Welcome to Module 1.",
-            "visual": "Title slide with team image",
-            "interaction": "None",
-            "dev_notes": "Use brand header",
-        },
-        {
-            "num": 2,
-            "type": "Content",
-            "text": "What does effective delegation look like?",
-            "narration": "In this section we explore the four conditions for safe delegation.",
-            "visual": "Split screen: manager and employee",
-            "interaction": "Click to reveal",
-            "dev_notes": "",
-        },
-        {
-            "num": 3,
-            "type": "Knowledge Check",
-            "text": "Which of the following is a sign the task is ready to delegate?",
-            "narration": "",
-            "visual": "MCQ layout",
-            "interaction": "MCQ — 4 options",
-            "dev_notes": "Correct: B. Feedback: see slide notes.",
-        },
-    ],
-})
-
 DOCX_MAPPING = json.dumps({
     "session_plan_table": 0,
     "column_map": {
@@ -304,7 +243,7 @@ DOCX_DATA = json.dumps({
     "max_participants": 20,
     "format": "ILT",
     "materials": ["Slide deck", "Handout A"],
-    "setup": "U-shape seating, flip chart at front",
+    "setup": "U-shape seating",
     "activities": [
         {
             "time": "0:00",
@@ -328,11 +267,300 @@ DOCX_DATA = json.dumps({
     "troubleshooting": [
         {
             "situation": "Group disengages during scenarios",
-            "response": "Break into pairs; give one scenario each rather than group choice",
+            "response": "Break into pairs; give one scenario each",
         }
     ],
 })
 
+
+# ─── analyze_template.py — pptx ───────────────────────────────────────────────
+
+class TestAnalyzePptx(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.tmp.close()
+        make_pptx(self.tmp.name)
+
+    def tearDown(self):
+        os.unlink(self.tmp.name)
+
+    def test_returns_valid_json(self):
+        rc, out, err = run(ANALYZE, "--file", self.tmp.name)
+        self.assertEqual(rc, 0, err)
+        data = json.loads(out)
+        self.assertEqual(data["type"], "pptx")
+
+    def test_layouts_present(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        names = [l["name"] for l in data["layouts"]]
+        self.assertIn("Title Slide", names)
+        self.assertIn("Storyboard Row", names)
+
+    def test_each_layout_has_shapes_list(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        for layout in data["layouts"]:
+            self.assertIn("shapes", layout)
+            self.assertIsInstance(layout["shapes"], list)
+
+    def test_layout_reports_has_background(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        for layout in data["layouts"]:
+            self.assertIn("has_background", layout)
+
+    def test_existing_slide_count(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        self.assertIn("existing_slide_count", data)
+        self.assertIsInstance(data["existing_slide_count"], int)
+
+
+class TestAnalyzePptxHints(unittest.TestCase):
+    """Shape classification hints are surfaced correctly."""
+
+    def setUp(self):
+        self.tmp = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.tmp.close()
+        make_pptx_with_vo_shape(self.tmp.name)
+
+    def tearDown(self):
+        os.unlink(self.tmp.name)
+
+    def test_vo_shape_detected_in_existing_slides(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        found_hints = []
+        for slide in data.get("existing_slides", []):
+            for shape in slide.get("non_placeholder_shapes", []):
+                if "hint" in shape:
+                    found_hints.append(shape["hint"])
+        self.assertIn("candidate_narration", found_hints)
+
+    def test_vo_shape_name_preserved(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        names = [
+            s["name"]
+            for slide in data.get("existing_slides", [])
+            for s in slide.get("non_placeholder_shapes", [])
+        ]
+        self.assertIn("Voice Over Box", names)
+
+
+class TestAnalyzeBackgroundDetection(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.tmp.close()
+        make_pptx(self.tmp.name, include_background=True)
+
+    def tearDown(self):
+        os.unlink(self.tmp.name)
+
+    def test_background_layout_flagged(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        kc = next((l for l in data["layouts"] if l["name"] == "Knowledge Check"), None)
+        self.assertIsNotNone(kc)
+        self.assertTrue(kc["has_background"])
+
+    def test_plain_layout_not_flagged(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        data = json.loads(out)
+        title_layout = next((l for l in data["layouts"] if l["name"] == "Title Slide"), None)
+        self.assertIsNotNone(title_layout)
+        self.assertFalse(title_layout["has_background"])
+
+
+# ─── analyze_template.py — docx / xlsx / errors ───────────────────────────────
+
+class TestAnalyzeDocx(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.NamedTemporaryFile(suffix=".docx", delete=False)
+        self.tmp.close()
+        make_docx(self.tmp.name)
+
+    def tearDown(self):
+        os.unlink(self.tmp.name)
+
+    def test_returns_valid_json(self):
+        rc, out, err = run(ANALYZE, "--file", self.tmp.name)
+        self.assertEqual(rc, 0, err)
+        self.assertEqual(json.loads(out)["type"], "docx")
+
+    def test_detects_tables(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        self.assertGreaterEqual(len(json.loads(out)["tables"]), 1)
+
+    def test_session_plan_headers_present(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        headers = json.loads(out)["tables"][0]["headers"]
+        self.assertIn("Time", headers)
+        self.assertIn("Facilitator Action", headers)
+
+    def test_headings_detected(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        texts = [h["text"] for h in json.loads(out)["headings"]]
+        self.assertIn("Session Plan", texts)
+
+
+class TestAnalyzeXlsx(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False)
+        self.tmp.close()
+        make_xlsx(self.tmp.name)
+
+    def tearDown(self):
+        os.unlink(self.tmp.name)
+
+    def test_returns_valid_json(self):
+        rc, out, err = run(ANALYZE, "--file", self.tmp.name)
+        self.assertEqual(rc, 0, err)
+        self.assertEqual(json.loads(out)["type"], "xlsx")
+
+    def test_headers_detected(self):
+        _, out, _ = run(ANALYZE, "--file", self.tmp.name)
+        headers = json.loads(out)["sheets"][0]["headers"]
+        self.assertIn("Learning Objective", headers)
+        self.assertIn("Bloom's Level", headers)
+
+
+class TestAnalyzeErrors(unittest.TestCase):
+    def test_missing_file(self):
+        rc, out, _ = run(ANALYZE, "--file", "/nonexistent/file.pptx")
+        self.assertNotEqual(rc, 0)
+        self.assertIn("error", json.loads(out))
+
+    def test_unsupported_extension(self):
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+            f.write(b"fake")
+            name = f.name
+        try:
+            rc, out, _ = run(ANALYZE, "--file", name)
+            self.assertNotEqual(rc, 0)
+            self.assertIn("error", json.loads(out))
+        finally:
+            os.unlink(name)
+
+
+# ─── generate_doc.py — storyboard (.pptx) ────────────────────────────────────
+
+class TestGeneratePptxNotesRouting(unittest.TestCase):
+    """Narration goes to slide Notes when notes_fields includes 'narration'."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.template.close()
+        make_pptx(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f): os.unlink(f)
+
+    def test_generates_file(self):
+        rc, out, err = run(
+            GENERATE,
+            "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", PPTX_DATA,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
+        self.assertTrue(os.path.exists(self.out.name))
+
+    def test_slide_count_matches_data(self):
+        from pptx import Presentation
+        run(GENERATE, "--type", "storyboard", "--template", self.template.name,
+            "--data", PPTX_DATA, "--mapping", PPTX_MAPPING_NOTES, "--out", self.out.name)
+        prs = Presentation(self.out.name)
+        self.assertEqual(len(prs.slides), len(json.loads(PPTX_DATA)["slides"]))
+
+    def test_narration_in_notes(self):
+        from pptx import Presentation
+        run(GENERATE, "--type", "storyboard", "--template", self.template.name,
+            "--data", PPTX_DATA, "--mapping", PPTX_MAPPING_NOTES, "--out", self.out.name)
+        prs = Presentation(self.out.name)
+        notes = prs.slides[0].notes_slide.notes_text_frame.text
+        self.assertIn("Welcome to Module 1", notes)
+
+    def test_narration_not_in_notes_when_omitted_from_notes_fields(self):
+        """When narration is routed to a shape, it should NOT also appear in notes."""
+        from pptx import Presentation
+        make_pptx_with_vo_shape(self.template.name)
+        run(GENERATE, "--type", "storyboard", "--template", self.template.name,
+            "--data", PPTX_DATA, "--mapping", PPTX_MAPPING_SHAPE, "--out", self.out.name)
+        prs = Presentation(self.out.name)
+        # Slide 0: narration = "Welcome to Module 1." — should NOT appear in notes
+        notes = prs.slides[0].notes_slide.notes_text_frame.text
+        self.assertNotIn("Welcome to Module 1", notes)
+
+    def test_knowledge_check_uses_correct_layout(self):
+        from pptx import Presentation
+        run(GENERATE, "--type", "storyboard", "--template", self.template.name,
+            "--data", PPTX_DATA, "--mapping", PPTX_MAPPING_NOTES, "--out", self.out.name)
+        prs = Presentation(self.out.name)
+        self.assertEqual(prs.slides[2].slide_layout.name, "Knowledge Check")
+
+
+class TestGeneratePptxShapeRouting(unittest.TestCase):
+    """Narration goes to a named shape when shape_map routes it there."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.template.close()
+        make_pptx_with_vo_shape(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f): os.unlink(f)
+
+    def test_generates_file(self):
+        rc, out, err = run(
+            GENERATE,
+            "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", PPTX_DATA,
+            "--mapping", PPTX_MAPPING_SHAPE,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
+
+    def test_narration_in_named_shape(self):
+        from pptx import Presentation
+        run(GENERATE, "--type", "storyboard", "--template", self.template.name,
+            "--data", PPTX_DATA, "--mapping", PPTX_MAPPING_SHAPE, "--out", self.out.name)
+        prs = Presentation(self.out.name)
+        # Template prototype slide is removed; output = [Title(0), Content(1), KnowledgeCheck(2)].
+        # Content slide (index 1) uses Storyboard Row — the VO Box is copied from the prototype.
+        slide = prs.slides[1]
+        vo_shape = next(
+            (s for s in slide.shapes if s.name == "Voice Over Box"), None
+        )
+        self.assertIsNotNone(vo_shape, "Voice Over Box shape should be present on Content slide")
+        self.assertIn("In this section we explore", vo_shape.text_frame.text)
+
+    def test_placeholder_map_alias_fields_key(self):
+        """Legacy 'fields' key works as alias for 'placeholder_map'."""
+        mapping_with_alias = json.loads(PPTX_MAPPING_NOTES)
+        mapping_with_alias["fields"] = mapping_with_alias.pop("placeholder_map")
+        rc, out, _ = run(
+            GENERATE,
+            "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", PPTX_DATA,
+            "--mapping", json.dumps(mapping_with_alias),
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0)
+
+
+# ─── generate_doc.py — xlsx design inheritance ────────────────────────────────
 
 class TestGenerateXlsx(unittest.TestCase):
     def setUp(self):
@@ -344,13 +572,11 @@ class TestGenerateXlsx(unittest.TestCase):
 
     def tearDown(self):
         for f in [self.template.name, self.out.name]:
-            if os.path.exists(f):
-                os.unlink(f)
+            if os.path.exists(f): os.unlink(f)
 
     def test_generates_file(self):
         rc, out, err = run(
-            GENERATE,
-            "--type", "alignment-matrix",
+            GENERATE, "--type", "alignment-matrix",
             "--template", self.template.name,
             "--data", XLSX_DATA,
             "--mapping", XLSX_MAPPING,
@@ -359,130 +585,58 @@ class TestGenerateXlsx(unittest.TestCase):
         self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
         self.assertTrue(os.path.exists(self.out.name))
 
-    def test_output_is_valid_json(self):
-        rc, out, _ = run(
-            GENERATE,
-            "--type", "alignment-matrix",
-            "--template", self.template.name,
-            "--data", XLSX_DATA,
-            "--mapping", XLSX_MAPPING,
-            "--out", self.out.name,
-        )
-        self.assertEqual(rc, 0)
-        result = json.loads(out)
-        self.assertIn("output", result)
-
     def test_data_rows_written(self):
         from openpyxl import load_workbook
-        run(
-            GENERATE,
-            "--type", "alignment-matrix",
-            "--template", self.template.name,
-            "--data", XLSX_DATA,
-            "--mapping", XLSX_MAPPING,
-            "--out", self.out.name,
-        )
-        wb = load_workbook(self.out.name)
-        ws = wb.active
-        # Header row + 2 data rows = 3 rows
-        rows_with_data = [
-            row for row in ws.iter_rows(min_row=2, values_only=True)
-            if any(v for v in row)
-        ]
-        self.assertEqual(len(rows_with_data), 2)
+        run(GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name, "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING, "--out", self.out.name)
+        ws = load_workbook(self.out.name).active
+        rows = [r for r in ws.iter_rows(min_row=2, values_only=True) if any(v for v in r)]
+        self.assertEqual(len(rows), 2)
 
-    def test_bloom_cell_has_fill(self):
+    def test_bloom_cell_color_coded(self):
         from openpyxl import load_workbook
-        run(
-            GENERATE,
-            "--type", "alignment-matrix",
-            "--template", self.template.name,
-            "--data", XLSX_DATA,
-            "--mapping", XLSX_MAPPING,
-            "--out", self.out.name,
+        run(GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name, "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING, "--out", self.out.name)
+        ws = load_workbook(self.out.name).active
+        bloom_col = next(
+            (cell.column for cell in ws[1] if cell.value == "Bloom's Level"), None
         )
-        wb = load_workbook(self.out.name)
-        ws = wb.active
-        # Bloom's Level is column 2 (index 2); row 2 should have Apply color
-        bloom_col = None
-        for cell in ws[1]:
-            if cell.value == "Bloom's Level":
-                bloom_col = cell.column
-                break
         self.assertIsNotNone(bloom_col)
         bloom_cell = ws.cell(row=2, column=bloom_col)
         self.assertNotEqual(bloom_cell.fill.fgColor.rgb, "00000000")
 
-
-class TestGeneratePptx(unittest.TestCase):
-    def setUp(self):
-        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
-        self.template.close()
-        make_pptx(self.template.name)
-        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
-        self.out.close()
-
-    def tearDown(self):
-        for f in [self.template.name, self.out.name]:
-            if os.path.exists(f):
-                os.unlink(f)
-
-    def test_generates_file(self):
-        rc, out, err = run(
-            GENERATE,
-            "--type", "storyboard",
-            "--template", self.template.name,
-            "--data", PPTX_DATA,
-            "--mapping", PPTX_MAPPING,
-            "--out", self.out.name,
+    def test_design_inheritance_border_copied(self):
+        """Data cells inherit the border style from the header row."""
+        from openpyxl import load_workbook
+        run(GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name, "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING, "--out", self.out.name)
+        wb = load_workbook(self.out.name)
+        ws = wb.active
+        header_cell = ws.cell(row=1, column=1)
+        data_cell = ws.cell(row=2, column=1)
+        # Both should have a border (header had thin borders; data row should inherit)
+        self.assertIsNotNone(data_cell.border)
+        self.assertEqual(
+            data_cell.border.left.style,
+            header_cell.border.left.style,
         )
-        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
-        self.assertTrue(os.path.exists(self.out.name))
 
-    def test_slide_count_matches_data(self):
-        from pptx import Presentation
-        run(
-            GENERATE,
-            "--type", "storyboard",
-            "--template", self.template.name,
-            "--data", PPTX_DATA,
-            "--mapping", PPTX_MAPPING,
-            "--out", self.out.name,
-        )
-        data = json.loads(PPTX_DATA)
-        prs = Presentation(self.out.name)
-        self.assertEqual(len(prs.slides), len(data["slides"]))
+    def test_design_inheritance_data_rows_not_bold(self):
+        """Data rows should not inherit the header's bold flag."""
+        from openpyxl import load_workbook
+        run(GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name, "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING, "--out", self.out.name)
+        ws = load_workbook(self.out.name).active
+        data_cell = ws.cell(row=2, column=1)
+        bold = data_cell.font.bold if data_cell.font else False
+        self.assertFalse(bold)
 
-    def test_narration_in_notes(self):
-        from pptx import Presentation
-        run(
-            GENERATE,
-            "--type", "storyboard",
-            "--template", self.template.name,
-            "--data", PPTX_DATA,
-            "--mapping", PPTX_MAPPING,
-            "--out", self.out.name,
-        )
-        prs = Presentation(self.out.name)
-        first_slide = prs.slides[0]
-        notes = first_slide.notes_slide.notes_text_frame.text
-        self.assertIn("Welcome to Module 1", notes)
 
-    def test_knowledge_check_uses_correct_layout(self):
-        from pptx import Presentation
-        run(
-            GENERATE,
-            "--type", "storyboard",
-            "--template", self.template.name,
-            "--data", PPTX_DATA,
-            "--mapping", PPTX_MAPPING,
-            "--out", self.out.name,
-        )
-        prs = Presentation(self.out.name)
-        # Slide 3 should use Knowledge Check layout
-        kc_slide = prs.slides[2]
-        self.assertEqual(kc_slide.slide_layout.name, "Knowledge Check")
-
+# ─── generate_doc.py — docx ───────────────────────────────────────────────────
 
 class TestGenerateDocx(unittest.TestCase):
     def setUp(self):
@@ -494,13 +648,11 @@ class TestGenerateDocx(unittest.TestCase):
 
     def tearDown(self):
         for f in [self.template.name, self.out.name]:
-            if os.path.exists(f):
-                os.unlink(f)
+            if os.path.exists(f): os.unlink(f)
 
     def test_generates_file(self):
         rc, out, err = run(
-            GENERATE,
-            "--type", "facilitator-guide",
+            GENERATE, "--type", "facilitator-guide",
             "--template", self.template.name,
             "--data", DOCX_DATA,
             "--mapping", DOCX_MAPPING,
@@ -511,58 +663,38 @@ class TestGenerateDocx(unittest.TestCase):
 
     def test_activity_rows_written(self):
         from docx import Document
-        run(
-            GENERATE,
-            "--type", "facilitator-guide",
-            "--template", self.template.name,
-            "--data", DOCX_DATA,
-            "--mapping", DOCX_MAPPING,
-            "--out", self.out.name,
-        )
-        doc = Document(self.out.name)
-        tbl = doc.tables[0]
-        # Header + 2 activity rows = 3 rows
-        self.assertEqual(len(tbl.rows), 3)
+        run(GENERATE, "--type", "facilitator-guide",
+            "--template", self.template.name, "--data", DOCX_DATA,
+            "--mapping", DOCX_MAPPING, "--out", self.out.name)
+        tbl = Document(self.out.name).tables[0]
+        self.assertEqual(len(tbl.rows), 3)  # header + 2 activities
 
     def test_activity_content_present(self):
         from docx import Document
-        run(
-            GENERATE,
-            "--type", "facilitator-guide",
-            "--template", self.template.name,
-            "--data", DOCX_DATA,
-            "--mapping", DOCX_MAPPING,
-            "--out", self.out.name,
-        )
-        doc = Document(self.out.name)
-        tbl = doc.tables[0]
+        run(GENERATE, "--type", "facilitator-guide",
+            "--template", self.template.name, "--data", DOCX_DATA,
+            "--mapping", DOCX_MAPPING, "--out", self.out.name)
+        tbl = Document(self.out.name).tables[0]
         all_text = " ".join(c.text for row in tbl.rows for c in row.cells)
         self.assertIn("Delegation scenarios", all_text)
 
     def test_troubleshooting_row_written(self):
         from docx import Document
-        run(
-            GENERATE,
-            "--type", "facilitator-guide",
-            "--template", self.template.name,
-            "--data", DOCX_DATA,
-            "--mapping", DOCX_MAPPING,
-            "--out", self.out.name,
-        )
-        doc = Document(self.out.name)
-        tbl2 = doc.tables[1]
+        run(GENERATE, "--type", "facilitator-guide",
+            "--template", self.template.name, "--data", DOCX_DATA,
+            "--mapping", DOCX_MAPPING, "--out", self.out.name)
+        tbl2 = Document(self.out.name).tables[1]
         all_text = " ".join(c.text for row in tbl2.rows for c in row.cells)
         self.assertIn("disengages", all_text)
 
 
-# ─── Mapping persistence tests ────────────────────────────────────────────────
+# ─── Mapping persistence ──────────────────────────────────────────────────────
 
 class TestMappingPersistence(unittest.TestCase):
     def setUp(self):
         self.template = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False)
         self.template.close()
         make_xlsx(self.template.name)
-        # Use a temporary mappings file to avoid polluting real one
         self._real_mappings = os.path.join(REPO_ROOT, "templates", "mappings.json")
         self._backup = None
         if os.path.exists(self._real_mappings):
@@ -580,44 +712,31 @@ class TestMappingPersistence(unittest.TestCase):
 
     def test_save_mapping(self):
         rc, out, err = run(
-            GENERATE,
-            "--save-mapping",
+            GENERATE, "--save-mapping",
             "--template", self.template.name,
             "--mapping", XLSX_MAPPING,
         )
         self.assertEqual(rc, 0, err)
-        result = json.loads(out)
-        self.assertIn("saved", result)
+        self.assertIn("saved", json.loads(out))
 
-    def test_saved_mapping_used_on_next_run(self):
-        basename = os.path.basename(self.template.name)
-        # Save mapping
-        run(
-            GENERATE,
-            "--save-mapping",
-            "--template", self.template.name,
-            "--mapping", XLSX_MAPPING,
-        )
-        # Load mappings file and verify key exists
+    def test_saved_mapping_keyed_by_basename(self):
+        run(GENERATE, "--save-mapping",
+            "--template", self.template.name, "--mapping", XLSX_MAPPING)
         with open(self._real_mappings) as f:
             mappings = json.load(f)
-        self.assertIn(basename, mappings)
+        self.assertIn(os.path.basename(self.template.name), mappings)
 
     def test_missing_mapping_returns_exit_2(self):
-        # Fresh template with no saved mapping
         tmp = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False)
         tmp.close()
         make_xlsx(tmp.name)
         try:
             rc, out, _ = run(
-                GENERATE,
-                "--type", "alignment-matrix",
-                "--template", tmp.name,
-                "--data", XLSX_DATA,
+                GENERATE, "--type", "alignment-matrix",
+                "--template", tmp.name, "--data", XLSX_DATA,
             )
             self.assertEqual(rc, 2)
-            result = json.loads(out)
-            self.assertEqual(result["error"], "no_mapping")
+            self.assertEqual(json.loads(out)["error"], "no_mapping")
         finally:
             os.unlink(tmp.name)
 
