@@ -82,6 +82,77 @@ def make_pptx_with_vo_shape(path):
     prs.save(path)
 
 
+def make_pptx_with_multiple_prototypes(path):
+    """Three Storyboard Row prototype slides, each with a uniquely named text box."""
+    from pptx import Presentation
+    from pptx.util import Inches
+
+    prs = Presentation()
+    prs.slide_layouts[0].name = "Title Slide"
+    prs.slide_layouts[1].name = "Storyboard Row"
+    prs.slide_layouts[2].name = "Knowledge Check"
+
+    layout = prs.slide_layouts[1]
+    for label in ("Box A", "Box B", "Box C"):
+        slide = prs.slides.add_slide(layout)
+        tb = slide.shapes.add_textbox(Inches(0), Inches(4), Inches(3), Inches(1))
+        tb.name = label
+        tb.text_frame.text = f"Placeholder for {label}"
+
+    prs.save(path)
+
+
+def make_pptx_with_no_textframe_shape(path):
+    """Prototype slide that includes a decorative shape element with no text body."""
+    from pptx import Presentation
+    from pptx.util import Inches
+    import lxml.etree as etree
+
+    prs = Presentation()
+    prs.slide_layouts[0].name = "Title Slide"
+    prs.slide_layouts[1].name = "Storyboard Row"
+
+    layout = prs.slide_layouts[1]
+    slide = prs.slides.add_slide(layout)
+
+    tb = slide.shapes.add_textbox(Inches(0), Inches(0), Inches(4), Inches(1))
+    tb.name = "Content Area"
+    tb.text_frame.text = "Content placeholder"
+
+    # Decorative line element — no <p:txBody>, so has_text_frame is False
+    ns_p = "http://schemas.openxmlformats.org/presentationml/2006/main"
+    ns_a = "http://schemas.openxmlformats.org/drawingml/2006/main"
+    sp_xml = (
+        f'<p:sp xmlns:p="{ns_p}" xmlns:a="{ns_a}">'
+        "<p:nvSpPr>"
+        '<p:cNvPr id="200" name="Decorative Line"/>'
+        "<p:cNvSpPr/><p:nvPr/>"
+        "</p:nvSpPr>"
+        "<p:spPr>"
+        '<a:xfrm><a:off x="0" y="4572000"/><a:ext cx="9144000" cy="50000"/></a:xfrm>'
+        '<a:prstGeom prst="line"><a:avLst/></a:prstGeom>'
+        "</p:spPr>"
+        "</p:sp>"
+    )
+    slide.shapes._spTree.append(etree.fromstring(sp_xml.encode("utf-8")))
+
+    prs.save(path)
+
+
+def make_xlsx_partial_columns(path):
+    """xlsx with only 3 of the 6 standard alignment-matrix columns."""
+    from openpyxl import Workbook
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Alignment Matrix"
+    for col, header in enumerate(
+        ["Learning Objective", "Bloom's Level", "Instructional Strategy"], start=1
+    ):
+        ws.cell(row=1, column=col, value=header)
+    wb.save(path)
+
+
 def make_docx(path):
     from docx import Document
     from docx.shared import Pt
@@ -739,6 +810,389 @@ class TestMappingPersistence(unittest.TestCase):
             self.assertEqual(json.loads(out)["error"], "no_mapping")
         finally:
             os.unlink(tmp.name)
+
+
+# ─── High-stress edge cases ───────────────────────────────────────────────────
+#
+# Cases 1–10 exercise failure modes not covered by the baseline suite:
+# unicode/XML-unsafe chars, empty data, unknown slide types, duplicate field
+# routing, all-empty fields, multiple prototypes, non-text-frame shapes,
+# missing xlsx columns, large slide count, and nonexistent shape names.
+
+
+class TestStressPptx(unittest.TestCase):
+    """Cases 1, 2, 3, 5, 9, 10 — plain pptx template (no prototype slides)."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.template.close()
+        make_pptx(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f):
+                os.unlink(f)
+
+    # ── Case 1: Unicode and XML-unsafe characters in all text fields ──────────
+
+    def test_unicode_and_xml_unsafe_chars(self):
+        """Unicode, emoji, smart quotes, XML-special chars must not crash or corrupt."""
+        data = json.dumps({
+            "title": "Test <Course> & ‘Module’ \U0001f3af",
+            "version": "v1.0",
+            "date": "2026-04-29",
+            "slides": [{
+                "num": 1, "type": "Title",
+                "text": "H\xe9llo <World> & \"Friends\"",
+                "narration": "Smart “quotes” and em—dash\nnewline here",
+                "visual": "Ampersand & angle <brackets>",
+                "interaction": "None",
+                "dev_notes": "Special chars: <>&\"'",
+            }],
+        })
+        rc, out, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
+        from pptx import Presentation
+        prs = Presentation(self.out.name)
+        self.assertEqual(len(prs.slides), 1)
+
+    # ── Case 2: Empty slides list ─────────────────────────────────────────────
+
+    def test_empty_slides_generates_valid_file(self):
+        """Zero slides in data → valid openable pptx with 0 slides, exit 0."""
+        data = json.dumps({
+            "title": "Empty", "version": "v1.0", "date": "2026-04-29", "slides": []
+        })
+        rc, out, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
+        from pptx import Presentation
+        self.assertEqual(len(Presentation(self.out.name).slides), 0)
+
+    # ── Case 3: Unknown slide type not in mapping ─────────────────────────────
+
+    def test_unknown_slide_type_falls_to_default_layout(self):
+        """A slide type absent from slide_types falls to default layout, no crash."""
+        data = json.dumps({
+            "title": "Test", "version": "v1.0", "date": "2026-04-29",
+            "slides": [{"num": 1, "type": "Quiz", "text": "What is delegation?",
+                        "narration": "Unknown type slide", "visual": "", "interaction": "",
+                        "dev_notes": ""}],
+        })
+        rc, _, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}")
+        from pptx import Presentation
+        self.assertEqual(len(Presentation(self.out.name).slides), 1)
+
+    # ── Case 5: All data fields empty for a slide ─────────────────────────────
+
+    def test_all_fields_empty_generates_slide_without_crash(self):
+        """A slide with every field empty still generates cleanly; no crash or KeyError."""
+        data = json.dumps({
+            "title": "Test", "version": "v1.0", "date": "2026-04-29",
+            "slides": [{
+                "num": 1, "type": "Content",
+                "text": "", "narration": "", "visual": "",
+                "interaction": "", "dev_notes": "",
+            }],
+        })
+        rc, _, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}")
+        from pptx import Presentation
+        self.assertEqual(len(Presentation(self.out.name).slides), 1)
+
+    # ── Case 9: Large storyboard — 50 slides ─────────────────────────────────
+
+    def test_large_storyboard_50_slides(self):
+        """50-slide generation completes, output opens, and slide count is exact."""
+        types = ["Title", "Content", "Scenario", "Knowledge Check"]
+        slides = [
+            {
+                "num": i + 1,
+                "type": types[i % len(types)],
+                "text": f"Slide {i + 1} on-screen text",
+                "narration": f"Narration for slide {i + 1}.",
+                "visual": f"Visual description {i + 1}",
+                "interaction": "None",
+                "dev_notes": f"Dev note {i + 1}",
+            }
+            for i in range(50)
+        ]
+        data = json.dumps({
+            "title": "Large Storyboard", "version": "v1.0", "date": "2026-04-29",
+            "slides": slides,
+        })
+        rc, _, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}")
+        from pptx import Presentation
+        self.assertEqual(len(Presentation(self.out.name).slides), 50)
+
+    # ── Case 10: shape_map references a shape that exists in no prototype ──────
+
+    def test_shape_map_nonexistent_shape_silently_skipped(self):
+        """shape_map entry for a shape not in any prototype is silently skipped."""
+        mapping = json.dumps({
+            "slide_types": {
+                "Title": "Title Slide", "Content": "Storyboard Row",
+                "Scenario": "Storyboard Row", "Knowledge Check": "Knowledge Check",
+            },
+            "placeholder_map": {"0": "text"},
+            "shape_map": {"Nonexistent Box": "narration"},
+            "notes_fields": [],
+        })
+        rc, _, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", PPTX_DATA,
+            "--mapping", mapping,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}")
+        from pptx import Presentation
+        self.assertEqual(len(Presentation(self.out.name).slides), 3)
+
+
+class TestStressDuplicateRouting(unittest.TestCase):
+    """Case 4 — field appears in both shape_map and notes_fields; shape_map must win."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.template.close()
+        make_pptx_with_vo_shape(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f):
+                os.unlink(f)
+
+    def test_shape_map_wins_over_notes_fields(self):
+        """When a field is in both shape_map and notes_fields, it goes to the shape only."""
+        mapping = json.dumps({
+            "slide_types": {
+                "Title": "Title Slide", "Content": "Storyboard Row",
+                "Scenario": "Storyboard Row", "Knowledge Check": "Knowledge Check",
+            },
+            "placeholder_map": {"0": "text"},
+            "shape_map": {"Voice Over Box": "narration"},
+            "notes_fields": ["narration", "visual"],  # narration in BOTH
+        })
+        run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", PPTX_DATA,
+            "--mapping", mapping,
+            "--out", self.out.name,
+        )
+        from pptx import Presentation
+        prs = Presentation(self.out.name)
+        content_slide = prs.slides[1]  # Content slide — has VO Box from prototype
+
+        vo_shape = next(
+            (s for s in content_slide.shapes if s.name == "Voice Over Box"), None
+        )
+        self.assertIsNotNone(vo_shape, "Voice Over Box must be present on Content slide")
+        self.assertIn("In this section we explore", vo_shape.text_frame.text)
+
+        notes_text = content_slide.notes_slide.notes_text_frame.text
+        self.assertNotIn(
+            "In this section we explore", notes_text,
+            "Narration must not appear in notes when routed to a shape",
+        )
+        # visual is only in notes_fields (not shape_map) — it should be in notes
+        self.assertIn("Split screen", notes_text)
+
+
+class TestStressMultiplePrototypes(unittest.TestCase):
+    """Case 6 — three prototype slides for the same layout; only first is used."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.template.close()
+        make_pptx_with_multiple_prototypes(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f):
+                os.unlink(f)
+
+    def test_only_first_prototype_shapes_copied(self):
+        """When a layout has multiple prototype slides only the first one's shapes copy."""
+        run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", PPTX_DATA,
+            "--mapping", PPTX_MAPPING_NOTES,
+            "--out", self.out.name,
+        )
+        from pptx import Presentation
+        prs = Presentation(self.out.name)
+        self.assertEqual(len(prs.slides), 3)  # 3 template slides removed; 3 generated
+
+        content_slide = prs.slides[1]  # Storyboard Row layout
+        shape_names = [s.name for s in content_slide.shapes]
+        self.assertIn("Box A", shape_names, "First prototype shape must be copied")
+        self.assertNotIn("Box B", shape_names, "Second prototype must not bleed in")
+        self.assertNotIn("Box C", shape_names, "Third prototype must not bleed in")
+
+
+class TestStressNonTextFrameShape(unittest.TestCase):
+    """Case 7 — prototype contains a non-text-frame shape (decorative element)."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.template.close()
+        make_pptx_with_no_textframe_shape(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".pptx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f):
+                os.unlink(f)
+
+    def test_non_text_frame_shape_copies_without_crash(self):
+        """Decorative shapes without a text body deepcopy cleanly; output is valid."""
+        data = json.dumps({
+            "title": "Test", "version": "v1.0", "date": "2026-04-29",
+            "slides": [{"num": 1, "type": "Content", "text": "On-screen text",
+                        "narration": "Narration here", "visual": "", "interaction": "",
+                        "dev_notes": ""}],
+        })
+        mapping = json.dumps({
+            "slide_types": {"Content": "Storyboard Row"},
+            "placeholder_map": {},
+            "shape_map": {},
+            "notes_fields": ["narration"],
+        })
+        rc, out, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", mapping,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
+        from pptx import Presentation
+        prs = Presentation(self.out.name)
+        self.assertEqual(len(prs.slides), 1)
+        shape_names = [s.name for s in prs.slides[0].shapes]
+        self.assertIn("Content Area", shape_names, "Text-frame shape must survive deepcopy")
+
+    def test_populate_skips_non_text_frame_shape_in_shape_map(self):
+        """shape_map entry pointing to a non-text-frame shape is silently skipped."""
+        data = json.dumps({
+            "title": "Test", "version": "v1.0", "date": "2026-04-29",
+            "slides": [{"num": 1, "type": "Content", "text": "", "narration": "Audio here",
+                        "visual": "", "interaction": "", "dev_notes": ""}],
+        })
+        mapping = json.dumps({
+            "slide_types": {"Content": "Storyboard Row"},
+            "placeholder_map": {},
+            "shape_map": {"Decorative Line": "narration"},  # no text frame — must skip
+            "notes_fields": [],
+        })
+        rc, _, err = run(
+            GENERATE, "--type", "storyboard",
+            "--template", self.template.name,
+            "--data", data,
+            "--mapping", mapping,
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}")
+
+
+class TestStressXlsxPartialColumns(unittest.TestCase):
+    """Case 8 — column_map references columns absent from the xlsx template."""
+
+    def setUp(self):
+        self.template = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False)
+        self.template.close()
+        make_xlsx_partial_columns(self.template.name)
+        self.out = tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False)
+        self.out.close()
+
+    def tearDown(self):
+        for f in [self.template.name, self.out.name]:
+            if os.path.exists(f):
+                os.unlink(f)
+
+    def test_missing_columns_silently_skipped(self):
+        """Columns referenced in column_map but absent in the template are ignored."""
+        rc, out, err = run(
+            GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name,
+            "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING,  # maps all 6 columns; template has 3
+            "--out", self.out.name,
+        )
+        self.assertEqual(rc, 0, f"stderr: {err}\nstdout: {out}")
+
+    def test_present_columns_are_written(self):
+        """The 3 columns that do exist in the template receive data."""
+        from openpyxl import load_workbook
+        run(
+            GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name,
+            "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING,
+            "--out", self.out.name,
+        )
+        ws = load_workbook(self.out.name).active
+        col_headers = {cell.value for cell in ws[1] if cell.value}
+        self.assertIn("Learning Objective", col_headers)
+        obj_col = next(c.column for c in ws[1] if c.value == "Learning Objective")
+        self.assertIsNotNone(ws.cell(row=2, column=obj_col).value)
+
+    def test_absent_columns_not_written(self):
+        """Columns present in column_map but absent from the template have no data."""
+        from openpyxl import load_workbook
+        run(
+            GENERATE, "--type", "alignment-matrix",
+            "--template", self.template.name,
+            "--data", XLSX_DATA,
+            "--mapping", XLSX_MAPPING,
+            "--out", self.out.name,
+        )
+        ws = load_workbook(self.out.name).active
+        col_headers = {cell.value for cell in ws[1] if cell.value}
+        self.assertNotIn("Assessment Method", col_headers)
+        self.assertNotIn("Media Type", col_headers)
+        self.assertNotIn("Duration", col_headers)
 
 
 if __name__ == "__main__":

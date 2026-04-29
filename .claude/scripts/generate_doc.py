@@ -398,6 +398,9 @@ def _populate_slide(slide, slide_data, mapping):
     shape_map = mapping.get("shape_map", {})
     notes_fields = mapping.get("notes_fields", [])
 
+    # Track fields routed to slide content; these are excluded from notes (priority rule).
+    routed_fields = set()
+
     # 1. Placeholder population
     for ph in slide.placeholders:
         idx_str = str(ph.placeholder_format.idx)
@@ -405,6 +408,7 @@ def _populate_slide(slide, slide_data, mapping):
         if field and slide_data.get(field):
             try:
                 ph.text = str(slide_data[field])
+                routed_fields.add(field)
             except Exception:
                 pass
 
@@ -419,12 +423,16 @@ def _populate_slide(slide, slide_data, mapping):
             if shape:
                 try:
                     shape.text_frame.text = str(slide_data[field])
+                    routed_fields.add(field)
                 except Exception:
                     pass
 
-    # 3. Notes field population
+    # 3. Notes field population — fields already routed to slide content are skipped
     if notes_fields:
-        parts = [str(slide_data[f]) for f in notes_fields if slide_data.get(f)]
+        parts = [
+            str(slide_data[f]) for f in notes_fields
+            if slide_data.get(f) and f not in routed_fields
+        ]
         if parts:
             slide.notes_slide.notes_text_frame.text = "\n\n".join(parts)
 
