@@ -5,6 +5,23 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 
 ---
 
+## [2.2.0] — 2026-04-29
+
+### Added
+- **`references/document-templates.md`** — 8 lean structural scaffolds for core L&D artifacts: Audience Analysis Report, Facilitator Guide, Job Aid/Quick Reference Card, Learning Objective Alignment Matrix, SME Interview Protocol, Content Audit Template, Storyboard, Program Communication Plan; Bitter Lesson compliant — section headers and `[PLACEHOLDER]` fields only
+- **Artifact & Document Output Protocol** in `SKILL.md` — 5-rule consultative generation system: diagnose before drafting (ask 1–3 questions unless context is sufficient), consult as you build (name gaps, don't silently placeholder), apply three design lenses during the build (performance, inclusive, emotional), format for use (headers, tables, markdown-ready), close with ≤3 bullets including the most important design risk; generation does not bypass the skill's coaching identity — documents emerge from the consulting process
+- **Router pattern at position 2** in `reference-router.py` — high-priority document generation intent pattern; catches generate/draft/create/build verbs before topic-specific patterns; standalone artifact names (facilitator guide, storyboard template, etc.) matched without requiring verb to prevent false-positive routing of informational questions
+
+### Changed
+- **README**: count updated 30 → 31 reference files (both occurrences); `document-templates.md` row added to reference table; "What it does" updated with Document & Artifact Generation bullet; "What's inside" expanded with Artifact Protocol description; "Tested against" block updated with 12/13 router accuracy and 10/10 consultative stance results; "Recent Enhancements" section added with v2.2.0, v2.1.0, v3.0.0 entries
+- **SKILL.md version**: `3.0.0` → `3.0.0` (version held; protocol added as minor enhancement atop v3.0.0 base)
+
+### Validated
+- **Consultative stance**: 10/10 test cases — minimal-context requests diagnose before drafting; sufficient-context requests proceed directly; compliance traps fire performance lens before scaffold is touched; emotional high-risk topics fire all three lenses; every case closes with a practitioner-level design risk (not a generic placeholder note)
+- **Router accuracy**: 12/13 pass — 1 acceptable edge case: "how do I create a job aid" routes to `document-templates.md` rather than `facilitation-and-ilt.md` (correct behavior — the scaffold is the useful context for that request)
+
+---
+
 ## [3.0.1] — 2026-04-11
 
 ### Added

@@ -1,6 +1,6 @@
 # master-instructional-design — Claude Code Context
 
-This repo is a Claude skill for expert-level instructional design coaching. It ships a skill harness (SKILL.md + 30 reference files) and a Claude Code hook that routes prompts to the right reference file automatically.
+This repo is a Claude skill for expert-level instructional design coaching. It ships a skill harness (SKILL.md + 31 reference files) and a Claude Code hook that routes prompts to the right reference file automatically.
 
 ---
 
@@ -14,7 +14,7 @@ LICENSE                             ← CC BY-NC-ND 4.0
 
 master-instructional-design/
   SKILL.md                          ← core skill: frontmatter, 15 modes, audit framework
-  references/                       ← 30 on-demand reference files (loaded per conversation, not all at once)
+  references/                       ← 31 on-demand reference files (loaded per conversation, not all at once)
     academic-courseware.md
     agile-and-design.md
     authoring-tools.md
@@ -22,6 +22,7 @@ master-instructional-design/
     coaching-stance.md
     corporate-communications.md
     designer-developer-handover.md
+    document-templates.md
     evaluation-architecture.md
     evaluation-planning.md
     facilitation-and-ilt.md
@@ -65,7 +66,7 @@ evaluations/
 
 ## Key constraints
 
-- **SKILL.md `description:` field must stay ≤ 1024 characters** — the skill upload validator enforces this hard limit. Run `./build.sh` before committing; it will fail if the limit is exceeded. Current: 851/1024 chars.
+- **SKILL.md `description:` field must stay ≤ 1024 characters** — the skill upload validator enforces this hard limit. Run `./build.sh` before committing; it will fail if the limit is exceeded. Current: 970/1024 chars.
 - **All reference files need the CC BY-NC-ND 4.0 license footer** — the CI check enforces this.
 - **`.skill` bundle must stay current** — run `./build.sh` after any change to SKILL.md or any reference file. The CI `--check` step will fail on stale bundles in PRs.
 

@@ -7,3 +7,7 @@ TECHNICAL-ROADMAP.md
 __pycache__/
 graphify-out/
 .graphify_python
+.DS_Store
+**/.DS_Store
+.vscode/
+.idea/
