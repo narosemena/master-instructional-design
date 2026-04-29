@@ -359,6 +359,50 @@ Activate when the user explicitly asks to **generate, draft, create, build, or p
 
 ---
 
+## Memory Protocol
+
+Project state persists in `memory.json` at the repo root (gitignored). When active
+project context appears at the top of your context window, treat it as a pre-loaded
+briefing — skip intake questions already answered there.
+
+### When to read
+If injected project context matches the current topic, use it without asking the user
+to re-explain. Reference it naturally: *"Given the 6-week timeline you're working
+against..."* Use the data; don't surface the mechanism.
+
+### When to write
+Offer to save at natural session milestones — once, not repeatedly:
+- After taxonomy classification (cell is confirmed)
+- After a key design decision is made and rationale established
+- When a new risk or flag is surfaced
+- When the user says "save this," "remember this," or "log this project"
+
+Ask once: *"Want me to save this to your project memory so we pick up here next
+session?"* If yes, write directly to `memory.json` using your file tools.
+
+### What to capture
+```json
+{
+  "id": "slug-lowercase-hyphenated",
+  "name": "Human-readable project name",
+  "classification": "soft-new | soft-change | hard-new | hard-change | mixed",
+  "last_updated": "YYYY-MM-DD",
+  "audience": "Role, experience level, motivation/resistance notes",
+  "performance_gap": "What they need to do differently — behavioral, not topic",
+  "constraints": "Timeline, platform, budget, stakeholder dynamics",
+  "design_decisions": ["Decision + rationale"],
+  "open_risks": ["Risk flag"],
+  "sme_notes": "Key SME contacts, gaps, governance decisions (optional)"
+}
+```
+
+### Update rule
+**Merge, don't overwrite** — append to `design_decisions` and `open_risks`, update
+`last_updated` to today. Projects inactive for more than 30 days are not injected
+automatically but remain in the file.
+
+---
+
 ## For More Depth
 
 - **Artifact & Document Generation**: `references/document-templates.md`  

@@ -3,11 +3,14 @@
 Reference router for master-instructional-design skill.
 Reads a UserPromptSubmit event from stdin, keyword-matches the user's message,
 and outputs additionalContext pointing to the most relevant reference file.
+Also injects active project memory from memory.json when present.
 No LLM call — pure keyword matching, zero token cost.
 """
 import json
+import os
 import re
 import sys
+from datetime import datetime, timedelta
 
 data = json.load(sys.stdin)
 prompt = (data.get("message") or data.get("prompt") or "").lower()
@@ -208,12 +211,49 @@ routes = [
      r"|kirkpatrick.*level|bloom.*level"),
 ]
 
-match = next((base + f for f, p in routes if re.search(p, prompt)), None)
+context_parts = []
 
+match = next((base + f for f, p in routes if re.search(p, prompt)), None)
 if match:
+    context_parts.append(f"Relevant reference file for this query: {match}")
+
+# Project memory injection — reads memory.json from repo root; silently skips if
+# missing or malformed so the hook never breaks routing.
+try:
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    memory_path = os.path.join(repo_root, "memory.json")
+    if os.path.exists(memory_path):
+        with open(memory_path) as f:
+            memory = json.load(f)
+        cutoff = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+        active = [p for p in memory.get("projects", []) if p.get("last_updated", "") >= cutoff]
+        if active:
+            lines = ["Active project memory:"]
+            for p in active:
+                lines.append(
+                    f"• {p['name']} [{p.get('classification', '?')}]"
+                    f" — updated {p.get('last_updated', '?')}"
+                )
+                for field, label in [("audience", "Audience"),
+                                     ("performance_gap", "Gap"),
+                                     ("constraints", "Constraints")]:
+                    if p.get(field):
+                        lines.append(f"  {label}: {p[field]}")
+                for field, label in [("open_risks", "Risks"),
+                                     ("design_decisions", "Decisions")]:
+                    if p.get(field):
+                        val = p[field]
+                        lines.append(
+                            f"  {label}: {'; '.join(val) if isinstance(val, list) else val}"
+                        )
+            context_parts.append("\n".join(lines))
+except Exception:
+    pass
+
+if context_parts:
     print(json.dumps({
         "hookSpecificOutput": {
             "hookEventName": "UserPromptSubmit",
-            "additionalContext": f"Relevant reference file for this query: {match}"
+            "additionalContext": "\n\n".join(context_parts)
         }
     }))
