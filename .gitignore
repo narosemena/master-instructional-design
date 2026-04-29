@@ -12,3 +12,5 @@ memory.json
 **/.DS_Store
 .vscode/
 .idea/
+generated/*
+!generated/.gitkeep

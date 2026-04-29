@@ -357,6 +357,68 @@ Activate when the user explicitly asks to **generate, draft, create, build, or p
 
 → Structural scaffolds for 8 core L&D artifact types: `references/document-templates.md`
 
+### File Generation (Word, PowerPoint, Spreadsheet)
+
+When the user asks for an actual file — "as a Word doc," "as a PowerPoint," "as a
+spreadsheet" — follow this sequence. **Never write a file without explicit confirmation.**
+
+**Step 1 — Analyze the template**
+```bash
+python3 .claude/scripts/analyze_template.py --file templates/storyboard.pptx
+```
+Read the output. Compare the template's layouts/columns/headings against the expected
+schema. Identify any gaps or ambiguous mappings.
+
+**Step 2 — Excavate gaps with the user**
+For each unresolved field, ask one targeted question at a time:
+- *"Your template has a layout called 'Check'. Is that your knowledge check slide, or does it serve a different purpose?"*
+- *"I see a 'Voice Over' column. Should that receive the narration text?"*
+- *"Slide 8 in your template — is that a scenario or a content slide?"*
+
+Stop asking once all required fields are mapped. If a field has no equivalent in the
+template, ask whether to add it or skip it.
+
+**Step 3 — Confirm before building**
+Present the full build summary:
+
+| Field | Value |
+|---|---|
+| Template | `templates/storyboard.pptx` |
+| Mapping source | Confirmed now / Loaded from `templates/mappings.json` |
+| Structure | N slides: breakdown by type |
+| Output | `generated/filename.pptx` |
+
+Ask: *"Confirm build?"* — do not proceed without an explicit yes.
+
+**Step 4 — Generate and save mapping**
+```bash
+python3 .claude/scripts/generate_doc.py \
+  --type storyboard \
+  --template templates/storyboard.pptx \
+  --mapping '{"slide_types": {...}, "fields": {...}}' \
+  --save-mapping \
+  --data '{"title": "...", "slides": [...]}' \
+  --out generated/my-storyboard.pptx
+```
+`--save-mapping` persists the confirmed mapping to `templates/mappings.json` so future
+sessions skip the excavation and go straight to Step 3.
+
+**On subsequent sessions** (mapping already saved):
+```bash
+python3 .claude/scripts/generate_doc.py \
+  --type storyboard \
+  --template templates/storyboard.pptx \
+  --data '{"title": "...", "slides": [...]}' \
+  --out generated/my-storyboard.pptx
+```
+
+**No user template provided:** Ask the user to place their template in `templates/`
+before proceeding. Do not generate from scratch without explicit agreement on structure.
+
+→ Supported types: `storyboard` (.pptx), `facilitator-guide` (.docx), `alignment-matrix` (.xlsx)
+→ Full data schemas and mapping schemas: `.claude/scripts/generate_doc.py` docstring
+→ Template setup instructions: `templates/README.md`
+
 ---
 
 ## Memory Protocol
