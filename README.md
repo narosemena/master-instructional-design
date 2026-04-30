@@ -125,66 +125,28 @@
 
   **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, evaluation planning framework, and the **Artifact & Document Output Protocol** — a consultative document generation system that diagnoses before drafting, applies the three design lenses during the build, and closes with the most important design risk the document reveals.
 
-  **31 reference files** loaded on demand — never all at once, preserving context efficiency:
+  **18 reference files** loaded on demand — never all at once, preserving context efficiency:
 
   | Reference file | Covers |
   | :--- | :--- |
-  | `document-templates.md` | Structural scaffolds for 8 core L&D artifacts: facilitator guide, job aid, storyboard, audience analysis, alignment matrix, SME interview, content audit, communication plan |
-  | `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning,    
-  organizational learning |
-  | `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job  
-  aids, microlearning |
-  | `authoring-tools.md` | Storyline, Rise, Captivate, Lectora, Camtasia + JavaScript/CSS/HTML coding    
-  patterns |
+  | `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning, organizational learning |
+  | `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job aids, microlearning |
+  | `authoring-tools.md` | Storyline, Rise, Captivate, Lectora, Camtasia + JavaScript/CSS/HTML coding patterns |
   | `lxd-and-atd.md` | LXD frameworks, learner journey, ATD Capability Model, CPTD exam prep |
   | `agile-and-design.md` | Agile/Scrum for L&D, visual design, UX/UI, Adobe Creative Suite |
-  | `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |        
-  | `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy
-   |
-  | `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |  
-  | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |    
-  | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools 
-  |
-  | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc,
-   trauma-informed design |
-  | `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope       
-  boundaries |
-  | `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow   
-  and Formative Assessment Architecture |
-  | `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick        
-  reference |
-  | `situational-leadership.md` | SLII development levels (D1–D4), leadership style matching, L&D team   
-  coaching, SLII failure modes |
-  | `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message
-   mapping, L&D brand voice, CLO presentation structure |
-  | `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign 
-  design, enrollment metrics |
-  | `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion 
-  network design, cannot vs. will-not diagnostic |
-  | `taxonomy-decision-engine.md` | Two-tier classification engine (Hard/Soft × New/Change); 6-cell      
-  taxonomy matrix; entry point for all project mode engagements |
-  | `hard-new.md` | Ecosystem audit, fidelity ladder, Gate 1–3 protocol, scenario selection, SME
-  governance for brand-new hard skills |
-  | `hard-change.md` | WIIFM reframing, unlearning design, ADKAR ownership model, pre-launch gap
-  conversation |
-  | `soft-change.md` | Identity threat distinction, andragogical foundation, opening protocol,
-  mid-session resistance handling |
-  | `soft-new.md` | Prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, 
-  cross-level pairing |
-  | `mixed.md` | Keep-together vs. separate decision rule, judgment/system sequencing, verification      
-  failure → separation rule |
-  | `stakeholder-communication.md` | Verbatim language for sponsor conversations, scope change,
-  evaluation commitment, escalation |
-  | `workload-estimation.md` | Two-owner estimation model, SME involvement curve, uncertainty buffer     
-  calibration, definition of ready |
-  | `scope-creep-governance.md` | Criticality taxonomy (A/B/C/D), silent absorption problem, jidoka      
-  escalation protocol |
-  | `evaluation-architecture.md` | Root cause of missing evaluation, role accountability, Kirkpatrick    
-  teaching sequence, Level 4 timing |
-  | `sme-governance.md` | Ecosystem mapping, approver vs. knower gap, lead SME model, verification       
-  protocol |
-  | `designer-developer-handover.md` | Co-authoring reframe, script standards, developer creative        
-  liberty, equivalent value negotiation |
+  | `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |
+  | `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy |
+  | `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |
+  | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |
+  | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
+  | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
+  | `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
+  | `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow and Formative Assessment Architecture |
+  | `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick reference |
+  | `situational-leadership.md` | SLII development levels (D1–D4), leadership style matching, L&D team coaching, SLII failure modes |
+  | `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message mapping, L&D brand voice, CLO presentation structure |
+  | `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign design, enrollment metrics |
+  | `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion network design, cannot vs. will-not diagnostic |
 
   ---
 
