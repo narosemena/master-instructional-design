@@ -7,3 +7,12 @@ TECHNICAL-ROADMAP.md
 __pycache__/
 graphify-out/
 .graphify_python
+memory.json
+.mcp.json
+session-log.md
+.DS_Store
+**/.DS_Store
+.vscode/
+.idea/
+generated/*
+!generated/.gitkeep

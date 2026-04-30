@@ -3,11 +3,14 @@
 Reference router for master-instructional-design skill.
 Reads a UserPromptSubmit event from stdin, keyword-matches the user's message,
 and outputs additionalContext pointing to the most relevant reference file.
+Also injects active project memory from memory.json when present.
 No LLM call — pure keyword matching, zero token cost.
 """
 import json
+import os
 import re
 import sys
+from datetime import datetime, timedelta
 
 data = json.load(sys.stdin)
 prompt = (data.get("message") or data.get("prompt") or "").lower()
@@ -208,12 +211,73 @@ routes = [
      r"|kirkpatrick.*level|bloom.*level"),
 ]
 
-match = next((base + f for f, p in routes if re.search(p, prompt)), None)
+context_parts = []
 
+# Dynamic mode hints — inject a one-line design cell hint when a classification
+# signal is unambiguous. Helps prime the correct coaching stance before routing.
+MODE_HINTS = [
+    (r"\bsoft[- ]new\b|first.time manager|newly promoted|never.*given.*feedback"
+     r"|awareness.*train|mindset.*shift.*train|never.*done.*before.*soft",
+     "Hint: soft-new cell — favor pull-based acquisition; heterogeneous cohort risk is high."),
+    (r"\bsoft[- ]change\b|resist.*adopt|won.t adopt|veteran.*resist|openly resist"
+     r"|actively resist|pushback.*training|muscle memory|professional identity",
+     "Hint: soft-change cell — address identity threat before content; WIIFM must land first."),
+    (r"\bhard[- ]new\b|brand.new.*skill|never.*done.*before.*hard|ecosystem audit"
+     r"|fidelity ladder|new.*procedure.*from scratch",
+     "Hint: hard-new cell — ecosystem audit and fidelity ladder before scenario design."),
+    (r"\bhard[- ]change\b|process.*change.*train|procedure.*change.*train"
+     r"|unlearn|retraining|switching.*to.*new.*system|migrat.*new.*system",
+     "Hint: hard-change cell — delta mapping first; WIIFM reframe before content rebuild."),
+    (r"\bmixed\b.*classif|classif.*\bmixed\b|hard.*soft.*same.*intervention"
+     r"|inseparable.*skill|keep together.*separate",
+     "Hint: mixed cell — confirm keep-together vs. separate decision before sequencing."),
+]
+for pattern, hint in MODE_HINTS:
+    if re.search(pattern, prompt, re.I):
+        context_parts.append(hint)
+        break
+
+match = next((base + f for f, p in routes if re.search(p, prompt)), None)
 if match:
+    context_parts.append(f"Relevant reference file for this query: {match}")
+
+# Project memory injection — reads memory.json from repo root; silently skips if
+# missing or malformed so the hook never breaks routing.
+try:
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    memory_path = os.path.join(repo_root, "memory.json")
+    if os.path.exists(memory_path):
+        with open(memory_path) as f:
+            memory = json.load(f)
+        cutoff = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+        active = [p for p in memory.get("projects", []) if p.get("last_updated", "") >= cutoff]
+        if active:
+            lines = ["Active project memory:"]
+            for p in active:
+                lines.append(
+                    f"• {p['name']} [{p.get('classification', '?')}]"
+                    f" — updated {p.get('last_updated', '?')}"
+                )
+                for field, label in [("audience", "Audience"),
+                                     ("performance_gap", "Gap"),
+                                     ("constraints", "Constraints")]:
+                    if p.get(field):
+                        lines.append(f"  {label}: {p[field]}")
+                for field, label in [("open_risks", "Risks"),
+                                     ("design_decisions", "Decisions")]:
+                    if p.get(field):
+                        val = p[field]
+                        lines.append(
+                            f"  {label}: {'; '.join(val) if isinstance(val, list) else val}"
+                        )
+            context_parts.append("\n".join(lines))
+except Exception:
+    pass
+
+if context_parts:
     print(json.dumps({
         "hookSpecificOutput": {
             "hookEventName": "UserPromptSubmit",
-            "additionalContext": f"Relevant reference file for this query: {match}"
+            "additionalContext": "\n\n".join(context_parts)
         }
     }))

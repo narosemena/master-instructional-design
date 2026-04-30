@@ -47,6 +47,7 @@
   stakeholder communications
   * **Evaluation Planning** — Kirkpatrick L1–5, ROI calculation, L3 manager observation, learning        
   analytics
+  * **Document & Artifact Generation** — on-demand production of complete, populated L&D documents: facilitator guides, job aids, storyboards, audience analysis reports, alignment matrices, SME interview protocols, content audits, and communication plans; generation is consultative — the skill diagnoses before drafting and challenges assumptions during the build
 
   ---
 
@@ -79,25 +80,50 @@
   # 2. Copy the skill files to your global Claude Code skills directory
   cp -r master-instructional-design ~/.claude/skills/
 
-  # 3. Copy the hook and settings to your project (or global) Claude config
-  #    Run this from inside any project where you want the reference router active:
+  # 3. Copy hooks, agents, and settings to your project (or global) Claude config
+  #    Run this from inside any project where you want the skill harness active:
   mkdir -p .claude/hooks
   cp .claude/hooks/reference-router.py .claude/hooks/
+  cp .claude/hooks/guard-writes.py .claude/hooks/
+  cp .claude/hooks/session-end.py .claude/hooks/
+  cp -r .claude/agents .claude/agents
   cp .claude/settings.json .claude/settings.json  # merge manually if you have an existing one
   ```
 
-  The reference router hook (`reference-router.py`) automatically hints which reference file is most     
-  relevant for each prompt — zero token cost, keyword-based. Runs on `UserPromptSubmit`.
+  The reference router hook (`reference-router.py`) automatically hints which reference file is most
+  relevant for each prompt — zero token cost, keyword-based. Runs on `UserPromptSubmit`. The guardrail
+  hook (`guard-writes.py`) protects `SKILL.md` and all reference files from accidental overwrites via
+  `PreToolUse`.
 
-  > **Already have a `.claude/settings.json`?** Manually merge the `hooks.UserPromptSubmit` block from   
-  this repo's `.claude/settings.json` into yours rather than overwriting it.
+  > **Already have a `.claude/settings.json`?** Manually merge the `hooks` block from this repo's
+  `.claude/settings.json` into yours rather than overwriting it.
+
+  **Optional: MCP integrations** — each user provides their own credentials. Copy the template and rename it, then set your environment variables:
+
+  ```bash
+  cp .mcp.json.example .mcp.json   # gitignored — stays local to your machine
+  ```
+
+  | Server | Env var(s) | How to get credentials |
+  | :--- | :--- | :--- |
+  | Perplexity | `PERPLEXITY_API_KEY` | Sign up at [perplexity.ai](https://www.perplexity.ai/) — free tier 2,000 calls/month |
+  | Google Drive | `GDRIVE_CLIENT_ID`, `GDRIVE_CLIENT_SECRET` | Google Cloud Console → APIs & Services → OAuth 2.0 Client ID (free) |
+  | Notion | `NOTION_API_KEY` | notion.so/my-integrations → New integration → copy Internal Integration Token (free) |
+
+  Users who don't need MCP integrations can skip this step entirely — the skill and routing hook work without it.
 
   ---
 
   ## What's inside
 
-  **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching   
-  response patterns, diagnostic questions, and evaluation planning framework.
+  **Specialist subagents** — isolated agents with focused expertise:
+
+  | Subagent | Trigger | What it does |
+  | :--- | :--- | :--- |
+  | `needs-analyst` | "new project", "intake", "I've been assigned…", "where do I begin" | One-question-at-a-time intake: performance gap → root cause (taxonomy signal) → audience → constraints → success definition. Writes to `memory.json`. |
+  | `eval-architect` | Kirkpatrick, ROI, Level 3/4 evaluation, measurement strategy | Designs L1–L5 evaluation architecture tied to the performance gap. Flags L3 infrastructure gaps and missing baselines. |
+
+  **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, evaluation planning framework, and the **Artifact & Document Output Protocol** — a consultative document generation system that diagnoses before drafting, applies the three design lenses during the build, and closes with the most important design risk the document reveals.
 
   **31 reference files** loaded on demand — never all at once, preserving context efficiency:
 
@@ -113,52 +139,30 @@
   | `lxd-and-atd.md` | LXD frameworks, learner journey, ATD Capability Model, CPTD exam prep |
   | `agile-and-design.md` | Agile/Scrum for L&D, visual design, UX/UI, Adobe Creative Suite |
   | `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |        
-  | `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy
-   |
+  | `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy |
   | `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |  
   | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |    
-  | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools 
-  |
-  | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc,
-   trauma-informed design |
-  | `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope       
-  boundaries |
-  | `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow   
-  and Formative Assessment Architecture |
-  | `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick        
-  reference |
-  | `situational-leadership.md` | SLII development levels (D1–D4), leadership style matching, L&D team   
-  coaching, SLII failure modes |
-  | `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message
-   mapping, L&D brand voice, CLO presentation structure |
-  | `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign 
-  design, enrollment metrics |
-  | `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion 
-  network design, cannot vs. will-not diagnostic |
-  | `taxonomy-decision-engine.md` | Two-tier classification engine (Hard/Soft × New/Change); 6-cell      
-  taxonomy matrix; entry point for all project mode engagements |
-  | `hard-new.md` | Ecosystem audit, fidelity ladder, Gate 1–3 protocol, scenario selection, SME
-  governance for brand-new hard skills |
-  | `hard-change.md` | WIIFM reframing, unlearning design, ADKAR ownership model, pre-launch gap
-  conversation |
-  | `soft-change.md` | Identity threat distinction, andragogical foundation, opening protocol,
-  mid-session resistance handling |
-  | `soft-new.md` | Prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, 
-  cross-level pairing |
-  | `mixed.md` | Keep-together vs. separate decision rule, judgment/system sequencing, verification      
-  failure → separation rule |
-  | `stakeholder-communication.md` | Verbatim language for sponsor conversations, scope change,
-  evaluation commitment, escalation |
-  | `workload-estimation.md` | Two-owner estimation model, SME involvement curve, uncertainty buffer     
-  calibration, definition of ready |
-  | `scope-creep-governance.md` | Criticality taxonomy (A/B/C/D), silent absorption problem, jidoka      
-  escalation protocol |
-  | `evaluation-architecture.md` | Root cause of missing evaluation, role accountability, Kirkpatrick    
-  teaching sequence, Level 4 timing |
-  | `sme-governance.md` | Ecosystem mapping, approver vs. knower gap, lead SME model, verification       
-  protocol |
-  | `designer-developer-handover.md` | Co-authoring reframe, script standards, developer creative        
-  liberty, equivalent value negotiation |
+  | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
+  | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
+  | `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
+  | `modes-deep-dive.md` | Full guidance for all 15 engagement modes including Needs Analysis workflow and Formative Assessment Architecture |
+  | `quick-reference.md` | Glossary of ID terms, key frameworks table, Kirkpatrick/Phillips quick reference |
+  | `situational-leadership.md` | SLII development levels (D1–D4), leadership style matching, L&D team coaching, SLII failure modes |
+  | `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message mapping, L&D brand voice, CLO presentation structure |
+  | `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign design, enrollment metrics |
+  | `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion network design, cannot vs. will-not diagnostic |
+  | `taxonomy-decision-engine.md` | Two-tier classification engine (Hard/Soft × New/Change); 6-cell taxonomy matrix; entry point for all project mode engagements |
+  | `hard-new.md` | Ecosystem audit, fidelity ladder, Gate 1–3 protocol, scenario selection, SME governance for brand-new hard skills |
+  | `hard-change.md` | WIIFM reframing, unlearning design, ADKAR ownership model, pre-launch gap conversation |
+  | `soft-change.md` | Identity threat distinction, andragogical foundation, opening protocol, mid-session resistance handling |
+  | `soft-new.md` | Prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, cross-level pairing |
+  | `mixed.md` | Keep-together vs. separate decision rule, judgment/system sequencing, verification failure → separation rule |
+  | `stakeholder-communication.md` | Verbatim language for sponsor conversations, scope change, evaluation commitment, escalation |
+  | `workload-estimation.md` | Two-owner estimation model, SME involvement curve, uncertainty buffer calibration, definition of ready |
+  | `scope-creep-governance.md` | Criticality taxonomy (A/B/C/D), silent absorption problem, jidoka escalation protocol |
+  | `evaluation-architecture.md` | Root cause of missing evaluation, role accountability, Kirkpatrick teaching sequence, Level 4 timing |
+  | `sme-governance.md` | Ecosystem mapping, approver vs. knower gap, lead SME model, verification protocol |
+  | `designer-developer-handover.md` | Co-authoring reframe, script standards, developer creative liberty, equivalent value negotiation |
 
   ---
 
@@ -173,14 +177,31 @@
 
   ---
 
+  ## Recent Enhancements
+
+  **v3.2.0 — Specialist Subagents + Session Continuity**
+
+  * **Needs Analyst subagent** (`.claude/agents/needs-analyst/`) — structured one-question-at-a-time intake: performance gap → root cause (taxonomy signal) → audience → constraints → success definition. Does not recommend solutions during intake. Writes completed project brief to `memory.json`.
+  * **Evaluation Architect subagent** (`.claude/agents/eval-architect/`) — full Kirkpatrick L1–L5 (Phillips ROI) evaluation architecture tied to a specific performance gap. Flags L3 infrastructure gaps and missing baselines. Reads active project memory to tailor the architecture.
+  * **Session log hook** (`session-end.py`) — appends session summaries to `session-log.md` (gitignored) on `Stop`. Silently no-ops when no summary is available.
+  * **Notion MCP** — `.mcp.json.example` now includes the Notion server for syncing project briefs, decisions, and risk logs to a shared workspace. Requires `NOTION_API_KEY` (free with Notion account).
+
+  **v3.1.0 — Skill Harness Upgrades**
+
+  * **Cross-session project memory** — `memory.json` (gitignored) persists active project state. The `UserPromptSubmit` hook injects active projects (updated within 30 days) as pre-loaded context. A `## Memory Protocol` section in SKILL.md governs when to read, write, and merge.
+  * **PreToolUse guardrail hook** — `guard-writes.py` intercepts Write/Edit calls targeting `SKILL.md` or any file in `references/` and prompts for confirmation before proceeding.
+  * **Dynamic mode hints** — the reference router detects unambiguous classification signals (soft-new, soft-change, hard-new, hard-change, mixed) and injects a one-line design cell hint before routing.
+  * **Perplexity + Google Drive + Notion MCPs** — `.mcp.json.example` template for real-time research and document access. Each user provides their own credentials; `.mcp.json` is gitignored.
+
+  ---
+
   ## How to use it
 
   Just mention what you're working on. The skill activates automatically based on context. Examples:     
 
     * *"Audit these 5 learning objectives for a new manager course"*
     * *"Design a blended onboarding program for software engineers"*
-    * *"Our CSAT dropped 11 points — the sponsor thinks agents need product knowledge training. What do I
-   do?"*
+    * *"Our CSAT dropped 11 points — the sponsor thinks agents need product knowledge training. What do I do?"*
     * *"Help me write JavaScript to track variable states in Storyline"*
     * *"Build a 3-year L&D strategy for a 5,000-person financial services firm"*
 
