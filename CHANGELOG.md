@@ -5,6 +5,27 @@ Format: [Semantic Versioning](https://semver.org/) — `MAJOR.MINOR.PATCH`
 
 ---
 
+## [3.1.0] — 2026-04-30
+
+### Added — Skill Harness (Tier 1)
+- **Cross-session project memory** (`memory.json`) — persists active project state across sessions. The `UserPromptSubmit` hook injects projects updated within 30 days as pre-loaded context. `## Memory Protocol` section in SKILL.md governs when to read, write, and merge. Users never re-brief audience or constraints again.
+- **PreToolUse guardrail** (`guard-writes.py`) — intercepts Write/Edit tool calls targeting `SKILL.md` or any file in `references/` and prompts for confirmation. Protects the core skill harness from accidental overwrites.
+- **Dynamic mode hints in router** — `reference-router.py` now detects unambiguous classification signals (soft-new, soft-change, hard-new, hard-change, mixed) and prepends a one-line design cell hint before the reference file route. Zero token overhead.
+- **MCP integration template** (`.mcp.json.example`) — pre-configured template for Perplexity Ask (real-time research, free 2K calls/month), Google Drive (read source docs via OAuth), and Notion (sync project briefs and decisions). File is gitignored; each user provides their own credentials.
+
+### Added — Specialist Subagents (Tier 2)
+- **Needs Analyst subagent** (`.claude/agents/needs-analyst/`) — structured one-question-at-a-time intake covering five diagnostic areas: performance gap (behavioral, not topic), root cause (taxonomy signal), audience, constraints, success definition. Does not recommend solutions during intake. Confirms taxonomy cell and writes project brief to `memory.json`.
+- **Evaluation Architect subagent** (`.claude/agents/eval-architect/`) — designs complete Kirkpatrick L1–L5 (Phillips ROI) evaluation architecture tied to a specific performance gap and business outcome. Requires confirmed gap before recommending instruments. Flags the top evaluation risk (typically no L3 infrastructure or missing baseline data). Reads active project memory to tailor the architecture.
+- **Session log hook** (`session-end.py`) — appends session summaries to `session-log.md` (gitignored) on the `Stop` hook event. Silently no-ops when no summary is available.
+- **Notion MCP** added to `.mcp.json.example` for syncing project briefs, design decisions, and risk logs to a shared Notion workspace.
+
+### Changed
+- `settings.json` — added `PreToolUse` (guard-writes.py) and `Stop` (session-end.py) hook registrations alongside existing `UserPromptSubmit`.
+- `.gitignore` — added `memory.json`, `.mcp.json`, `session-log.md` to local-only gitignore entries.
+- `README.md` — updated install instructions (all hooks + agents + MCP table), added subagent reference table, added v3.1.0 enhancements section.
+
+---
+
 ## [3.0.1] — 2026-04-11
 
 ### Added
