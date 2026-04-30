@@ -80,7 +80,7 @@
   # 2. Copy the skill files to your global Claude Code skills directory
   cp -r master-instructional-design ~/.claude/skills/
 
-  # 3. Copy hooks and settings to your project (or global) Claude config
+  # 3. Copy hooks, agents, and settings to your project (or global) Claude config
   #    Run this from inside any project where you want the skill harness active:
   mkdir -p .claude/hooks
   cp .claude/hooks/reference-router.py .claude/hooks/
@@ -125,19 +125,23 @@
 
   **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, evaluation planning framework, and the **Artifact & Document Output Protocol** — a consultative document generation system that diagnoses before drafting, applies the three design lenses during the build, and closes with the most important design risk the document reveals.
 
-  **18 reference files** loaded on demand — never all at once, preserving context efficiency:
+  **31 reference files** loaded on demand — never all at once, preserving context efficiency:
 
   | Reference file | Covers |
   | :--- | :--- |
-  | `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning, organizational learning |
-  | `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job aids, microlearning |
-  | `authoring-tools.md` | Storyline, Rise, Captivate, Lectora, Camtasia + JavaScript/CSS/HTML coding patterns |
+  | `document-templates.md` | Structural scaffolds for 8 core L&D artifacts: facilitator guide, job aid, storyboard, audience analysis, alignment matrix, SME interview, content audit, communication plan |
+  | `foundational-texts.md` | Adult learning theory, ID texts, cognitive science, immersive learning,    
+  organizational learning |
+  | `facilitation-and-ilt.md` | Workshop design, facilitation guides, VILT, needs analysis methods, job  
+  aids, microlearning |
+  | `authoring-tools.md` | Storyline, Rise, Captivate, Lectora, Camtasia + JavaScript/CSS/HTML coding    
+  patterns |
   | `lxd-and-atd.md` | LXD frameworks, learner journey, ATD Capability Model, CPTD exam prep |
   | `agile-and-design.md` | Agile/Scrum for L&D, visual design, UX/UI, Adobe Creative Suite |
-  | `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |
+  | `generative-ai-for-ld.md` | Prompt engineering, AI tools, agentic workflows, responsible AI |        
   | `academic-courseware.md` | Graduate program canon, textbook tiers, ID theory frameworks, CLO strategy |
-  | `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |
-  | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |
+  | `lms-evaluation.md` | LMS/LXP selection, RFP process, platform comparison, learning data strategy |  
+  | `project-management.md` | Project charters, RACI, design documents, style guides, QA checklists |    
   | `evaluation-planning.md` | Kirkpatrick L1–5, ROI methodology, survey templates, L3 observation tools |
   | `inclusive-emotional-design.md` | DEI design, psychological safety, stereotype threat, emotional arc, trauma-informed design |
   | `coaching-stance.md` | Coaching response patterns, error recovery, feedback calibration, scope boundaries |
@@ -147,57 +151,47 @@
   | `corporate-communications.md` | Executive communication (Pyramid Principle/BLUF), stakeholder message mapping, L&D brand voice, CLO presentation structure |
   | `marketing-for-ld.md` | 3-phase program launch framework, learner persona segmentation, L&D campaign design, enrollment metrics |
   | `change-management.md` | ADKAR mapped to L&D interventions, change resistance types, change champion network design, cannot vs. will-not diagnostic |
+  | `taxonomy-decision-engine.md` | Two-tier classification engine (Hard/Soft × New/Change); 6-cell taxonomy matrix; entry point for all project mode engagements |
+  | `hard-new.md` | Ecosystem audit, fidelity ladder, Gate 1–3 protocol, scenario selection, SME governance for brand-new hard skills |
+  | `hard-change.md` | WIIFM reframing, unlearning design, ADKAR ownership model, pre-launch gap conversation |
+  | `soft-change.md` | Identity threat distinction, andragogical foundation, opening protocol, mid-session resistance handling |
+  | `soft-new.md` | Prior scaffolding diagnostic, transfer vs. acquisition, heterogeneous cohort design, cross-level pairing |
+  | `mixed.md` | Keep-together vs. separate decision rule, judgment/system sequencing, verification failure → separation rule |
+  | `stakeholder-communication.md` | Verbatim language for sponsor conversations, scope change, evaluation commitment, escalation |
+  | `workload-estimation.md` | Two-owner estimation model, SME involvement curve, uncertainty buffer calibration, definition of ready |
+  | `scope-creep-governance.md` | Criticality taxonomy (A/B/C/D), silent absorption problem, jidoka escalation protocol |
+  | `evaluation-architecture.md` | Root cause of missing evaluation, role accountability, Kirkpatrick teaching sequence, Level 4 timing |
+  | `sme-governance.md` | Ecosystem mapping, approver vs. knower gap, lead SME model, verification protocol |
+  | `designer-developer-handover.md` | Co-authoring reframe, script standards, developer creative liberty, equivalent value negotiation |
 
   ---
 
   ## Tested against
 
-  **Complexity challenges (L1–L10)** — from writing a single learning objective to building a 3-year L&D capability strategy for a 5,000-person organization.
+  10 progressive complexity challenges — from writing a single learning objective (L1) to building a     
+  3-year L&D capability strategy for a 5,000-person organization (L10).
 
-  **Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and consulting posture dimensions.
-
-  **Router accuracy** — 19-pattern keyword router smoke-tested across all reference files.
-
-  **Result: 12/13 pass** (1 acceptable edge case: "how do I create a job aid" routes to `document-templates.md` rather than `facilitation-and-ilt.md` — correct behavior since the scaffold is the useful context for that request).
-
-  **Consultative stance validation** — 10 artifact generation scenarios tested to confirm the Artifact Protocol does not bypass the skill's coaching identity.
-
-  **Result: 10/10 pass** across: minimal-context requests (diagnose before drafting), sufficient-context requests (proceed directly), compliance traps (performance lens fires before scaffold is touched), emotional high-risk topics (all three lenses fire before the document is started), specific constraints (addressed inline during the build), and scope-undefined requests (minimum load-bearing questions asked). Every test closed with a practitioner-level design risk, not a generic placeholder note.
+  **Result: 314/320 (98.1%)** across alignment, learner-centeredness, cognitive load, practice/transfer, 
+  feedback quality, engagement, visual design, DEI & inclusion, emotional design, theory grounding, and  
+  consulting posture dimensions.
 
   ---
 
   ## Recent Enhancements
 
-  **v3.2.0 — Specialist Subagents + Session Continuity (Tier 2)**
+  **v3.2.0 — Specialist Subagents + Session Continuity**
 
-  * **Needs Analyst subagent** (`.claude/agents/needs-analyst/`) — runs a structured one-question-at-a-time intake interview: performance gap, root cause (taxonomy signal), audience, constraints, success definition. Does not recommend solutions during intake. Ends by confirming the taxonomy cell and offering to save the project brief to `memory.json`.
-  * **Evaluation Architect subagent** (`.claude/agents/eval-architect/`) — designs complete Kirkpatrick L1–L5 (Phillips ROI) evaluation architectures tied to a specific performance gap and business outcome. Flags the top evaluation risk (usually no L3 infrastructure or missing baseline data). Reads active project memory if available.
+  * **Needs Analyst subagent** (`.claude/agents/needs-analyst/`) — structured one-question-at-a-time intake: performance gap → root cause (taxonomy signal) → audience → constraints → success definition. Does not recommend solutions during intake. Writes completed project brief to `memory.json`.
+  * **Evaluation Architect subagent** (`.claude/agents/eval-architect/`) — full Kirkpatrick L1–L5 (Phillips ROI) evaluation architecture tied to a specific performance gap. Flags L3 infrastructure gaps and missing baselines. Reads active project memory to tailor the architecture.
   * **Session log hook** (`session-end.py`) — appends session summaries to `session-log.md` (gitignored) on `Stop`. Silently no-ops when no summary is available.
-  * **Notion MCP** — `.mcp.json` now includes the Notion server for syncing project briefs, design decisions, and risk logs to a shared workspace. Requires `NOTION_API_KEY` (free with Notion account).
+  * **Notion MCP** — `.mcp.json.example` now includes the Notion server for syncing project briefs, decisions, and risk logs to a shared workspace. Requires `NOTION_API_KEY` (free with Notion account).
 
-  **v3.1.0 — Skill Harness Upgrades (Tier 1)**
+  **v3.1.0 — Skill Harness Upgrades**
 
-  * **Cross-session project memory** — `memory.json` (gitignored) persists active project state across sessions. The `UserPromptSubmit` hook injects active projects (updated within 30 days) as pre-loaded context. A `## Memory Protocol` section in SKILL.md governs when to read, write, and merge. Never re-brief the audience or constraints again.
-  * **PreToolUse guardrail hook** — `guard-writes.py` intercepts Write/Edit tool calls targeting `SKILL.md` or any file in `references/` and prompts for confirmation before proceeding. Protects the core skill harness from accidental overwrites.
-  * **Dynamic mode hints** — the reference router now detects unambiguous classification signals (soft-new, soft-change, hard-new, hard-change, mixed) and injects a one-line design cell hint before routing. Primes the correct coaching stance without adding tokens.
-  * **Perplexity MCP** — `.mcp.json` wires in the Perplexity Ask server for real-time research during sessions. Free tier: 2,000 calls/month. Set `PERPLEXITY_API_KEY` in your environment.
-  * **Google Drive MCP** — `.mcp.json` also includes the Google Drive server for reading source documents (SME notes, existing decks, stakeholder briefs) directly from Drive. Requires `GDRIVE_CLIENT_ID` and `GDRIVE_CLIENT_SECRET` (free OAuth).
-
-  **v2.2.0 — Artifact & Document Generation**
-  * New `document-templates.md` — 8 structural scaffolds (facilitator guide, job aid, storyboard, audience analysis, alignment matrix, SME interview protocol, content audit, program communication plan)
-  * New **Artifact & Document Output Protocol** in SKILL.md — consultative generation: diagnose before drafting, consult during the build, close with the key design risk
-  * Router updated with generation-intent pattern (position 2 — high priority)
-  * Protocol refined after 10-case consultative stance test: generation does not bypass coaching identity; documents emerge from the consulting process, not in place of it
-
-  **v2.1.0 — Four New Domains + Efficiency Audit**
-  * 4 new reference files: `situational-leadership.md`, `corporate-communications.md`, `marketing-for-ld.md`, `change-management.md`
-  * Two-pass Bitter Lesson efficiency audit across 9 files — removed encyclopedic content the model already knows (Bloom's definitions, Kirkpatrick level descriptions, CRAP principles, Nielsen's heuristics, UDL principle descriptions, 70-20-10 breakdown, WCAG numbered criteria, 23 TD Capabilities prose); replaced with practitioner-specific decision trees, failure modes, and application tables
-  * Bundle reduced ~2.3% compressed; router expanded to 18 patterns
-
-  **v3.0.0 — Taxonomy Decision Engine (prior release)**
-  * Two-tier project classification: Hard/Soft × New/Change — 4 cell-specific reference files plus a `mixed.md` for inseparable skills
-  * 11 new governance and project management reference files (SME governance, scope creep, workload estimation, evaluation architecture, stakeholder communication, designer-developer handover)
-  * Knowledge graph of all skill nodes via graphify
+  * **Cross-session project memory** — `memory.json` (gitignored) persists active project state. The `UserPromptSubmit` hook injects active projects (updated within 30 days) as pre-loaded context. A `## Memory Protocol` section in SKILL.md governs when to read, write, and merge.
+  * **PreToolUse guardrail hook** — `guard-writes.py` intercepts Write/Edit calls targeting `SKILL.md` or any file in `references/` and prompts for confirmation before proceeding.
+  * **Dynamic mode hints** — the reference router detects unambiguous classification signals (soft-new, soft-change, hard-new, hard-change, mixed) and injects a one-line design cell hint before routing.
+  * **Perplexity + Google Drive + Notion MCPs** — `.mcp.json.example` template for real-time research and document access. Each user provides their own credentials; `.mcp.json` is gitignored.
 
   ---
 
@@ -207,8 +201,7 @@
 
     * *"Audit these 5 learning objectives for a new manager course"*
     * *"Design a blended onboarding program for software engineers"*
-    * *"Our CSAT dropped 11 points — the sponsor thinks agents need product knowledge training. What do I
-   do?"*
+    * *"Our CSAT dropped 11 points — the sponsor thinks agents need product knowledge training. What do I do?"*
     * *"Help me write JavaScript to track variable states in Storyline"*
     * *"Build a 3-year L&D strategy for a 5,000-person financial services firm"*
 
