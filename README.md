@@ -85,6 +85,8 @@
   mkdir -p .claude/hooks
   cp .claude/hooks/reference-router.py .claude/hooks/
   cp .claude/hooks/guard-writes.py .claude/hooks/
+  cp .claude/hooks/session-end.py .claude/hooks/
+  cp -r .claude/agents .claude/agents
   cp .claude/settings.json .claude/settings.json  # merge manually if you have an existing one
   ```
 
@@ -99,10 +101,18 @@
   **Optional: MCP integrations** — copy `.mcp.json` to your project root and set environment variables:
   * `PERPLEXITY_API_KEY` — free tier at [perplexity.ai](https://www.perplexity.ai/), 2,000 calls/month
   * `GDRIVE_CLIENT_ID` / `GDRIVE_CLIENT_SECRET` — Google Cloud OAuth credentials (free)
+  * `NOTION_API_KEY` — Notion integration token (free with Notion account)
 
   ---
 
   ## What's inside
+
+  **Specialist subagents** — isolated agents with focused expertise:
+
+  | Subagent | Trigger | What it does |
+  | :--- | :--- | :--- |
+  | `needs-analyst` | "new project", "intake", "I've been assigned…", "where do I begin" | One-question-at-a-time intake: performance gap → root cause (taxonomy signal) → audience → constraints → success definition. Writes to `memory.json`. |
+  | `eval-architect` | Kirkpatrick, ROI, Level 3/4 evaluation, measurement strategy | Designs L1–L5 evaluation architecture tied to the performance gap. Flags L3 infrastructure gaps and missing baselines. |
 
   **SKILL.md** — the core skill file with 15 engagement modes, a 9-dimension audit framework, coaching response patterns, diagnostic questions, evaluation planning framework, and the **Artifact & Document Output Protocol** — a consultative document generation system that diagnoses before drafting, applies the three design lenses during the build, and closes with the most important design risk the document reveals.
 
@@ -186,6 +196,13 @@
   ---
 
   ## Recent Enhancements
+
+  **v3.2.0 — Specialist Subagents + Session Continuity (Tier 2)**
+
+  * **Needs Analyst subagent** (`.claude/agents/needs-analyst/`) — runs a structured one-question-at-a-time intake interview: performance gap, root cause (taxonomy signal), audience, constraints, success definition. Does not recommend solutions during intake. Ends by confirming the taxonomy cell and offering to save the project brief to `memory.json`.
+  * **Evaluation Architect subagent** (`.claude/agents/eval-architect/`) — designs complete Kirkpatrick L1–L5 (Phillips ROI) evaluation architectures tied to a specific performance gap and business outcome. Flags the top evaluation risk (usually no L3 infrastructure or missing baseline data). Reads active project memory if available.
+  * **Session log hook** (`session-end.py`) — appends session summaries to `session-log.md` (gitignored) on `Stop`. Silently no-ops when no summary is available.
+  * **Notion MCP** — `.mcp.json` now includes the Notion server for syncing project briefs, design decisions, and risk logs to a shared workspace. Requires `NOTION_API_KEY` (free with Notion account).
 
   **v3.1.0 — Skill Harness Upgrades (Tier 1)**
 

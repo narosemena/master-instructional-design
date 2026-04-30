@@ -14,6 +14,13 @@
         "GDRIVE_CLIENT_ID": "${GDRIVE_CLIENT_ID}",
         "GDRIVE_CLIENT_SECRET": "${GDRIVE_CLIENT_SECRET}"
       }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}"
+      }
     }
   }
 }

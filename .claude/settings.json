@@ -21,6 +21,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 10,
+            "command": "python3 .claude/hooks/session-end.py"
+          }
+        ]
+      }
     ]
   }
 }
