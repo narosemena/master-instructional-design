@@ -1,4 +1,5 @@
 .claude/hooks/__pycache__/
 .claude/skills/
 memory.json
+.mcp.json
 session-log.md

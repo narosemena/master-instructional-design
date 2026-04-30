@@ -98,10 +98,19 @@
   > **Already have a `.claude/settings.json`?** Manually merge the `hooks` block from this repo's
   `.claude/settings.json` into yours rather than overwriting it.
 
-  **Optional: MCP integrations** — copy `.mcp.json` to your project root and set environment variables:
-  * `PERPLEXITY_API_KEY` — free tier at [perplexity.ai](https://www.perplexity.ai/), 2,000 calls/month
-  * `GDRIVE_CLIENT_ID` / `GDRIVE_CLIENT_SECRET` — Google Cloud OAuth credentials (free)
-  * `NOTION_API_KEY` — Notion integration token (free with Notion account)
+  **Optional: MCP integrations** — each user provides their own credentials. Copy the template and rename it, then set your environment variables:
+
+  ```bash
+  cp .mcp.json.example .mcp.json   # gitignored — stays local to your machine
+  ```
+
+  | Server | Env var(s) | How to get credentials |
+  | :--- | :--- | :--- |
+  | Perplexity | `PERPLEXITY_API_KEY` | Sign up at [perplexity.ai](https://www.perplexity.ai/) — free tier 2,000 calls/month |
+  | Google Drive | `GDRIVE_CLIENT_ID`, `GDRIVE_CLIENT_SECRET` | Google Cloud Console → APIs & Services → OAuth 2.0 Client ID (free) |
+  | Notion | `NOTION_API_KEY` | notion.so/my-integrations → New integration → copy Internal Integration Token (free) |
+
+  Users who don't need MCP integrations can skip this step entirely — the skill and routing hook work without it.
 
   ---
 
